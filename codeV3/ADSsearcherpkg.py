@@ -81,11 +81,10 @@ def run_file_fellows(filename, token, stop_dir ):
     data3= merge(data2)
     data4= n_grams(data3, stop_dir)
 
-    final_df= final_df.append(data4, ignore_index= True)
+    final_df = pd.concat([final_df, data4], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
     count+=1
     print(str(count)+' iterations done')
   return final_df
-
 
 def run_file_insts(filename, token, stop_dir ):
   dataframe= pd.read_csv(filename)
@@ -121,7 +120,7 @@ def run_file_insts(filename, token, stop_dir ):
     #data3= merge(data2)
     #data4= n_grams(data3, stop_dir)
 
-    final_df= final_df.append(data1, ignore_index= True)
+    final_df = pd.concat([final_df, data1], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
     count+=1
     print(str(count)+' iterations done')
   return final_df
@@ -145,7 +144,7 @@ def run_file_names(filename, token, stop_dir):
            year='[2003 TO 2030]', token=token,stop_dir=stop_dir)
     
     
-    final_df= final_df.append(data1, ignore_index= True)
+    final_df = pd.concat([final_df, data1], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
     count+=1
     print(str(count)+' iterations done')
   return final_df
@@ -484,3 +483,116 @@ def ads_search(name=None, institution=None, year= None, refereed= 'property:notr
 
   #final_df= df.append(data4, ignore_index= True)
   return data4
+
+#------------------------------ Deprecated Functions (for testing purposes) ----------------------------------------------
+
+# Outdated pandas function (pandas.dataframe.append())
+def run_file_fellows_deprecated(filename, token, stop_dir ):
+  dataframe= pd.read_csv(filename)
+  try:
+    institutions= dataframe['Current Institution']
+  except:
+    institutions= dataframe['Institution']
+  names= dataframe['Name']
+  start_years= dataframe['Fellowship Year']
+  #host_insts= dataframe['Host Institution']
+
+  final_df= pd.DataFrame()
+  count= 0
+  for i in np.arange(len(dataframe)):
+
+    inst= institutions[i]
+    name= names[i]
+    year= start_years[i]
+
+    #data1= ads_search(name, institution= inst, year_range=year)
+    data1= ads_search(name=name, institution=inst, \
+           year= year, token=token)
+    '''
+    if data1.empty:
+        data1= ads_search(name, year_range=year)
+
+    if data1.empty:
+        data1= ads_search(name, year_range='general') #general year range added in ads_search function
+    '''
+    data1['Input Institution']=inst
+
+    data2= data_type(data1)
+    data3= merge(data2)
+    data4= n_grams(data3, stop_dir)
+
+    final_df= final_df.append(data4, ignore_index= True)
+    count+=1
+    print(str(count)+' iterations done')
+  return final_df
+
+
+
+
+# Outdated pandas fucntion (pandas.dataframe.append())
+def run_file_insts_deprecated(filename, token, stop_dir ):
+  dataframe= pd.read_csv(filename)
+  try:
+    institutions= dataframe['Current Institution']
+  except:
+    institutions= dataframe['Institution']
+  #names= dataframe['Name']
+  #start_years= dataframe['Fellowship Year']
+  #host_insts= dataframe['Host Institution']
+
+  final_df= pd.DataFrame()
+  count= 0
+  for i in np.arange(len(dataframe)):
+
+    inst= institutions[i]
+    #name= names[i]
+    #year= start_years[i]
+
+    #data1= ads_search(name, institution= inst, year_range=year)
+    data1= ads_search(institution=inst, \
+            token=token, stop_dir=stop_dir)
+    '''
+    if data1.empty:
+        data1= ads_search(name, year_range=year)
+
+    if data1.empty:
+        data1= ads_search(name, year_range='general') #general year range added in ads_search function
+    '''
+    data1['Input Institution']=inst
+
+    #data2= data_type(data1)
+    #data3= merge(data2)
+    #data4= n_grams(data3, stop_dir)
+
+    final_df= final_df.append(data1, ignore_index= True)
+    count+=1
+    print(str(count)+' iterations done')
+  return final_df
+
+
+
+
+# Outdated pandas fucntion (pandas.dataframe.append())
+def run_file_names_deprecated(filename, token, stop_dir):
+  # just a file with a list of names. Format is a single column "Last, First"
+  print('I will go through each name in the list. Name should be formatted in a single column called "Last, First".\
+  We will search by default any pubblication between 2003 and 2030 by these authors, independently of the institutions they were\
+  affiliated to. \n')
+
+  dataframe= pd.read_csv(filename)
+  #print(dataframe['Name'])
+  #institutions= dataframe['Current Institution']
+  names= dataframe['Name']
+  #print(type(names[0]))
+  final_df= pd.DataFrame()
+  count= 0
+  for i in np.arange(len(dataframe)):
+    print(names[i])
+    data1= ads_search(name=names[i],  \
+           year='[2003 TO 2030]', token=token,stop_dir=stop_dir)
+    
+    
+    final_df= final_df.append(data1, ignore_index= True)
+    count+=1
+    print(str(count)+' iterations done')
+  return final_df
