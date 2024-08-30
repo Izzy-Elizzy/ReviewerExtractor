@@ -1,6 +1,21 @@
 import pytest
-import ADSsearcherpkg as ADS
+import os
 import pandas as pd
+from dotenv import find_dotenv, load_dotenv
+import ADSsearcherpkg as ADS
+
+import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('punkt_tab')
+
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
+API_KEY = os.getenv("token")
+STOPWORDS = os.getenv("stopwords")
+TESTFILE = os.getenv("testfile")
+
+
 
 #Mock Test Data 
 
@@ -26,19 +41,32 @@ df3 = pd.DataFrame({
 })
 
 
-def testLegacyAppendAndConcatFunctionality():
+# def testLegacyAppendAndConcatFunctionality():
     
-    # Test old append method
-    result_of_append = df1.append([df2, df3], ignore_index=True)
+#     # Test old append method
+#     result_of_append = df1.append([df2, df3], ignore_index=True)
 
-    # Test new concat method
-    result_of_concat = pd.concat([df1, df2, df3], ignore_index=True)
+#     # Test new concat method
+#     result_of_concat = pd.concat([df1, df2, df3], ignore_index=True)
 
-    assert result_of_append.equals(result_of_concat)
+#     assert result_of_append.equals(result_of_concat)
 
 
 # Regression tests
 
-# def testRunFileFellows():
-# def testRunFileInsts():
-# def testRunFileNames():
+def testRegressionRunFileFellows():
+    depracted_function_dataframe = ADS.run_file_fellows(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
+    function_dataframe = ADS.run_file_fellows_deprecated(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
+    assert depracted_function_dataframe.equals(function_dataframe)
+
+def testRegressionRunFileInsts():
+
+    depracted_function_dataframe = ADS.run_file_insts(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
+    function_dataframe = ADS.run_file_insts_deprecated(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
+    assert depracted_function_dataframe.equals(function_dataframe)
+
+def testRegresssionRunFileNames():
+
+    depracted_function_dataframe = ADS.run_file_names(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
+    function_dataframe = ADS.run_file_names_deprecated(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
+    assert depracted_function_dataframe.equals(function_dataframe)

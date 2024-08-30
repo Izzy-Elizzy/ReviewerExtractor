@@ -277,59 +277,26 @@ def ads_search(name=None, institution=None, year= None, refereed= 'property:notr
     print("You did not give me enough to search on, please try again.")
 
   #Block. Name + year
+  # Simplified query construction using f-strings and format_year function
   if value==5:
-    #print('Value=5')
-    #print(type(year))
-    query = 'author:"^{}"'.format(name)
-    if len(year)==4:
-      startd=str(int(year)-1)
-      endd=str(int(year)+4)
-      years='['+startd+' TO '+endd+']'
-      print("I will search for every paper who first authors is %s and has published between %s and %s.\n" % (name,str(startd),str(endd)))
-      #query += ', pubdate:{}'.format(years) #input year in function
-    else:
-      years=year
-      print("I will search for every paper who first authors is %s and has published between %s and %s. \n" % (name,year[1:5],year[9:13]))
-    query += ', pubdate:{}'.format(years) #input year in function
-    
+    query = f'author:"^{name}"'
+    years = format_year(year)
+    query += f', pubdate:{years}'
+    print(f"I will search for every paper whose first author is {name} and has published between {years}.\n")
+  
   # Block institution + year
+  # Consolidated query construction and year formatting
   if value==6:
-    #print('Value=6')
-    if len(year)==4:
-      startd=str(int(year)-1)
-      endd=str(int(year)+4)
-      years='['+startd+' TO '+endd+']'
-      print("I will search for every paper who first authors is %s and has published between %s and %s. \n" % (name,str(startd),str(endd)))
-
-    else:
-      years=year
-      #query += ', pubdate:{}'.format(years) #input year in function
-      print("I will search for every paper who first authors is %s and has published between %s and %s. \n" % (name,year[1:5],year[9:13]))
-    
-    query = 'pos(institution:"{}",1)'.format(institution)
-    query += ', pubdate:{}'.format(years) #input year in function
-    
-    #print(query)
+     years = format_year(year)
+     query = f'pos(institution:"{institution}",1), pubdate:{years}'
+     print(f"I will search for every paper whose first author is affiliated with {institution} and has published between {years}.\n")
 
   # Block name+institution + year
+  # Simplified query construction and ensured all parameters are included
   if value==7:
-    #print("Value=7 \n")
-    query = 'pos(institution:"{}",1), author:"^{}"'.format(institution, name)
-    if len(year)==4:
-      startd=str(int(year)-1)
-      endd=str(int(year)+4)
-      years='['+startd+' TO '+endd+']'
-      print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,str(startd),str(endd)))
-
-    else:
-      years=year
-      #query += ', pubdate:{}'.format(years) #input year in function
-      print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,year[1:5],year[9:13]))
-    
-    query = 'pos(institution:"{}",1)'.format(institution)
-    query += ', pubdate:{}'.format(years) #input year in function
-
-    #print(query)
+     years = format_year(year)
+     query = f'pos(institution:"{institution}",1), author:"^{name}", pubdate:{years}'
+     print(f"I will search for every paper published by {name} and affiliated with {institution} between {years}.\n")
 
 
   #making and sending query to ADS
@@ -447,12 +414,13 @@ def ads_search(name=None, institution=None, year= None, refereed= 'property:notr
       refereed='property:notrefereed OR property:refereed'
 
       query = 'pos(aff:"{}",1), author:"^{}"'.format(institution, name)
-      if len(year)==4:
+      if len(str(year))==4: #<- Attempted to take len() of int. Change to Str() before taking len().
         startd=str(int(year)-1)
         endd=str(int(year)+4)
         years='['+startd+' TO '+endd+']'
         print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,str(startd),str(endd)))
 
+      # Attempts to Access a Int as a indexable object
       else:
         years=year
         #query += ', pubdate:{}'.format(years) #input year in function
@@ -463,7 +431,7 @@ def ads_search(name=None, institution=None, year= None, refereed= 'property:notr
     
 
       print("I will search for every paper published by %s and affiliated with %s  \
-          between %s and %s.\n" %(name, institution,year[1:5],year[9:14]) )
+          between %s and %s.\n" %(name, institution,startd,endd) )
       #print(query)
       encoded_query = urlencode({
         "q": query,
@@ -483,6 +451,26 @@ def ads_search(name=None, institution=None, year= None, refereed= 'property:notr
 
   #final_df= df.append(data4, ignore_index= True)
   return data4
+
+
+#------------------------------ Helper Functions ----------------------------------------------
+
+
+def format_year(year):
+        if isinstance(year, (int, np.integer)):
+            startd = str(year - 1)
+            endd = str(year + 4)
+            return f'[{startd} TO {endd}]'
+        elif isinstance(year, str):
+            if len(year) == 4:
+                startd = str(int(year) - 1)
+                endd = str(int(year) + 4)
+                return f'[{startd} TO {endd}]'
+            else:
+                return year
+        else:
+            raise ValueError("Year must be an integer or a string")
+
 
 #------------------------------ Deprecated Functions (for testing purposes) ----------------------------------------------
 
