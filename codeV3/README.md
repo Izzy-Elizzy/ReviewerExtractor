@@ -20,7 +20,7 @@ The main aspect is the notebook called "ADS_search.ipynb". The main function can
 - Perform simple searches ("CMD+F) on the excel version of the output dataframe: this will allow you to search words in the published abstracts as well and not rely only on the N-grams.
   
 **What the User needs:**
-The user needs an ADS API Access Token (can be found here:  https://ui.adsabs.harvard.edu/help/api/), which searches the input into ADS. Other libraries needed include: nltk and pandas version 1.5. 
+The user needs an ADS API Access Token (can be found here:  https://ui.adsabs.harvard.edu/help/api/), which searches the input into ADS. Other libraries needed include: nltk and pandas. 
 
 Please look at the [Jupyter Notebook v1 of the code](https://github.com/ninoc/ReviewerExtractor/blob/main/codeV1/ExpertiseFinder_Tutorial.ipynb) to learn about all the possible keywords.
 
