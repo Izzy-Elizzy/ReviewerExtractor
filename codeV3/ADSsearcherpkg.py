@@ -67,7 +67,7 @@ def run_file_fellows(filename, token, stop_dir ):
 
     #data1= ads_search(name, institution= inst, year_range=year)
     data1= ads_search(name=name, institution=inst, \
-           year= year, token=token)
+           year= year, token=token, stop_dir=stop_dir)
     '''
     if data1.empty:
         data1= ads_search(name, year_range=year)
