@@ -5,6 +5,8 @@ import sys
 from dotenv import find_dotenv, load_dotenv
 import os
 import pandas as pd
+import TextAnalysis as TA
+import ADSsearcherpkg as AP
 
 import nltk
 nltk.download('punkt')
@@ -16,12 +18,9 @@ stop_file='stopwords.txt'
 stop_dir=path_stop+stop_file
 sys.path.append(path_stop)
 
-import TextAnalysis as TA
-import ADSsearcherpkg as AP
-
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 token = os.getenv("token")
 
-dataframe=AP.run_file_fellows(filename= 'codeV3\example3.csv',
-               token=token, stop_dir=stop_file)
+dataframe=AP.run_file_fellows(filename= 'G:\\Intern\\ReviewerExtractor\\codeV3\\example3.csv',
+               token=token, stop_dir=stop_dir)

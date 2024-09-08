@@ -2,6 +2,7 @@ import requests
 from urllib.parse import urlencode, quote_plus
 import numpy as np
 import TextAnalysis as TA
+import itertools
 
 #We designed the code to work with Pandas 1.5.3
 
@@ -59,11 +60,11 @@ def run_file_fellows(filename, token, stop_dir ):
 
   final_df= pd.DataFrame()
   count= 0
-  for i in np.arange(len(dataframe)):
+  for i in range(dataframe.shape[0]):
 
     inst= institutions[i]
     name= names[i]
-    year= start_years[i]
+    year= int(start_years[i])
 
     #data1= ads_search(name, institution= inst, year_range=year)
     data1= ads_search(name=name, institution=inst, \
@@ -155,23 +156,26 @@ def merge(df):
     df['Publication Date']= df['Publication Date'].astype(str)
     df['Abstract']= df['Abstract'].astype(str)
     df['Keywords'] = df['Keywords'].apply(lambda keywords: ', '.join(keywords) if keywords else '')
-    df['Title'] = df['Title'].apply(lambda titles: ', '.join(titles) if titles else '')
-    df['Identifier'] = df['Identifier'].apply(lambda ids: ', '.join(ids) if ids else '')
+
+    # Fix for Title and Identifier. Create new list to preserve individual titles and identifiers. 
+    df['Title'] = df['Title'].apply(lambda titles: titles if titles else [])  # Preserve individual titles
+    df['Identifier'] = df['Identifier'].apply(lambda ids: ids if ids else []) # Preserve individual identifiers
     
 # if the dataframe is missing any information it is labeled as "None"
 
     df.fillna('None', inplace=True)
     
-    merged= df.groupby('Input Author').aggregate({'Input Institution':', '.join,
-                                                  'First Author':', '.join,
-                                                  'Bibcode':', '.join,
-                                                 'Title':', '.join,
-                                                 'Publication Date':', '.join,
-                                                 'Keywords':', '.join,
-                                                 'Affiliations':', '.join,
-                                                'Abstract':', '.join,
-                                                'Data Type':', '.join,
-                                                 'Identifier':', '.join}).reset_index()
+    merged = df.groupby('Input Author').aggregate({'Input Institution': ', '.join,
+                                                 'First Author': ', '.join,
+                                                 'Bibcode': ', '.join,
+                                                 'Title': lambda x: list(itertools.chain.from_iterable(x)),  # Flatten titles
+                                                 'Publication Date': ', '.join,
+                                                 'Keywords': ', '.join,
+                                                 'Affiliations': ', '.join,
+                                                 'Abstract': ', '.join,
+                                                 'Data Type': ', '.join,
+                                                 'Identifier': lambda x: list(itertools.chain.from_iterable(x))  # Flatten identifiers
+                                                 }).reset_index()
 
     return merged
 
@@ -461,6 +465,11 @@ def format_year(year):
             startd = str(year - 1)
             endd = str(year + 4)
             return f'[{startd} TO {endd}]'
+        elif isinstance(year, float):
+           year = int(year)
+           startd = str(year - 1)
+           endd = str(year + 4)
+           return f'[{startd} TO {endd}]'
         elif isinstance(year, str):
             if len(year) == 4:
                 startd = str(int(year) - 1)
