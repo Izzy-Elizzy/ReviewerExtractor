@@ -13,11 +13,10 @@ dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 API_KEY = os.getenv("token")
 STOPWORDS = os.getenv("stopwords")
-TESTFILE = os.getenv("testfile")
+TESTFILE = os.getenv("testfile")  # Make sure this is set to a valid CSV file path
 
 
-
-#Mock Test Data 
+# Mock Test Data 
 
 df1 = pd.DataFrame({
     'A': ['A0', 'A1', 'A2'],
@@ -52,21 +51,26 @@ df3 = pd.DataFrame({
 #     assert result_of_append.equals(result_of_concat)
 
 
-# Regression tests
+def testEnvironmentalVariables():
+    assert API_KEY and STOPWORDS and TESTFILE != None
 
-def testRegressionRunFileFellows():
-    depracted_function_dataframe = ADS.run_file_fellows(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
-    function_dataframe = ADS.run_file_fellows_deprecated(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
-    assert depracted_function_dataframe.equals(function_dataframe)
+#Regression tests
+@pytest.mark.parametrize("search_type", ['fellows', 'insts', 'names'])
+def testRegressionRunFileSearch(search_type):
+    """
+    Test that the combined 'run_file_search' function produces the same output
+    as the individual functions for fellows, institutions, and names.
+    """
+    deprecated_func_name = f"run_file_{search_type}_deprecated"
+    
+    # Call deprecated individual functions
+    deprecated_dataframe = getattr(ADS, deprecated_func_name)(filename=TESTFILE, token=API_KEY, stop_dir=STOPWORDS)
+    
+    # Call the combined function 
+    combined_dataframe = ADS.run_file_search(filename=TESTFILE, token=API_KEY, stop_dir=STOPWORDS, search_type=search_type)
 
-def testRegressionRunFileInsts():
+    deprecated_dataframe.to_csv("dep.csv")
+    combined_dataframe.to_csv('com.csv')
 
-    depracted_function_dataframe = ADS.run_file_insts(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
-    function_dataframe = ADS.run_file_insts_deprecated(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
-    assert depracted_function_dataframe.equals(function_dataframe)
-
-def testRegresssionRunFileNames():
-
-    depracted_function_dataframe = ADS.run_file_names(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
-    function_dataframe = ADS.run_file_names_deprecated(filename=TESTFILE,token=API_KEY, stop_dir=STOPWORDS)
-    assert depracted_function_dataframe.equals(function_dataframe)
+    # Assert that both DataFrames are equal
+    assert deprecated_dataframe.equals(combined_dataframe)

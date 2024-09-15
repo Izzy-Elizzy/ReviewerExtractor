@@ -4,51 +4,472 @@ import numpy as np
 import TextAnalysis as TA
 import itertools
 
-#We designed the code to work with Pandas 1.5.3
+# We designed the code to work with Pandas 1.5.3
 
 import pandas as pd
-#print(pd. __version__)
-#If the Pandas version differs from 1.5.3, run the following:
-#pip install pandas==1.5.3 --user
+# print(pd.__version__)
+# If the Pandas version differs from 1.5.3, run the following:
+# pip install pandas==1.5.3 --user
 
-#edit the following string pointing to the directory where the stopwords.txt file is
+# edit the following string pointing to the directory where the stopwords.txt file is
+# stop_dir = "/path/to/stopwords.txt"  # Update this with the actual path
 
 def do_search(auth_name, inst, t, q):
-  results = requests.get(
-            "https://api.adsabs.harvard.edu/v1/search/query?{}".format(q),
-           headers={'Authorization': 'Bearer ' + t}
-          )
-  data = results.json()["response"]["docs"]
-  pdates = [d['pubdate'] for d in data]
-  affiliations = [d['aff'][0] for d in data]
-  bibcodes = [d['bibcode'] for d in data]
-  f_auth = [d['first_author'] for d in data]
-  keysw = [d.get('keyword', []) for d in data]
-  titles = [d.get('title', '') for d in data]
-  abstracts = [d.get('abstract', '') for d in data]
-  ids= [d.get('identifier', []) for d in data]
-  
-  #define data frame
+    results = requests.get(
+        "https://api.adsabs.harvard.edu/v1/search/query?{}".format(q),
+        headers={'Authorization': 'Bearer ' + t}
+    )
+    data = results.json()["response"]["docs"]
+    pdates = [d['pubdate'] for d in data]
+    affiliations = [d['aff'][0] for d in data]
+    bibcodes = [d['bibcode'] for d in data]
+    f_auth = [d['first_author'] for d in data]
+    keysw = [d.get('keyword', []) for d in data]
+    titles = [d.get('title', '') for d in data]
+    abstracts = [d.get('abstract', '') for d in data]
+    ids = [d.get('identifier', []) for d in data]
 
-  df = pd.DataFrame({
-          'Input Author': [auth_name] * len(data),
-          'Input Institution': [inst] * len(data),
-          'First Author': f_auth,
-          'Bibcode': bibcodes,
-          'Title': titles,
-          'Publication Date': pdates,
-          'Keywords': keysw,
-          'Affiliations': affiliations,
-          'Abstract': abstracts,
-          'Identifier': ids,
-          'Data Type': [[]]*len(data)
-        })
+    # define data frame
 
-  if auth_name==None:
-        df['Input Author']= f_auth
-  return df
+    df = pd.DataFrame({
+        'Input Author': [auth_name] * len(data),
+        'Input Institution': [inst] * len(data),
+        'First Author': f_auth,
+        'Bibcode': bibcodes,
+        'Title': titles,
+        'Publication Date': pdates,
+        'Keywords': keysw,
+        'Affiliations': affiliations,
+        'Abstract': abstracts,
+        'Identifier': ids,
+        'Data Type': [[]]*len(data)
+    })
 
-def run_file_fellows(filename, token, stop_dir ):
+    if auth_name is None:
+        df['Input Author'] = f_auth
+    return df
+
+def run_file_search(filename, token, stop_dir, search_type='fellows'):
+    """
+    Combined function to handle searches for fellows, institutions, and names.
+
+    Args:
+        filename (str): Path to the input CSV file.
+        token (str): Your ADS API token.
+        stop_dir (str): Path to the directory containing the stopwords.txt file.
+        search_type (str): Type of search to perform: 'fellows', 'insts', 'names'. Defaults to 'fellows'.
+
+    Returns:
+        pandas.DataFrame: Dataframe containing search results.
+    """
+
+    dataframe = pd.read_csv(filename)
+    final_df = pd.DataFrame()
+    count = 0
+
+    if search_type == 'fellows':
+        try:
+            institutions = dataframe['Current Institution']
+        except KeyError:
+            institutions = dataframe['Institution']
+        names = dataframe['Name']
+        start_years = dataframe['Fellowship Year']
+
+        for i in range(dataframe.shape[0]):
+            inst = institutions[i]
+            name = names[i]
+            year = int(start_years[i])
+
+            data1 = ads_search(name=name, institution=inst, year=year, token=token, stop_dir=stop_dir)
+            data1['Input Institution'] = inst
+
+            data2 = data_type(data1)
+            data3 = merge(data2)
+            data4 = n_grams(data3, stop_dir)
+
+            final_df = pd.concat([final_df, data4], ignore_index=True)
+            count += 1
+            print(str(count) + ' iterations done')
+
+    elif search_type == 'insts':
+        try:
+            institutions = dataframe['Current Institution']
+        except KeyError:
+            institutions = dataframe['Institution']
+
+        for i in np.arange(len(dataframe)):
+            inst = institutions[i]
+
+            data1 = ads_search(institution=inst, token=token, stop_dir=stop_dir)
+            data1['Input Institution'] = inst
+
+            final_df = pd.concat([final_df, data1], ignore_index=True)
+            count += 1
+            print(str(count) + ' iterations done')
+
+    elif search_type == 'names':
+        names = dataframe['Name']
+
+        for i in np.arange(len(dataframe)):
+            name = names[i]
+            print(name)
+
+            data1 = ads_search(name=name, year='[2003 TO 2030]', token=token, stop_dir=stop_dir)
+
+            final_df = pd.concat([final_df, data1], ignore_index=True)
+            count += 1
+            print(str(count) + ' iterations done')
+
+    else:
+        print("Invalid search type. Choose from: 'fellows', 'insts', 'names'")
+
+    return final_df
+
+
+def merge(df):
+
+    df['Publication Date'] = df['Publication Date'].astype(str)
+    df['Abstract'] = df['Abstract'].astype(str)
+    df['Keywords'] = df['Keywords'].apply(lambda keywords: ', '.join(keywords) if keywords else '')
+
+    # Fix for Title and Identifier. Create new list to preserve individual titles and identifiers.
+    df['Title'] = df['Title'].apply(lambda titles: titles if titles else [])  # Preserve individual titles
+    df['Identifier'] = df['Identifier'].apply(lambda ids: ids if ids else [])  # Preserve individual identifiers
+
+    # if the dataframe is missing any information it is labeled as "None"
+
+    df.fillna('None', inplace=True)
+
+    merged = df.groupby('Input Author').aggregate({'Input Institution': ', '.join,
+                                                 'First Author': ', '.join,
+                                                 'Bibcode': ', '.join,
+                                                 'Title': lambda x: list(itertools.chain.from_iterable(x)),  # Flatten titles
+                                                 'Publication Date': ', '.join,
+                                                 'Keywords': ', '.join,
+                                                 'Affiliations': ', '.join,
+                                                 'Abstract': ', '.join,
+                                                 'Data Type': ', '.join,
+                                                 'Identifier': lambda x: list(itertools.chain.from_iterable(x))  # Flatten identifiers
+                                                 }).reset_index()
+
+    return merged
+
+
+def n_grams(df, directorypath):  # directory path should lead to TextAnalysis.py
+    top10Dict = {'Top 10 Words': [],
+                 'Top 10 Bigrams': [],
+                 'Top 10 Trigrams': []}
+
+    for i in df.values:
+        abstracts = i[8]
+
+        top10words = TA.topwords(abstracts, directorypath)
+        top10bigrams = TA.topbigrams(abstracts, directorypath)
+        top10trigrams = TA.toptrigrams(abstracts, directorypath)
+
+        top10Dict['Top 10 Words'].append(top10words)
+        top10Dict['Top 10 Bigrams'].append(top10bigrams)
+        top10Dict['Top 10 Trigrams'].append(top10trigrams)
+
+    top10Df = df
+    top10Df['Top 10 Words'] = top10Dict['Top 10 Words']
+    top10Df['Top 10 Bigrams'] = top10Dict['Top 10 Bigrams']
+    top10Df['Top 10 Trigrams'] = top10Dict['Top 10 Trigrams']
+
+    top10Df = top10Df[['Input Author', 'Input Institution', 'First Author', 'Bibcode', 'Title', 'Publication Date',
+                       'Keywords', 'Affiliations', 'Abstract', 'Identifier', 'Top 10 Words', 'Top 10 Bigrams',
+                       'Top 10 Trigrams', 'Data Type']]
+
+    return top10Df
+
+
+def data_type(df):
+
+    journals = ['ApJ', 'MNRAS', 'AJ', 'Nature', 'Science', 'PASP', 'AAS', 'arXiv', 'SPIE', 'A&A']
+
+    for index, row in df.iterrows():
+
+        flag = 0
+
+        # Journal check
+        if any(journal in row['Bibcode'] for journal in journals):
+            data_type_label = 'Clean'
+        else:
+            flag = flag + 1
+
+        # Author check
+        if row['First Author'].lower() == row['Input Author'].lower():
+            data_type_label = 'Clean'
+        else:
+            flag = flag + 2
+
+        # Update the 'Data Type' column
+        if flag == 0:
+            data_type_label = 'Clean'
+        else:
+            data_type_label = 'Dirty'
+
+        df.at[index, 'Data Type'] = data_type_label
+
+    # this lets the user know what aspect of the data made it 'dirty'- uncomment to see what the "dirty" aspect is
+    # print(flag)
+
+    # flag= 1 just the journal aspect is dirty,
+    # flag= 2 just the author aspect is dirty,
+    # flag=3 the author and journal are dirty,
+    # flag=4 just the inst is dirty, etc.
+
+    return df
+
+
+def ads_search(name=None, institution=None, year=None, refereed='property:notrefereed OR property:refereed', \
+               token=None, stop_dir=None):
+    # editing query input here
+    final_df = pd.DataFrame()
+    value = 0
+    if name:
+        value = value + 1
+    if institution:
+        value = value + 2
+    if year:
+        value = value + 4
+
+    # Block only name
+    if value == 1:
+        query = 'author:"^{}", pubdate:[2008 TO 2030]'.format(name)
+        print("I will search for any first author publications by %s in the last 15 years.\n" % name)
+
+    # Block Only institution name
+    if value == 2:
+        query = 'pos(institution:"{}",1), pubdate:[2008 TO 2030]'.format(institution)
+        print("I will search for every paper who first authors is afiliated with %s and published in the past 15 years.\n" %
+              institution)
+        # print(query)
+
+    # Block institution + name
+    if value == 3:
+        # print('Value=3')
+        query = 'pos(institution:"{}",1), author:"^{}", pubdate:[2008 TO 2030]'.format(institution, name)
+        print("I will search for every paper published by %s and afiliated with %s  in the past 15 years.\n" % (
+        institution, name))
+        # print(query)
+
+    # Block just year, so nothing really
+    if value == 4:
+        print("You did not give me enough to search on, please try again.")
+
+    # Block. Name + year
+    # Simplified query construction using f-strings and format_year function
+    if value == 5:
+        query = f'author:"^{name}"'
+        years = format_year(year)
+        query += f', pubdate:{years}'
+        print(f"I will search for every paper whose first author is {name} and has published between {years}.\n")
+
+    # Block institution + year
+    # Consolidated query construction and year formatting
+    if value == 6:
+        years = format_year(year)
+        query = f'pos(institution:"{institution}",1), pubdate:{years}'
+        print(f"I will search for every paper whose first author is affiliated with {institution} and has published between {years}.\n")
+
+    # Block name+institution + year
+    # Simplified query construction and ensured all parameters are included
+    if value == 7:
+        years = format_year(year)
+        query = f'pos(institution:"{institution}",1), author:"^{name}", pubdate:{years}'
+        print(
+            f"I will search for every paper published by {name} and affiliated with {institution} between {years}.\n")
+
+    # making and sending query to ADS
+
+    encoded_query = urlencode({
+        "q": query,
+        "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword, identifier",
+        "fq": "database:astronomy," + str(refereed),
+        "rows": 3000,
+        "sort": "date desc"
+    })
+
+    try:
+        print('I am now querying ADS.\n')
+        # print(encoded_query)
+        results = requests.get(
+            "https://api.adsabs.harvard.edu/v1/search/query?{}".format(encoded_query),
+            headers={'Authorization': 'Bearer ' + token}
+        )
+        data = results.json()["response"]["docs"]
+    except:
+        print('Ooops, something went wrong.\n')
+
+    # extract results into each separate detail
+
+    pdates = [d['pubdate'] for d in data]
+    affiliations = [d['aff'][0] for d in data]
+    bibcodes = [d['bibcode'] for d in data]
+    f_auth = [d['first_author'] for d in data]
+    keysw = [d.get('keyword', []) for d in data]
+    titles = [d.get('title', '') for d in data]
+    abstracts = [d.get('abstract', '') for d in data]
+    ids = [d.get('identifier', []) for d in data]
+    # define data frame
+
+    df = pd.DataFrame({
+        'Input Author': [name] * len(data),
+        'Input Institution': [institution] * len(data),
+        'First Author': f_auth,
+        'Bibcode': bibcodes,
+        'Title': titles,
+        'Publication Date': pdates,
+        'Keywords': keysw,
+        'Affiliations': affiliations,
+        'Abstract': abstracts,
+        'Identifier': ids,
+        'Data Type': [[]]*len(data)
+    })
+
+    if name is None:
+        df['Input Author'] = f_auth
+
+    ##############################
+    ############# Checking if the DATAFRAME is EMPTY and trying affiliation instead of institution
+    #############
+    if df.empty:
+        print('DataFrame is empty! Something is wrong with the institution')
+        if value == 2:
+            print('I am querying ADS in a different way, stay tuned!/n')
+
+            query = 'pos(aff:"{}",1), pubdate:[2008 TO 2030]'.format(institution)
+            print("I will search for every paper who first authors is afiliated with %s and published in the past 15+ years.\n" %
+                  institution)
+            # print(query)
+
+            # making and sending query to ADS
+
+            encoded_query = urlencode({
+                "q": query,
+                "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword, identifier",
+                "fq": "database:astronomy," + str(refereed),
+                "rows": 3000,
+                "sort": "date desc"
+            })
+
+            df = do_search(name, institution, token, encoded_query)
+        if value == 6:
+            print('I am at the alternative 6')
+
+            refereed = 'property:notrefereed OR property:refereed'
+            query = 'pos(aff:"{}",1)'.format(institution)
+            if len(year) == 4:
+                startd = str(int(year) - 1)
+                endd = str(int(year) + 4)
+                years = '[' + startd + ' TO ' + endd + ']'
+                print(
+                    "I will search for every paper who first authors is %s and has published between %s and %s. /n" % (
+                    name, str(startd), str(endd)))
+
+            else:
+                years = year
+                # query += ', pubdate:{}'.format(years) #input year in function
+                print(
+                    "I will search for every paper who first authors is %s and has published between %s and %s. /n" % (
+                    name, year[1:5], year[9:14]))
+
+            query = 'pos(institution:"{}",1)'.format(institution)
+            query += ', pubdate:{}'.format(years)  # input year in function
+
+            # print(query)
+            # making and sending query to ADS
+
+            encoded_query = urlencode({
+                "q": query,
+                "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword,identifier",
+                "fq": "database:astronomy," + str(refereed),
+                "rows": 3000,
+                "sort": "date desc"
+            })
+
+            df = do_search(name, institution, token, encoded_query)
+
+        if value == 7:
+            # print('I am at the alternative 7')
+            print('I am querying ADS in a different way, stay tuned!/n')
+
+            refereed = 'property:notrefereed OR property:refereed'
+
+            query = 'pos(aff:"{}",1), author:"^{}"'.format(institution, name)
+            if len(str(year)) == 4:  # <- Attempted to take len() of int. Change to Str() before taking len().
+                startd = str(int(year) - 1)
+                endd = str(int(year) + 4)
+                years = '[' + startd + ' TO ' + endd + ']'
+                print(
+                    "I will search for every paper who first authors is %s and has published between %s and %s. /n" % (
+                    name, str(startd), str(endd)))
+
+            # Attempts to Access a Int as a indexable object
+            else:
+                years = year
+                # query += ', pubdate:{}'.format(years) #input year in function
+                print(
+                    "I will search for every paper who first authors is %s and has published between %s and %s. /n" % (
+                    name, year[1:5], year[9:14]))
+
+            query = 'pos(institution:"{}",1)'.format(institution)
+            query += ', pubdate:{}'.format(years)  # input year in function
+
+            print(
+                "I will search for every paper published by %s and affiliated with %s  \
+          between %s and %s.\n" % (
+                name, institution, startd, endd))
+            # print(query)
+            encoded_query = urlencode({
+                "q": query,
+                "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword,identifier",
+                "fq": "database:astronomy," + str(refereed),
+                "rows": 3000,
+                "sort": "date desc"
+            })
+            # print(encoded_query)
+            df = do_search(name, institution, token, encoded_query)
+            df
+
+    ######################## Block that runs the other functions to get the N-grams
+    data2 = data_type(df)
+    data3 = merge(data2)
+    data4 = n_grams(data3, stop_dir)
+
+    # final_df= df.append(data4, ignore_index= True)
+    return data4
+
+
+# ------------------------------ Helper Functions ----------------------------------------------
+
+
+def format_year(year):
+    if isinstance(year, (int, np.integer)):
+        startd = str(year - 1)
+        endd = str(year + 4)
+        return f'[{startd} TO {endd}]'
+    elif isinstance(year, float):
+        year = int(year)
+        startd = str(year - 1)
+        endd = str(year + 4)
+        return f'[{startd} TO {endd}]'
+    elif isinstance(year, str):
+        if len(year) == 4:
+            startd = str(int(year) - 1)
+            endd = str(int(year) + 4)
+            return f'[{startd} TO {endd}]'
+        else:
+            return year
+    else:
+        raise ValueError("Year must be an integer or a string")
+
+
+# ------------------------------- Deprecated Functions (for testing purposes) ----------------------------------------------
+
+#Deprecated Fucntions (Combined Functionality Above)
+def run_file_fellows_deprecated(filename, token, stop_dir ):
   dataframe= pd.read_csv(filename)
   try:
     institutions= dataframe['Current Institution']
@@ -87,446 +508,7 @@ def run_file_fellows(filename, token, stop_dir ):
     print(str(count)+' iterations done')
   return final_df
 
-def run_file_insts(filename, token, stop_dir ):
-  dataframe= pd.read_csv(filename)
-  try:
-    institutions= dataframe['Current Institution']
-  except:
-    institutions= dataframe['Institution']
-  #names= dataframe['Name']
-  #start_years= dataframe['Fellowship Year']
-  #host_insts= dataframe['Host Institution']
-
-  final_df= pd.DataFrame()
-  count= 0
-  for i in np.arange(len(dataframe)):
-
-    inst= institutions[i]
-    #name= names[i]
-    #year= start_years[i]
-
-    #data1= ads_search(name, institution= inst, year_range=year)
-    data1= ads_search(institution=inst, \
-            token=token, stop_dir=stop_dir)
-    '''
-    if data1.empty:
-        data1= ads_search(name, year_range=year)
-
-    if data1.empty:
-        data1= ads_search(name, year_range='general') #general year range added in ads_search function
-    '''
-    data1['Input Institution']=inst
-
-    #data2= data_type(data1)
-    #data3= merge(data2)
-    #data4= n_grams(data3, stop_dir)
-
-    final_df = pd.concat([final_df, data1], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
-    count+=1
-    print(str(count)+' iterations done')
-  return final_df
-
-def run_file_names(filename, token, stop_dir):
-  # just a file with a list of names. Format is a single column "Last, First"
-  print('I will go through each name in the list. Name should be formatted in a single column called "Last, First".\
-  We will search by default any pubblication between 2003 and 2030 by these authors, independently of the institutions they were\
-  affiliated to. \n')
-
-  dataframe= pd.read_csv(filename)
-  #print(dataframe['Name'])
-  #institutions= dataframe['Current Institution']
-  names= dataframe['Name']
-  #print(type(names[0]))
-  final_df= pd.DataFrame()
-  count= 0
-  for i in np.arange(len(dataframe)):
-    print(names[i])
-    data1= ads_search(name=names[i],  \
-           year='[2003 TO 2030]', token=token,stop_dir=stop_dir)
-    
-    
-    final_df = pd.concat([final_df, data1], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
-    count+=1
-    print(str(count)+' iterations done')
-  return final_df
-
-
-def merge(df):
-
-    df['Publication Date']= df['Publication Date'].astype(str)
-    df['Abstract']= df['Abstract'].astype(str)
-    df['Keywords'] = df['Keywords'].apply(lambda keywords: ', '.join(keywords) if keywords else '')
-
-    # Fix for Title and Identifier. Create new list to preserve individual titles and identifiers. 
-    df['Title'] = df['Title'].apply(lambda titles: titles if titles else [])  # Preserve individual titles
-    df['Identifier'] = df['Identifier'].apply(lambda ids: ids if ids else []) # Preserve individual identifiers
-    
-# if the dataframe is missing any information it is labeled as "None"
-
-    df.fillna('None', inplace=True)
-    
-    merged = df.groupby('Input Author').aggregate({'Input Institution': ', '.join,
-                                                 'First Author': ', '.join,
-                                                 'Bibcode': ', '.join,
-                                                 'Title': lambda x: list(itertools.chain.from_iterable(x)),  # Flatten titles
-                                                 'Publication Date': ', '.join,
-                                                 'Keywords': ', '.join,
-                                                 'Affiliations': ', '.join,
-                                                 'Abstract': ', '.join,
-                                                 'Data Type': ', '.join,
-                                                 'Identifier': lambda x: list(itertools.chain.from_iterable(x))  # Flatten identifiers
-                                                 }).reset_index()
-
-    return merged
-
-
-def n_grams(df, directorypath): #directory path should lead to TextAnalysis.py
-    top10Dict = {'Top 10 Words':[],
-                 'Top 10 Bigrams':[],
-                 'Top 10 Trigrams':[]}
-
-    for i in df.values:
-        abstracts = i[8]
-
-        top10words = TA.topwords(abstracts, directorypath)
-        top10bigrams = TA.topbigrams(abstracts, directorypath)
-        top10trigrams = TA.toptrigrams(abstracts, directorypath)
-
-        top10Dict['Top 10 Words'].append(top10words)
-        top10Dict['Top 10 Bigrams'].append(top10bigrams)
-        top10Dict['Top 10 Trigrams'].append(top10trigrams)
-
-    top10Df = df
-    top10Df['Top 10 Words'] = top10Dict['Top 10 Words']
-    top10Df['Top 10 Bigrams'] = top10Dict['Top 10 Bigrams']
-    top10Df['Top 10 Trigrams'] = top10Dict['Top 10 Trigrams']
-
-    top10Df = top10Df[['Input Author', 'Input Institution', 'First Author', 'Bibcode', 'Title', 'Publication Date',
-             'Keywords', 'Affiliations', 'Abstract', 'Identifier','Top 10 Words', 'Top 10 Bigrams', 'Top 10 Trigrams', 'Data Type']]
-
-    return top10Df
-
-
-def data_type(df):
-
-    journals = ['ApJ', 'MNRAS', 'AJ', 'Nature', 'Science', 'PASP', 'AAS', 'arXiv', 'SPIE', 'A&A']
-
-    for index, row in df.iterrows():
-
-        flag= 0
-
-# Journal check
-        if any(journal in row['Bibcode'] for journal in journals):
-            data_type_label = 'Clean'
-        else:
-            flag= flag+1
-
-#Author check
-        if row['First Author'].lower() == row['Input Author'].lower():
-            data_type_label = 'Clean'
-        else:
-            flag=flag+2
-
-
-# Update the 'Data Type' column
-        if flag==0:
-            data_type_label = 'Clean'
-        else:
-            data_type_label = 'Dirty'
-
-        df.at[index, 'Data Type'] = data_type_label
-
-    #this lets the user know what aspect of the data made it 'dirty'- uncomment to see what the "dirty" aspect is
-    #print(flag)
-
-#flag= 1 just the journal aspect is dirty,
-#flag= 2 just the author aspect is dirty,
-#flag=3 the author and journal are dirty,
-#flag=4 just the inst is dirty, etc.
-
-    return df
-
-def ads_search(name=None, institution=None, year= None, refereed= 'property:notrefereed OR property:refereed', \
-               token=None, stop_dir=None):
-#editing query input here
-  final_df= pd.DataFrame()
-  value=0
-  if name:
-      value=value+1
-  if institution:
-      value=value+2
-  if year:
-    value=value+4
-
-  # Block only name
-  if value==1:
-    query = 'author:"^{}", pubdate:[2008 TO 2030]'.format(name)
-    print("I will search for any first author publications by %s in the last 15 years.\n" % name)
-
-  # Block Only institution name
-  if value==2:
-    query = 'pos(institution:"{}",1), pubdate:[2008 TO 2030]'.format(institution)
-    print("I will search for every paper who first authors is afiliated with %s and published in the past 15 years.\n" % institution)
-    #print(query)
-
-  # Block institution + name
-  if value==3:
-    #print('Value=3')
-    query = 'pos(institution:"{}",1), author:"^{}", pubdate:[2008 TO 2030]'.format(institution, name)
-    print("I will search for every paper published by %s and afiliated with %s  in the past 15 years.\n" %(institution, name) )
-    #print(query)
-
-  # Block just year, so nothing really
-  if value==4:
-    print("You did not give me enough to search on, please try again.")
-
-  #Block. Name + year
-  # Simplified query construction using f-strings and format_year function
-  if value==5:
-    query = f'author:"^{name}"'
-    years = format_year(year)
-    query += f', pubdate:{years}'
-    print(f"I will search for every paper whose first author is {name} and has published between {years}.\n")
-  
-  # Block institution + year
-  # Consolidated query construction and year formatting
-  if value==6:
-     years = format_year(year)
-     query = f'pos(institution:"{institution}",1), pubdate:{years}'
-     print(f"I will search for every paper whose first author is affiliated with {institution} and has published between {years}.\n")
-
-  # Block name+institution + year
-  # Simplified query construction and ensured all parameters are included
-  if value==7:
-     years = format_year(year)
-     query = f'pos(institution:"{institution}",1), author:"^{name}", pubdate:{years}'
-     print(f"I will search for every paper published by {name} and affiliated with {institution} between {years}.\n")
-
-
-  #making and sending query to ADS
-
-
-  encoded_query = urlencode({
-        "q": query,
-        "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword, identifier",
-        "fq": "database:astronomy,"+str(refereed),
-        "rows": 3000,
-        "sort": "date desc"
-    })
-
-  try:
-    print('I am now querying ADS.\n')
-    #print(encoded_query)
-    results = requests.get(
-          "https://api.adsabs.harvard.edu/v1/search/query?{}".format(encoded_query),
-         headers={'Authorization': 'Bearer ' + token}
-      )
-    data = results.json()["response"]["docs"]
-  except:
-    print('Ooops, something went wrong.\n')
-
-
-
-  #extract results into each separate detail
-
-  pdates = [d['pubdate'] for d in data]
-  affiliations = [d['aff'][0] for d in data]
-  bibcodes = [d['bibcode'] for d in data]
-  f_auth = [d['first_author'] for d in data]
-  keysw = [d.get('keyword', []) for d in data]
-  titles = [d.get('title', '') for d in data]
-  abstracts = [d.get('abstract', '') for d in data]
-  ids= [d.get('identifier', []) for d in data]
-  #define data frame
-
-  df = pd.DataFrame({
-        'Input Author': [name] * len(data),
-        'Input Institution': [institution] * len(data),
-        'First Author': f_auth,
-        'Bibcode': bibcodes,
-        'Title': titles,
-        'Publication Date': pdates,
-        'Keywords': keysw,
-        'Affiliations': affiliations,
-        'Abstract': abstracts,
-        'Identifier': ids,
-        'Data Type': [[]]*len(data)
-    })
-
-  if name==None:
-        df['Input Author']= f_auth
-
-  ##############################
-  ############# Checking if the DATAFRAME is EMPTY and trying affiliation instead of institution
-  #############
-  if df.empty:
-    print('DataFrame is empty! Something is wrong with the institution')
-    if value==2:
-      print('I am querying ADS in a different way, stay tuned!/n')
-
-      query = 'pos(aff:"{}",1), pubdate:[2008 TO 2030]'.format(institution)
-      print("I will search for every paper who first authors is afiliated with %s and published in the past 15+ years.\n" % institution)
-      #print(query)
-
-      #making and sending query to ADS
-
-      encoded_query = urlencode({
-        "q": query,
-        "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword, identifier",
-        "fq": "database:astronomy,"+str(refereed),
-        "rows": 3000,
-        "sort": "date desc"
-        })
-
-      df=do_search(name, institution, token, encoded_query)
-    if value==6:
-      print('I am at the alternative 6')
-
-      refereed='property:notrefereed OR property:refereed'
-      query = 'pos(aff:"{}",1)'.format(institution)
-      if len(year)==4:
-        startd=str(int(year)-1)
-        endd=str(int(year)+4)
-        years='['+startd+' TO '+endd+']'
-        print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,str(startd),str(endd)))
-
-      else:
-        years=year
-        #query += ', pubdate:{}'.format(years) #input year in function
-        print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,year[1:5],year[9:14]))
-    
-      query = 'pos(institution:"{}",1)'.format(institution)
-      query += ', pubdate:{}'.format(years) #input year in function
-    
-      #print(query)
-      #making and sending query to ADS
-
-      encoded_query = urlencode({
-        "q": query,
-        "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword,identifier",
-        "fq": "database:astronomy,"+str(refereed),
-        "rows": 3000,
-        "sort": "date desc"
-        })
-
-      df=do_search(name, institution, token, encoded_query)
-
-    if value==7:
-      #print('I am at the alternative 7')
-      print('I am querying ADS in a different way, stay tuned!/n')
-
-      refereed='property:notrefereed OR property:refereed'
-
-      query = 'pos(aff:"{}",1), author:"^{}"'.format(institution, name)
-      if len(str(year))==4: #<- Attempted to take len() of int. Change to Str() before taking len().
-        startd=str(int(year)-1)
-        endd=str(int(year)+4)
-        years='['+startd+' TO '+endd+']'
-        print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,str(startd),str(endd)))
-
-      # Attempts to Access a Int as a indexable object
-      else:
-        years=year
-        #query += ', pubdate:{}'.format(years) #input year in function
-        print("I will search for every paper who first authors is %s and has published between %s and %s. /n" % (name,year[1:5],year[9:14]))
-    
-      query = 'pos(institution:"{}",1)'.format(institution)
-      query += ', pubdate:{}'.format(years) #input year in function
-    
-
-      print("I will search for every paper published by %s and affiliated with %s  \
-          between %s and %s.\n" %(name, institution,startd,endd) )
-      #print(query)
-      encoded_query = urlencode({
-        "q": query,
-        "fl": "title, first_author, bibcode, abstract, aff, pubdate, keyword,identifier",
-        "fq": "database:astronomy,"+str(refereed),
-        "rows": 3000,
-        "sort": "date desc"
-        })
-      #print(encoded_query)
-      df=do_search(name, institution, token, encoded_query)
-      df
-
-    ######################## Block that runs the other functions to get the N-grams
-  data2= data_type(df)
-  data3= merge(data2)
-  data4= n_grams(data3, stop_dir)
-
-  #final_df= df.append(data4, ignore_index= True)
-  return data4
-
-
-#------------------------------ Helper Functions ----------------------------------------------
-
-
-def format_year(year):
-        if isinstance(year, (int, np.integer)):
-            startd = str(year - 1)
-            endd = str(year + 4)
-            return f'[{startd} TO {endd}]'
-        elif isinstance(year, float):
-           year = int(year)
-           startd = str(year - 1)
-           endd = str(year + 4)
-           return f'[{startd} TO {endd}]'
-        elif isinstance(year, str):
-            if len(year) == 4:
-                startd = str(int(year) - 1)
-                endd = str(int(year) + 4)
-                return f'[{startd} TO {endd}]'
-            else:
-                return year
-        else:
-            raise ValueError("Year must be an integer or a string")
-
-
-#------------------------------ Deprecated Functions (for testing purposes) ----------------------------------------------
-
-# Outdated pandas function (pandas.dataframe.append())
-def run_file_fellows_deprecated(filename, token, stop_dir ):
-  dataframe= pd.read_csv(filename)
-  try:
-    institutions= dataframe['Current Institution']
-  except:
-    institutions= dataframe['Institution']
-  names= dataframe['Name']
-  start_years= dataframe['Fellowship Year']
-  #host_insts= dataframe['Host Institution']
-
-  final_df= pd.DataFrame()
-  count= 0
-  for i in np.arange(len(dataframe)):
-
-    inst= institutions[i]
-    name= names[i]
-    year= start_years[i]
-
-    #data1= ads_search(name, institution= inst, year_range=year)
-    data1= ads_search(name=name, institution=inst, \
-           year= year, token=token)
-    '''
-    if data1.empty:
-        data1= ads_search(name, year_range=year)
-
-    if data1.empty:
-        data1= ads_search(name, year_range='general') #general year range added in ads_search function
-    '''
-    data1['Input Institution']=inst
-
-    data2= data_type(data1)
-    data3= merge(data2)
-    data4= n_grams(data3, stop_dir)
-
-    final_df= final_df.append(data4, ignore_index= True)
-    count+=1
-    print(str(count)+' iterations done')
-  return final_df
-
-
-
-
-# Outdated pandas fucntion (pandas.dataframe.append())
+#Deprecated Fucntions (Combined Functionality Above)
 def run_file_insts_deprecated(filename, token, stop_dir ):
   dataframe= pd.read_csv(filename)
   try:
@@ -561,15 +543,12 @@ def run_file_insts_deprecated(filename, token, stop_dir ):
     #data3= merge(data2)
     #data4= n_grams(data3, stop_dir)
 
-    final_df= final_df.append(data1, ignore_index= True)
+    final_df = pd.concat([final_df, data1], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
     count+=1
     print(str(count)+' iterations done')
   return final_df
 
-
-
-
-# Outdated pandas fucntion (pandas.dataframe.append())
+#Deprecated Fucntions (Combined Functionality Above)
 def run_file_names_deprecated(filename, token, stop_dir):
   # just a file with a list of names. Format is a single column "Last, First"
   print('I will go through each name in the list. Name should be formatted in a single column called "Last, First".\
@@ -589,7 +568,7 @@ def run_file_names_deprecated(filename, token, stop_dir):
            year='[2003 TO 2030]', token=token,stop_dir=stop_dir)
     
     
-    final_df= final_df.append(data1, ignore_index= True)
+    final_df = pd.concat([final_df, data1], ignore_index=True) # Changed pandas.dataframe.append() to pandas.concat()
     count+=1
     print(str(count)+' iterations done')
   return final_df
