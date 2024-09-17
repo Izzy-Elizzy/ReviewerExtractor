@@ -6,21 +6,17 @@ from dotenv import find_dotenv, load_dotenv
 import os
 import pandas as pd
 import TextAnalysis as TA
-import ADSsearcherpkg as AP
+import ADSsearcherpkg as ADS
 
 import nltk
 nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
 
-path_stop= ''
-stop_file='stopwords.txt'
-stop_dir=path_stop+stop_file
-sys.path.append(path_stop)
-
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
-token = os.getenv("token")
+TESTFILE = os.getenv("names")
+API_KEY = os.getenv("token")
+STOPWORDS = os.getenv("stopwords")
 
-dataframe=AP.run_file_fellows(filename= 'G:\\Intern\\ReviewerExtractor\\codeV3\\example3.csv',
-               token=token, stop_dir=stop_dir)
+dataframe= ADS.run_file_search(filename=TESTFILE, token=API_KEY, stop_dir=STOPWORDS)

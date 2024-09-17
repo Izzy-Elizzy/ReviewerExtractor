@@ -13,64 +13,64 @@ dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 API_KEY = os.getenv("token")
 STOPWORDS = os.getenv("stopwords")
-TESTFILE = os.getenv("testfile")  # Make sure this is set to a valid CSV file path
-
-
-# Mock Test Data 
-
-df1 = pd.DataFrame({
-    'A': ['A0', 'A1', 'A2'],
-    'B': ['B0', 'B1', 'B2'],
-    'C': ['C0', 'C1', 'C2'],
-    'D': ['D0', 'D1', 'D2']
-})
-
-df2 = pd.DataFrame({
-    'A': ['A3', 'A4', 'A5'],
-    'B': ['B3', 'B4', 'B5'],
-    'C': ['C3', 'C4', 'C5'],
-    'D': ['D3', 'D4', 'D5']
-})
-
-df3 = pd.DataFrame({
-    'A': ['A6', 'A7', 'A8'],
-    'B': ['B6', 'B7', 'B8'],
-    'C': ['C6', 'C7', 'C8'],
-    'D': ['D6', 'D7', 'D8']
-})
-
-
-# def testLegacyAppendAndConcatFunctionality():
-    
-#     # Test old append method
-#     result_of_append = df1.append([df2, df3], ignore_index=True)
-
-#     # Test new concat method
-#     result_of_concat = pd.concat([df1, df2, df3], ignore_index=True)
-
-#     assert result_of_append.equals(result_of_concat)
-
+FELLOWS = os.getenv("fellows") # Make sure this is set to a valid CSV file path
+NAMES = os.getenv("names")
+INST = os.getenv("institutions")
 
 def testEnvironmentalVariables():
-    assert API_KEY and STOPWORDS and TESTFILE != None
+    assert API_KEY and STOPWORDS and FELLOWS and NAMES and INST != None
 
-#Regression tests
-@pytest.mark.parametrize("search_type", ['fellows', 'insts', 'names'])
-def testRegressionRunFileSearch(search_type):
-    """
-    Test that the combined 'run_file_search' function produces the same output
-    as the individual functions for fellows, institutions, and names.
-    """
-    deprecated_func_name = f"run_file_{search_type}_deprecated"
+# # Regression tests
+# @pytest.mark.parametrize("search_type", ['insts', 'names','fellows'])
+# def testRegressionRunFileSearch(search_type):
+#     """
+#     Test that the combined 'run_file_search' function produces the same output
+#     as the individual functions for fellows, institutions, and names.
+#     """
+#     deprecated_func_name = f"run_file_{search_type}_deprecated"
     
-    # Call deprecated individual functions
-    deprecated_dataframe = getattr(ADS, deprecated_func_name)(filename=TESTFILE, token=API_KEY, stop_dir=STOPWORDS)
+#     # Call deprecated individual functions
+#     deprecated_dataframe = getattr(ADS, deprecated_func_name)(filename=FELLOWS, token=API_KEY, stop_dir=STOPWORDS)
     
-    # Call the combined function 
-    combined_dataframe = ADS.run_file_search(filename=TESTFILE, token=API_KEY, stop_dir=STOPWORDS, search_type=search_type)
+#     # Call the combined function with appropriate keyword arguments
+#     if search_type == "insts":
+#         combined_dataframe = ADS.run_file_search(filename=INST, token=API_KEY, stop_dir=STOPWORDS)
+#     elif search_type == "names":
+#         combined_dataframe = ADS.run_file_search(filename=NAMES, token=API_KEY, stop_dir=STOPWORDS)
+#     else:  # 'fellows'
+#         combined_dataframe = ADS.run_file_search(filename=FELLOWS, token=API_KEY, stop_dir=STOPWORDS)
 
-    deprecated_dataframe.to_csv("dep.csv")
-    combined_dataframe.to_csv('com.csv')
+#     # For debugging:
+#     deprecated_dataframe.to_csv("dep_{search_type}.csv")
+#     combined_dataframe.to_csv('com_{search_type}.csv')
+
+#     # Assert that both DataFrames are equal
+#     assert deprecated_dataframe.equals(combined_dataframe)
+
+
+def testRegressionAdsSearch():
+    """
+    Test that the `ads_search` function produces the same results as the
+    deprecated `ads_search_deprecated` function for a given set of criteria.
+    """
+
+    # Choose test criteria (name, institution, year)
+    name = "Browning, Matthew"
+    institution = "University of California, Berkeley"
+    year = 2005
+
+    # Call both functions with the same criteria
+    result_df = ADS.ads_search(name=name, institution=institution, year=year, 
+                                token=API_KEY, stop_dir=STOPWORDS)
+    
+    deprecated_result_df = ADS.ads_search_deprecated(name=name, institution=institution, year=year,
+                                                   token=API_KEY,stop_dir=STOPWORDS)
+    
+    print(type(result_df))
+    print(type(deprecated_result_df))
+
+    result_df.to_csv("new.csv")
+    deprecated_result_df.to_csv("old.csv")
 
     # Assert that both DataFrames are equal
-    assert deprecated_dataframe.equals(combined_dataframe)
+    assert result_df.equals(deprecated_result_df)
