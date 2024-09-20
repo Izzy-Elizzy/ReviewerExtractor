@@ -15,8 +15,10 @@ nltk.download('punkt_tab')
 
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
-TESTFILE = os.getenv("names")
+TESTFILE = os.getenv("fellows")
 API_KEY = os.getenv("token")
 STOPWORDS = os.getenv("stopwords")
 
-dataframe= ADS.run_file_search(filename=TESTFILE, token=API_KEY, stop_dir=STOPWORDS)
+dataframe = pd.read_csv(TESTFILE)
+
+dataframe= ADS.get_user_input(dataframe)

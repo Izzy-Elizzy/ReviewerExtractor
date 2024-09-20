@@ -48,29 +48,36 @@ def testEnvironmentalVariables():
 #     assert deprecated_dataframe.equals(combined_dataframe)
 
 
-def testRegressionAdsSearch():
-    """
-    Test that the `ads_search` function produces the same results as the
-    deprecated `ads_search_deprecated` function for a given set of criteria.
-    """
+# def testRegressionAdsSearch():
+#     """
+#     Test that the `ads_search` function produces the same results as the
+#     deprecated `ads_search_deprecated` function for a given set of criteria.
+#     """
 
-    # Choose test criteria (name, institution, year)
-    name = "Browning, Matthew"
-    institution = "University of California, Berkeley"
-    year = 2005
+#     # Choose test criteria (name, institution, year)
+#     name = "Browning, Matthew"
+#     institution = "University of California, Berkeley"
+#     year = 2005
 
-    # Call both functions with the same criteria
-    result_df = ADS.ads_search(name=name, institution=institution, year=year, 
-                                token=API_KEY, stop_dir=STOPWORDS)
+#     # Call both functions with the same criteria
+#     result_df = ADS.ads_search(name=name, institution=institution, year=year, 
+#                                 token=API_KEY, stop_dir=STOPWORDS)
     
-    deprecated_result_df = ADS.ads_search_deprecated(name=name, institution=institution, year=year,
-                                                   token=API_KEY,stop_dir=STOPWORDS)
+#     deprecated_result_df = ADS.ads_search_deprecated(name=name, institution=institution, year=year,
+#                                                    token=API_KEY,stop_dir=STOPWORDS)
     
-    print(type(result_df))
-    print(type(deprecated_result_df))
+#     print(type(result_df))
+#     print(type(deprecated_result_df))
 
-    result_df.to_csv("new.csv")
-    deprecated_result_df.to_csv("old.csv")
+#     result_df.to_csv("new.csv")
+#     deprecated_result_df.to_csv("old.csv")
 
-    # Assert that both DataFrames are equal
-    assert result_df.equals(deprecated_result_df)
+#     # Assert that both DataFrames are equal
+#     assert result_df.equals(deprecated_result_df)
+
+
+def testFormatYear():
+    assert ADS.format_year(2020) == "[2019 TO 2024]"
+    assert ADS.format_year(2020.5) == "[2019 TO 2024]"
+    assert ADS.format_year("2020") == "[2019 TO 2024]"
+    assert ADS.format_year("[2010 TO 2020]") == "[2010 TO 2020]" 

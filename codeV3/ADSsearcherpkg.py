@@ -3,6 +3,9 @@ from urllib.parse import urlencode
 import numpy as np
 import TextAnalysis as TA
 import itertools
+from prompt_toolkit import prompt, PromptSession
+from prompt_toolkit.completion import WordCompleter
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
 import pandas as pd
 
@@ -54,10 +57,12 @@ def format_year(year):
             startd = str(int(year) - 1)
             endd = str(int(year) + 4)
             return f'[{startd} TO {endd}]'
+        elif year.startswith("[") and year.endswith("]") and " TO " in year:
+            return year  # Return the string as is if it's a year range
         else:
             return year
     else:
-        raise ValueError("Year must be an integer or a string")
+        raise ValueError("Year must be an integer, float, or a string representing a year or a year range.")
 
 def ads_search(name=None, institution=None, year=None, refereed='property:notrefereed OR property:refereed', \
                token=None, stop_dir=None):
@@ -195,6 +200,57 @@ def n_grams(df, directorypath):
                        'Top 10 Trigrams', 'Data Type']]
     return top10Df
 
+def get_user_input(dataframe):
+    
+    # Create a prompt session
+    session = PromptSession(auto_suggest=AutoSuggestFromHistory())
+    
+    # Columns we are concerned with for search
+    name_column = "Name"
+    institution_column = "Institution"
+    year_column = "Year"
+
+    # Detect and display available columns
+    print("I detected the following columns in your CSV:")
+    for column in dataframe.columns:
+        print(f"- {column}")
+
+    # Suggest search types based on available columns
+    possible_searches = []
+    if 'Name' in dataframe.columns:
+        possible_searches.append("Name Search - Type: Name")
+    if 'Institution' in dataframe.columns:
+        possible_searches.append("Institution Search - Type: Institution")    
+    if 'Name' in dataframe.columns and 'Institution' in dataframe.columns and 'Fellowship Year' in dataframe.columns:
+        possible_searches.append("Fellow Search - Type: Fellow")
+        
+
+    print("\nBased on your data, you can perform the following searches:")
+    for search in possible_searches:
+        print(f"- {search}")
+
+    # Get user input
+    search_type = input("Which search would you like to perform? ").lower()
+
+    # Prompt the user to confirm or correct column names
+    if search_type == 'name':
+        name_column = session.prompt(f"Name column (detected: Name): ", default={name_column})
+    if search_type == 'institution':
+        institution_column = session.prompt(f"Institution column (detected: Institution): ", default={institution_column})
+    if search_type == "fellow":
+        name_column = session.prompt(f"Name column (detected: Name): ", default={name_column})
+        institution_column = session.prompt(f"Institution column (detected: Institution): ", default={institution_column})
+        year_column = session.prompt(f"Year column (detected: Year): ", default={year_column})
+    # Return the user's input
+    return {
+        'name_column': name_column,
+        'institution_column': institution_column,
+        'year_column': year_column,
+        'search_type': search_type,
+        'default_year_range': None  # No need for a default year range if 'Year' is in the CSV
+    }
+
+
 def run_file_search(filename, token, stop_dir, **kwargs):
     """
     Combined function for fellows, institutions, and names searches.
@@ -215,6 +271,12 @@ def run_file_search(filename, token, stop_dir, **kwargs):
     dataframe = pd.read_csv(filename)
     final_df = pd.DataFrame()
     count = 0
+
+    # user_input = get_user_input(dataframe)
+
+    # name_column = user_input.name_column
+    # institution_column = user_input.institution_column
+    # year_column = user_input.year_column
 
     name_column = kwargs.get('name_column', 'Name')
     institution_column = kwargs.get('institution_column', 'Institution')
