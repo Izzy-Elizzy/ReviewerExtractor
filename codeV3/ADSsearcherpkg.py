@@ -158,7 +158,7 @@ def data_type(df):
 def merge(df):
     df['Publication Date'] = df['Publication Date'].astype(str)
     df['Abstract'] = df['Abstract'].astype(str)
-    df['Keywords'] = df['Keywords'].apply(lambda keywords: ', '.join(keywords) if keywords else '')
+    df['Keywords'] = df['Keywords'].apply(lambda keywords: keywords if keywords else []) # <- Fix for Keywords
     df['Title'] = df['Title'].apply(lambda titles: titles if titles else []) 
     df['Identifier'] = df['Identifier'].apply(lambda ids: ids if ids else []) 
     df.fillna('None', inplace=True)
@@ -168,7 +168,7 @@ def merge(df):
                                                  'Bibcode': ', '.join,
                                                  'Title': lambda x: list(itertools.chain.from_iterable(x)), 
                                                  'Publication Date': ', '.join,
-                                                 'Keywords': ', '.join,
+                                                 'Keywords': lambda x: list(itertools.chain.from_iterable(x)), # <- Fix for Keywords
                                                  'Affiliations': ', '.join,
                                                  'Abstract': ', '.join,
                                                  'Data Type': ', '.join,
@@ -234,13 +234,13 @@ def get_user_input(dataframe):
 
     # Prompt the user to confirm or correct column names
     if search_type == 'name':
-        name_column = session.prompt(f"Name column (detected: Name): ", default={name_column})
+        name_column = session.prompt(f"Name column (detected: Name): ", default = "Name")
     if search_type == 'institution':
-        institution_column = session.prompt(f"Institution column (detected: Institution): ", default={institution_column})
+        institution_column = session.prompt(f"Institution column (detected: Institution): ", default = "Institution")
     if search_type == "fellow":
-        name_column = session.prompt(f"Name column (detected: Name): ", default={name_column})
-        institution_column = session.prompt(f"Institution column (detected: Institution): ", default={institution_column})
-        year_column = session.prompt(f"Year column (detected: Year): ", default={year_column})
+        name_column = session.prompt(f"Name column (detected: Name): ", default = "Name" )
+        institution_column = session.prompt(f"Institution column (detected: Institution): ", default = "Institution")
+        year_column = session.prompt(f"Year column (detected: Year): ", default = "Fellowship Year")
     # Return the user's input
     return {
         'name_column': name_column,
@@ -272,15 +272,15 @@ def run_file_search(filename, token, stop_dir, **kwargs):
     final_df = pd.DataFrame()
     count = 0
 
-    # user_input = get_user_input(dataframe)
+    user_input = get_user_input(dataframe)
 
-    # name_column = user_input.name_column
-    # institution_column = user_input.institution_column
-    # year_column = user_input.year_column
+    name_column = user_input['name_column']
+    institution_column = user_input['institution_column']
+    year_column = user_input['year_column']
 
-    name_column = kwargs.get('name_column', 'Name')
-    institution_column = kwargs.get('institution_column', 'Institution')
-    year_column = kwargs.get('year_column', 'Fellowship Year')
+    # name_column = kwargs.get('name_column', 'Name')
+    # institution_column = kwargs.get('institution_column', 'Institution')
+    # year_column = kwargs.get('year_column', 'Fellowship Year')
 
     # Check if 'Fellowship Year' column exists (for fellows search)
     if year_column in dataframe.columns:

@@ -19,6 +19,6 @@ TESTFILE = os.getenv("fellows")
 API_KEY = os.getenv("token")
 STOPWORDS = os.getenv("stopwords")
 
-dataframe = pd.read_csv(TESTFILE)
+dataframe= ADS.run_file_search(TESTFILE, API_KEY, STOPWORDS)
 
-dataframe= ADS.get_user_input(dataframe)
+dataframe.to_csv("output.csv")
