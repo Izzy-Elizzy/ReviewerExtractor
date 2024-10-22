@@ -1,0 +1,324 @@
+Hawking for everyone: Commemorating half a
+century of an unfinished scientific revolution
+Jorge Pinochet∗
+Centro de Investigaci´on en Educaci´on ,
+N´ucleo Pensamiento Computacional y Educaci´on para el Desarrollo Sostenible .
+Universidad Metropolitana de Ciencias de la Educaci´on,
+Av. Jos´e Pedro Alessandri 774, ˜Nu˜noa, Santiago, Chile.
+e-mail: jorge.pinochet@umce.cl
+This year marks half a century since Stephen Hawking made his greatest scientific dis-
+covery by theoretically proving that “black holes ain’t so black”, as they behave like hot
+bodies with an absolute temperature that depends inversely on their mass. This discovery
+is expressed by a simple and elegant equation known as the Hawking temperature. The
+best way to commemorate this great scientific event is by bringing it to a wide audience.
+The simplest and most transparent and intuitive tool to achieve this goal is dimensional
+analysis. The objective of this work is to use this tool to derive the Hawking equation,
+reveal its meaning, and explore its main physical consequences.
+Keywords: Black holes, Hawking temperature, dimensional analysis.
+This year marks half a century since Stephen Hawking revolutionised physics by proposing,
+in 1974, that “black holes ain’t so black” . Specifically, Hawking theoretically
+demonstrated that a black hole emits thermal radiation as if it were a hot body with an
+absolute temperature TH, known as the Hawking temperature , which can be calculated
+by the equation:
+TH =
+Despite the scientific relevance of Hawking temperature, and the time that has passed since it
+was formulated, it continues to be unknown, and at best misunderstood, by the vast majority
+of people.
+arXiv:2410.11851v1    1 Oct 2024
+The best way to commemorate the 50th anniversary of Hawking’s discovery is to bring it
+to a wide audience. The simplest and most transparent and intuitive tool for this task is
+dimensional analysis , the application of which requires a minimal knowledge of physics
+and mathematics. In this work, we will use dimensional analysis to carry out an original
+derivation of the Hawking temperature. Following this, we will explore the meaning of this
+equation and its main physical consequences, namely that black holes evaporate and have
+entropy.
+This manuscript may be useful to gifted high school students, physics teachers, scientists and
+engineers, and, more generally, to any educated person who is interested in learning about
+Stephen Hawking’s most important scientific contribution.
+Figure 1: Stephen Hawking, born in 1942, was a renowned British theoretical physicist known for his
+contributions to cosmology and black hole physics. His greatest scientific discovery was the equation
+that established that black holes behave as hot bodies with an absolute temperature that depends
+inversely on their mass. Despite facing progressive motor paralysis caused by Lou Gehrig’s disease,
+Hawking continued to research and communicate his revolutionary ideas until his death in 2018.
+Black holes and Hawking’s discovery
+Black holes are the most extreme prediction of general relativity, which is the theory of gravity
+proposed by Einstein to refine and extend Newton’s law of gravitation . A black hole is a
+region of space where there is such a high concentration of matter that nothing can escape
+its powerful gravity, not even light . The simplest of these objects is the so-called static
+black hole, whose mathematical description depends only on its mass. Eq.  applies to
+these objects, so we will focus on them here.
+Fig. 2 shows an intuitive representation of a static black hole . The mass of this object is
+concentrated in a point region called a singularity, located in the centre of the event horizon,
+or simply horizon, which is a spherical surface that defines the outer limit of the black hole.
+Although the horizon has no material existence, it can be imagined as a unidirectional mem-
+brane that only allows matter or energy to flow inward . The radius of the horizon, called
+the gravitational radius , is calculated as :
+Rg = 2GMBH
+mass of the black hole, that is, the mass confined in the singularity. Since nothing can cross
+the horizon to the outside, this region appears completely black. If the description provided
+by general relativity is correct, we see that the laws of thermodynamics ensure that the tem-
+perature of the horizon is strictly zero; otherwise, the black hole would emit thermal radiation
+and would not be black.
+Figure 2: Structure of a static black hole.
+Broadly speaking, this is the classic black hole paradigm that emerges from general relativ-
+ity. In 1974, when Hawking entered the scene, no one questioned this paradigm. However,
+Hawking dared to question it, proving that “black holes ain’t so black”. Specifically, Hawking
+proved that the horizon behaves as a hot body with an absolute temperature TH, the Hawking
+temperature , which is proportional to the gravity at the horizon.
+Figure 3: Black holes emit thermal radiation, have entropy, and gradually evaporate.
+Table 1: Theories and physical constants involved in the Hawking temperature
+Characteristic constant
+General relativity
+G = 6.67 × 10−11N · m2 · kg−2
+Gravitational constant
+c = 3 × 108m · s−1
+Speed of light in vacuum
+Quantum mechanics
+ℏ= 1.05 × 10−34kg · m2 · s−1
+Planck constant
+k = 1.38 × 10−23kg · m2 · K−1
+Boltzmann constant
+As a consequence, the horizon emits thermal radiation in all directions, the so-called Hawking
+radiation .
+According to Einstein’s mass-energy equivalence, the energy radiated
+by the black hole leads to a gradual reduction of MBH and RS through a process called
+evaporation . Furthermore, from the laws of thermodynamics, this implies that a black
+hole has entropy, which turns out to be proportional to the area of the horizon. From Eq.
+ABH = 4πR2
+g = 16πG2M2
+the universe at a macroscopic level, with quantum mechanics, which describes the universe at
+a microscopic level, and thermodynamics, which describes thermal phenomena . Table 1
+shows the fundamental physical constants that characterise these theories, which will be very
+useful when dimensionally deriving the Hawking temperature.
+Table 2: SI units and their corresponding dimensions
+SI unit
+SI symbol
+To facilitate the derivation, which is presented in the next section, the constants in Table
+showing the dimensions that are relevant for our purposes along with their symbols and the
+associated SI units.
+To guide readers who are not familiar with dimensional analysis, an
+appendix has been included that summarises the main concepts of this tool.
+Derivation of the Hawking temperature
+All the physics we need for a dimensional derivation of the Hawking temperature is sum-
+marised in Tables 1 and 2, and in the idea that the description of a static black hole depends
+only on its mass. We will start by assuming that we do not know the Hawking equation. Ob-
+viously, our ignorance on the subject cannot be complete: in fact, to carry out a dimensional
+derivation, it is always necessary to start with a hypothesis about the dimensional parameters
+involved  .
+To formulate our hypothesis, we must keep in mind that Hawking’s great achievement was to
+combine general relativity with quantum mechanics and thermodynamics to demonstrate that
+a static black hole has an absolute temperature TH. As shown in Table 1, this suggests that
+TH depends on the characteristic constants of these three theories, G, c, ℏ, k. On the other
+hand, we also know that a static black hole is completely characterised by its mass, MBH.
+This shows us that a total of six dimensional parameters are involved, TH, G, c, ℏ, k, MBH,
+and four dimensions, M, L, T, Θ. However, we can reduce these parameters to five, and thus
+simplify the dimensional derivation of TH, by introducing a new variable which in astrophysics
+is known as the standard gravitational parameter, and for a celestial body of mass m is defined
+as µ ≡Gm. The usefulness of this parameter lies in the fact that in problems where gravity
+applies, as is the case with Hawking’s discovery, the product Gm appears frequently1.
+that the use of µ is essential to this derivation. Indeed, with p = 6 parameters  and d = 4
+dimensions , the number of dimensionless groups or Pi groups that can be formed is d −p = 2,
+Table 3: Dimensional parameters, symbols and dimensions
+Hawking temperature
+M0L0T 0Θ1
+Speed of light in vacuum
+M0L1T −1Θ0
+Planck constant
+M1L2T −1Θ0
+Boltzmann constant
+M1L2T −2Θ−1
+Standard gravitational parameter
+M0L3T −2Θ0
+Under these conditions, if we define the standard gravitational parameter as µ ≡GMBH, we
+can formulate our hypothesis in the form:
+Hypothesis: TH = f.
+The specific information needed to derive the Hawking equation is summarised in Table 3,
+which contains the dimensional parameters, their symbols, and the corresponding dimensions.
+We can rewrite our hypothesis in the form:
+TH = Πcx1ℏx2kx3µx4,
+unknown, and our main objective is to determine their numerical values. Starting from the
+rules of dimensional algebra, and remembering that the notation  means “the dimension of
+x” , we can rewrite Eq.  as:
+five parameters listed in Table 3, we obtain:
+M0L0T 0Θ1 =
+M0L0T 0Θ1 = M0x1+x2+x3+0x4Lx1+2x2+2x3+3x4T −x1−x2−2x3−2x4Θ0x1+0x2−x3+0x4.
+exponent on the left side, producing a linear system of four equations with four unknowns:
+x1 + 2x2 + 2x3 + 3x4 = 0
+d = 5 parameters, and since the number of dimensions remains d = 4, the number of Pi groups is reduced to
+d −p = 1, and the equation for TH is uniquely determined.
+By substitution, the reader can verify that the solution of this system is x1 = 3, x2 = 1, x3 =
+TH = Πℏc3
+kµ = Π
+Eqs.  and  we see that Π = 1/8π. The interested reader can find other simple derivations
+of the Hawking temperature in .
+The physical meaning of Hawking’s discovery: The Hawking
+Hawking temperature is not an isolated result, as it has two physical implications that continue
+to raise questions: the first is that black holes evaporate, and the second is that they have
+entropy.
+To understand these two important results in general terms, we must begin by
+exploring the physical meaning of the Hawking temperature.
+Table 4: The Hawking effect
+Mathematical formulation
+Hawking temperature
+TH =
+Black holes have an absolute temperature TH that depends
+inversely on their mass MBH. The greater the value of MBH,
+the lower the value ofTH, and vice versa. For known black
+holes, TH is undetectable.
+Hawking radiation and
+tev ∼= 103 G2M3
+Black holes evaporate in a characteristic time tev that de-
+pends on the cube of their mass. For known black holes, tev
+is much older than the age of the universe, and evaporation
+is undetectable.
+Bekenstein-Hawking
+SBH = kc3ABH
+Black holes have an entropy SBH that depends on the hori-
+zon area ABH, which is proportional to the square of the
+mass. The maximum entropy that can accumulate in a re-
+gion of fixed size is that of the largest black hole confined in
+said region.
+Table 4 summarises the equations that describe the Hawking effect, which is the name given
+to the set of phenomena associated with Hawking’s discovery. The interested reader will find
+very simple derivations of these equations in . In the following sections, we will delve into
+the Hawking effect. Due to space limitations, we will not analyse the physical mechanism
+responsible for the Hawking temperature.
+A reader interested in this topic can refer to
+Hawking’s texts , or other works published in this journal, where this topic is addressed
+in an accessible way .
+Hawking temperature
+The first aspect that we must keep in mind in relation to the Hawking temperature is that it
+does not depend on the interaction of the black hole with the matter in its environment. A
+black hole could be completely isolated and still have a temperature given by Eq. .
+We will start by rewriting this equation in a form that allows for quick calculations, using the
+values of G, c, ℏ, k from Table 1. If we enter the solar mass M⊙= 1.99 × 1030kg, and multiply
+the right side of Eq.  by the dimensionless quotient M⊙/1.99 × 1030kg = 1, we obtain the
+Hawking temperature expressed in kelvin  as:
+TH = 6.17 × 10−8K
+region of its horizon contains no matter or radiation. This equation tells us that “black holes
+ain’t so black”, and that they can be very bright and hot if MBH is small enough. To provide
+empirical corroboration of Hawking’s discovery, we need to find light black holes. The lightest
+ones that have been observed so far have masses of the order of ∼M⊙, while the heaviest
+ones can have masses of up to ∼1010M⊙. To obtain an upper bound for TH, we take
+MBH = M⊙in Eq. , obtaining TH = 6.17×10−8K. This tiny temperature is undetectable
+through astronomical observations.
+Figure 4: Graph of Hawking temperature, TH, versus MBH/M⊙.
+To illustrate the relationship between TH and MBH more clearly, a graph of Eq.  is shown
+in Fig. 4. The horizontal axis has dimensionless units of MBH/M⊙and the vertical axis has
+units of 6.17 × 10−8K. It can be observed that TH approaches zero asymptotically as MBH
+increases.
+Hawking radiation and evaporation
+As with any hot body, a black hole emits mainly photons; that is, Hawking radiation is ba-
+sically light. However, if TH is high enough, it can also emit neutrinos, electrons, positrons,
+etc. This emission process is known as evaporation . Just as the evaporation of a puddle
+of water on a summer day gradually reduces the mass of the puddle, Hawking radiation grad-
+ually reduces the mass of the black hole, as the photons, electrons, and other particles cross
+the horizon to the outside.
+Eq.  reveals that the smaller the value of MBH, the more Hawking radiation is emitted
+from the horizon, and the more radiation is emitted, the more rapidly MBH is reduced. This
+means that evaporation does not occur at a constant rate, but instead increases over time
+when they emit more material than they absorb that there will there be a net outward flow
+of radiation that will reduce MBH. The time taken for the mass of an isolated black hole of
+initial mass MBH to be reduced to zero is called the evaporation time :
+tev ∼= 103 G2M3
+sionless quotient 3 = 1, the evaporation time is expressed in seconds 
+as:
+tev = 1073s
+M⊙
+the vertical axis has units of 1073s. It can be observed that tev increases rapidly with an
+increase in MBH.
+Eq.  reveals that, in general, tev is extraordinarily large. To obtain a lower bound for tev,
+we take MBH = M⊙in Eq. , obtaining tev ∼= 1073s. This figure is 56 orders of magnitude
+greater than the age of the universe, which is estimated at ∼1017s. Hence, evaporation is
+unobservable, which is consistent with the fact that TH is undetectable.
+Figure 5: Graph of evaporation time, tev, versus MBH/M⊙.
+Bekenstein-Hawking entropy
+The laws of thermodynamics establish that every body with a non-zero temperature has
+entropy, and black holes are no exception. According to calculations originally carried out
+by the physicist Jacob Bekenstein and perfected by Hawking , the Bekenstein-Hawking
+entropy SBH of an isolated black hole is proportional to the area of its event horizon:
+SBH = kc3ABH
+the black hole and the solar mass:
+SBH = 4πkGM2
+M⊙
+equality by the dimensionless quotient 2 = 1, allowing SBH to be expressed
+in joules/kelvin , which are the SI units of entropy. Fig. 6 shows a graph of this
+equation, where the horizontal axis has units of MBH/M⊙and the vertical axis units of
+gives SBH = 1.5 × 1054J · K−1. This is a colossal number, and reveals that black holes are
+among the most entropic objects in the universe.
+Figure 6: Graph of entropy, SBH, versus MBH/M⊙.
+Analogue gravity
+If, as the evidence suggests, the smallest black holes have masses on the order of ∼M⊙, with
+Hawking temperatures on the order of a millionth of a kelvin, attempts to detect Hawking
+radiation may be unsuccessful. To get around this difficulty, the ideal would be to create
+black holes in our laboratories, which would allow us to study them in detail, but this is
+obviously impossible with current technology , and it may never be possible to develop
+such technology.
+Due to these difficulties, some specialists have turned their attention towards a field of ex-
+perimental physics called analogue gravity, whose objective is implementing physical systems
+that imitate the behaviour of gravitational phenomena that are difficult to observe under real
+conditions , such as the Hawking effect.
+The first person to propose the use of analogue models to study black holes was the Canadian
+theoretical physicist William Unruh, who, in 1972, introduced an inventive analogy: he imag-
+ined a fish screaming while falling over a waterfall. As the fish falls, it heads toward a point in
+the waterfall where the water travels downward faster than sound waves can travel upward.
+When the fish crosses this point, its friends in the river above can no longer hear it, since
+to enable this, the speed of the sound waves would have to exceed the speed of sound in the
+water . According to Unruh, this is analogous to what would happen to an astronaut
+who fell into the jaws of a black hole: the astronaut would not be able to communicate with
+the base station on Earth, because the signals sent towards the outside would need to move
+faster than light, which is prohibited by physical laws.
+Figure 7: A fish sends sound waves up a waterfall. The dashed line is an analogue of the horizon,
+where the speed with which the waterfall falls is equal to the speed of sound in the water, meaning
+that the waves cannot cross the dashed line.
+Almost a decade later, Unruh showed that the event horizons of black holes and the sonic
+horizons in systems such as his waterfall, which are now known as sonic black holes, can be
+described by identical equations . In particular, Unruh showed that sonic black holes can
+mimic the Hawking temperature and Hawking radiation. The results of the first experiment
+of this type were published in 2014 , so this is a new and developing field of research. The
+results obtained so far are encouraging, although not conclusive, and the evidence is consistent
+with the discoveries made by Hawking half a century ago.
+Final comments: Epitaph for a genius
+The great discoveries of physics are expressed through equations that accurately describe a
+wide range of phenomena. Some equations stand out for their simplicity, others for their
+elegance, and others for their ability to build bridges between apparently dissimilar domains
+of reality. However, there is a select group of equations that stand out for combining all these
+virtues.
+For example, Newton’s law of gravitation falls into this category, as it reconciles celestial
+physics with terrestrial physics, as does Einstein’s mass-energy equivalence, which unifies
+matter and energy. The Hawking equation also falls into this category, as it bridges general
+relativity, quantum mechanics and thermodynamics. Hawking’s tomb in Westminster Abbey
+has this equation engraved on it, alongside the inscription: “Here lies what was mortal of
+Stephen Hawking”. It is hoped that this work will contribute to a better understanding of
+Hawking’s work and his immortal equation, a symbol of a scientific revolution that is far from
+over.
+Appendix: Dimensional analysis and dimensional algebra
+A physical dimension, briefly called a dimension, is a property of an object or phenomenon
+that can be measured and expressed in terms of standard fundamental units. Dimensional
+analysis is a tool used in science and engineering to study and relate different physical quanti-
+ties through their dimensions. For example, length, mass, and time are dimensions that have
+associated SI units of the metre, kilogram, and second, respectively. There are seven dimen-
+sions, which correspond to the seven fundamental physical magnitudes. These dimensions,
+their symbols, and the associated SI units appear in Table A1 below.
+In the various applications of dimensional analysis, the notation  is commonly used, which
+is read as “the dimensions of a”. For example, if m is the mass of any object, ρ is its density
+and v is its speed, we have  = M,  = ML−3 and  = LT −1.
+Table A1: SI units and their corresponding dimensions
+SI unit
+SI symbol
+Electric current
+Luminous intensity
+Amount of substance
+To apply dimensional analysis, it is useful to systematise seven principles that, together, we
+can call the rules of dimensional algebra. We can consider a set of quantities a, b, c... that
+may be pure numbers, variables, physical constants, etc. The rules of dimensional algebra
+that can be applied to these quantities are as follows:
+i Product rule:  = .
+ii Quotient rule:  = /.
+iii Commutativity rule:  = .
+iv Associativity rule:  = .
+v Powers rule:  = n.
+vi Homogeneity rule: If a ± b = c then  =  =  = .
+vii Dimensionless quantities rule: If a is dimensionless, then  = 1.
+I would like to thank to Daniela Balieiro for their valuable comments in the writing of this
+paper.
