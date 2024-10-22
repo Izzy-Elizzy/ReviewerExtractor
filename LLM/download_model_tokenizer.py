@@ -38,7 +38,9 @@ def download_and_save_model(model_name, save_dir):
 
 if __name__ == "__main__":
     MODEL_NAME = "pszemraj/led-large-book-summary"
-    SAVE_DIR = "./model"
+    USERNAME = "ielhaime"
+    SAVE_DIR = "/nobackup/" + USERNAME + "/model"
+   
     
     # Download model and tokenizer
     download_and_save_model(MODEL_NAME, SAVE_DIR)
