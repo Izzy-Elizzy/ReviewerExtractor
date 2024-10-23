@@ -3,7 +3,8 @@ import os
 
 username = "ielhaime"
 model_name = "pszemraj/led-large-book-summary" 
-save_dir = f"/nobackup/{username}/model"
+# save_dir = f"/nobackup/{username}/model"
+save_dir = f"./model"
 
 # Create the save directory if it doesn't exist
 os.makedirs(save_dir, exist_ok=True)

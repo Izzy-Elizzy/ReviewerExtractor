@@ -1,2 +1,3 @@
 bert/
-model/
+models/
+summaries/
