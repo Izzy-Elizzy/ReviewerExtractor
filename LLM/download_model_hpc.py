@@ -38,7 +38,7 @@ def download_models(models: list, base_dir: str) -> None:
         logging.info(f"Downloaded {model_name} to {model_dir}")
         
         # Save configuration
-        config_path = save_model_config(model_dir)
+        config_path = save_model_config(model_dir,model_name)
         if config_path:
             logging.info(f"Saved configuration for {model_name}")
 
