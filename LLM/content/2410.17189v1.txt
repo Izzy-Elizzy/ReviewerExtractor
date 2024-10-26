@@ -1,0 +1,766 @@
+Draft version October 23, 2024
+Typeset using LATEX twocolumn style in AASTeX62
+Temporal and Spectral Analysis of the Unique and Second Brightest Gamma-Ray Burst GRB 230307A: Insights
+from GECAM and Fermi/GBM Observations
+R. Moradi,1 C. W. Wang,1, 2 B. Zhang ,3, 4 Y. Wang ,5, 6, 7 S.-L. Xiong ,1 S.-X. Yi,1 W.-J. Tan,1, 2
+M. Karlica,8 and S.-N. Zhang 1, 2
+Republic of China
+In this study, we present the pulse profile of the unique and the second brightest gamma-ray burst
+GRB 230307A, and analyze its temporal behavior using a joint GECAM–Fermi/GBM time-resolved
+spectral analysis. The utilization of GECAM data is advantageous as it successfully captured sig-
+nificant data during the pile-up period of the Fermi/GBM. We investigate the evolution of its flux,
+photon fluence, photon flux, peak energy, and the corresponding hardness-intensity and hardness-flux
+correlations. The findings within the first 27 seconds exhibit consistent patterns reported previously,
+providing valuable insights for comparing observations with predictions from the synchrotron radiation
+model invoking an expanding shell. Beyond the initial 27 seconds, we observe a notable transition in
+the emitted radiation, attributed to high latitude emission , influenced by the geometric prop-
+erties of the shells and the relativistic Doppler effects. By modeling the data within the framework
+of the large-radius internal shock model, we discuss the required parameters as well as the limitations
+of the model. We conclude that a more complicated synchrotron emission model is needed to fully
+describe the observational data of GRB 230307A.
+Keywords: gamma-ray bursts: general — gamma-rays: general — stars: — : general —
+A comprehensive understanding of the physical origins
+of gamma-ray burst  pulses is crucial to unravel
+the complexities of the overall GRB phenomenon and to
+shed light on the nature of the inner engine and associ-
+ated radiation processes .
+The individual GRB pulses typically exhibit a charac-
+teristic temporal evolution, characterised by a rapid rise
+rmoradi@ihep.ac.cn;cwwang@ihep.ac.cn;bing.zhang@unlv.edu;
+yu.wang@inaf.it;xiongsl@ihep.ac.cn
+followed by an exponential decay, often referred to as
+the “FRED” shape .
+However, statistical investigations of the decay phase
+of smooth FRED pulses within the Burst and Transient
+Source Experiment  have shown that many of
+these pulses do not conform to exponential behaviour
+Therefore, the exploration of alternative functions, such
+as power-law functions, has been proposed to explain
+this decay trend .
+During the decay phase, the spectral hardness of GRB
+pulses demonstrates a noticeable decrease. A significant
+fraction of pulses in this phase appear to satisfy spe-
+arXiv:2410.17189v1    22 Oct 2024
+cific relations between their temporal and spectral prop-
+erties, such as the hardness-intensity correlation 
+lation  .
+Based on these empirical findings, and with the goal of
+comprehending the radiative mechanisms responsible for
+the cooling process, it is essential to concentrate on the
+decay phase of GRBs’ prompt emission. Furthermore,
+it is vital for theoretical models to replicate these ob-
+servational results, as they can help distinguish among
+various possibilities; .
+In this regard, in this paper we conduct a comprehen-
+sive investigation into the spectral and temporal charac-
+teristics of GRB 230307A, the second brightest gamma-
+ray burst  detected in over 50 years, character-
+ized by its long-duration prompt emission .
+The unique features of
+GRB 230307A, along with the similar properties of GRB
+softer temporally extended emission  and kilonova
+pact stellar merger origin of GRB 230307A . The emer-
+gence of an X-ray component after the prompt γ-ray
+emission phase suggests a magnetar engine  ). Detailed analy-
+ses of the temporal spectral behavior suggest that the
+emission is likely synchrotron radiation from a Poynting-
+flux-dominated jet, with evidence of mini-jets suggested
+in the internal-collision-induced magnetic reconnection
+and turbulence  model , even
+though other possibilities have also been discussed .
+The high brightness of GRB 230307A caused the
+Fermi Gamma-ray Burst Monitor  to encounter pulse pile-up and data loss
+during the prompt emission from T0+1 s to T0+20 s
+This issue was
+also observed in the case of another bright GRBs, e.g.
+GRB 221009A . However, the Gravi-
+tational wave high-energy Electromagnetic Counterpart
+All-sky Monitor , success-
+fully obtained significant data during the pile-up period
+of the Fermi/GBM, showcasing its unique capability to
+capture data from highly luminous GRBs. This ability
+of GECAM provides valuable insights into the nature of
+exceptionally bright GRBs.
+Utilizing data obtained from both GECAM and
+Fermi/GBM, we perform a time-resolved spectral anal-
+ysis during the first 100 seconds of GRB 230307A. Our
+analysis, as shown in section 2 reveals consistent be-
+havior with the Hardness-Intensity Correlation 
+and Hardness-Fluence Correlation  relations as
+reported by Ryde & Svensson  derived from
+a sample of 25 bursts.
+In view that this spectral evolution behavior is con-
+sistent with a general synchrotron radiation model in-
+volving a large emission radius, we investigate how
+the model may be consistent with such models, espe-
+cially the widely discussed internal shock model .
+We consider relativistic ejection as a continuous pro-
+cess, with internal shocks taking the form of propagat-
+ing shock waves within the outflow. We utilize a ver-
+sion of the internal shock model developed by Daigne
+one pair of internal shocks at a large emission radius.
+This approach results in pulse shapes during the decay
+phase, determined by the hydrodynamical timescale as-
+sociated with the propagation of these shock waves.
+We point out the limitations of this model and discuss
+possible solutions to improve the model. In particular,
+we echo the suggestion of Yi et al.  that the full
+dataset of GRB 230307A demands a more complicated
+large-radius synchrotron radiation model invoking mini-
+jets, as envisaged within the framework of ICMART
+model .
+The paper is organized as follows: Section 2 presents
+the detailed methodology of the time-resolved spec-
+tral analysis applied to GRB 230307A using data from
+GECAM and Fermi-GBM. In section 3, we provide a
+brief overview of the internal shocks  model em-
+ployed in this study.
+Section 4 focuses on investigat-
+ing the astrophysical model parameters required in the
+IS model to explain the observed temporal and spectral
+evolution of GRB 230307A and the limitations of the
+model. Finally, in section 5, we present the concluding
+remarks of our study.
+On March 7, 2023, at 15:44:06 UT  the Gravi-
+tational wave high-energy Electromagnetic Counterpart
+All-sky Monitor  was triggered in-flight by
+this exceptionally bright long burst and the low latency
+alert reporting the GECAM discovery of this extremely
+bright burst initiated a global observation campaign
+The GECAM light curve shows
+a roughly FRED shape with a possible precursor and
+an overall duration of about 100 seconds .
+The GECAM duration  of this burst is
+At the same time, the Fermi Gamma-
+ray Burst Monitor  detected and located GRB
+a single burst in 10-1000 keV with a duration  of
+approximately 35 seconds . With
+a redshift estimated to be z ∼0.065 , the isotropic energy measured by GECAM-B is
+Eiso = 4.8×1052 erg.
+As of the detection of GRB 230707A, GECAM con-
+sists of three separate satellites: GECAM-A, GECAM-
+B, and GECAM-C. GECAM-A and GECAM-B were
+launched in December 2020 , while
+GECAM-C,
+SATech-01
+satellite,
+launched in July 2022 .
+Each GECAM satellite has two kinds of scientific in-
+struments: gamma-ray detectors  and charged
+particle detectors .
+There are 25 GRDs on-
+board GECAM-B and 12 GRDs onboard GECAM-C.
+GRB 230307A was detected by both GECAM-B and
+GECAM-C, and neither GECAM-B nor GECAM-C suf-
+fered saturation during the event. GRD04 of GECAM-
+B and GRD01 of GECAM-C are selected for spectral
+analysis due to their smallest zenith angles to the burst.
+These two detectors operate in two readout channels:
+high gain  and low gain , which are indepen-
+dent in terms of data processing, transmission, and dead
+time.
+For GRD04 of GECAM-B, the energy range of the HG
+channel data is used from about 40 keV to 300 keV, while
+the energy range of the LG channel data is used from
+about 700 keV to 8000 keV. For GRD01 of GECAM-
+C, only the HG channel data is used with an energy
+range from 6 keV to 100 keV. It should be noted that
+the response of GRD01 of GECAM-C for the 6-15 keV
+range is affected by certain instrumental effects, which
+may result in inaccuracies. This issue is currently being
+studied. The background of GECAM-B is estimated by
+fitting the data from T0-50 s to T0-5 s and T0+160 s to
+T0+200 s with first order polynomials.
+The background of GECAM-C is estimated by fitting
+the data from T0-20 s to T0-1 s and T0+170 s to T0+600 s
+with a combination of first and second-order exponential
+polynomials.
+It is noteworthy that GECAM features a unique and
+optimized design specifically for detecting extremely
+bright GRBs.
+In addition to employing transmission
+channels with large capacity and broad bandwidth, ad-
+jacent detectors with similar pointing are read out by
+independent electronic modules.
+Thanks to these so-
+phisticated designs, the count rate upper limit of each
+GRD can reach up to 100 kcps, significantly exceeding
+the count rate of GRB 230307A detected by GECAM.
+In this study, we also utilize the Time-Tagged Event
+one of the two scientific instruments on board the Fermi
+satellite, the other being Fermi/LAT. The Fermi/GBM
+instrument is equipped with two types of detectors,
+namely 12 Sodium Iodide  detectors  and 2
+Bismuth Germanate  detectors .
+Due to the high brightness of GRB 230307A, GBM ex-
+perienced pulse pile-up and data loss during the prompt
+emission, resulting in the creation of Bad Time Intervals
+To supplement the GECAM data when the source is
+not as bright ,
+we carry out a joint analysis using GBM data, using the
+na detector ranging from 8 keV to 900 keV, and the b1
+ranging from 0.3 MeV to 8 MeV.
+The spectral analysis is conducted using the Pyxspec
+software .
+The exceptional
+brightness of GRB 230307A enables the execution of
+spectral analysis with a significantly high time resolu-
+tion. The time intervals used in this study are deter-
+mined based on the results of the Bayesian block anal-
+ysis , with additional adjustments
+made based on the fitting results.
+Specifically, during the period of high brightness from
+T0 to T0+15 s, the time intervals are set to 0.1 s in or-
+der to achieve a more refined time-resolved spectrum.
+During the period of decreased burst intensity, specifi-
+cally from T0+ 15 s to T0+ 32 s, the time intervals are
+adjusted to 0.5 s. This choice allows for a more refined
+analysis of the dip spectrum, ensuring an adequate num-
+ber of photons for accurate fitting. Following T0+32 s,
+the time intervals are primarily determined based on the
+Bayesian blocks analysis results. However, these inter-
+vals are further adjusted multiple times to ensure opti-
+mal fitting of each bin, aiming for narrow and well-fitted
+bins.
+Three distinct photon spectral models are chosen for
+analysis: BAND model , the power law
+with a high-energy exponential cutoff  model, and
+the simple power law  model. In addition, we incor-
+porate the uncertainties arising from cross-calibration
+by introducing multiplicative factors between different
+detectors. Table 1 presents the best-fit parameters ob-
+tained for each time interval of GRB 230307A. The
+columns include the time interval, the best-fit model,
+the α parameter for the PL, CPL, or BAND function
+when applicable, the β parameter for the BAND func-
+tion in intervals where it is the best fit, the peak energy,
+the flux, the photon flux, the CSTAT value, and the de-
+grees of freedom  to assess the goodness of fit for
+the best model. Additionally, we thoroughly explored
+the potential need for an additional spectral component,
+such as a thermal component, to fit the spectra. How-
+ever, we did not find any statistically significant evidence
+supporting the necessity of such an extra component.
+The optimal model is determined using the Bayesian
+Information Criterion . The BIC is
+defined as BIC = −2lnL+klnN, where L represents the
+maximum likelihood value, k denotes the number of free
+parameters in the model, and N signifies the number of
+data points. A model with a lower BIC value is pre-
+ferred, particularly when the difference in BIC 
+exceeds 10. In the best model, all parameters should be
+well–constrained, and the multiplicative factors should
+be approximately equal to 1.
+The characteristics of the gamma-ray of the burst can
+be inferred from the temporal changes in the light curve
+and the spectral properties; . These observations have uncovered various sta-
+tistical relationships between different measurable quan-
+tities, providing valuable insights and limitations on the
+physical models that govern the production of gamma-
+rays .
+The advent of new satellites like GECAM  has further enhanced our ability to study and un-
+derstand these phenomena.
+As explained in the previous subsections, we examined
+the potential evolution of the spectral shape during the
+decay phase of GRB 230307A, but no significant changes
+were observed; see also Table. 1. We now study the tem-
+poral behaviour of the energy flux FE, the photon flux
+N and spectral peak energy Ep. FE is related
+to N and Ep by 
+FE = NEp
+φ =
+Z E2/Ep
+E1/Ep
+Ndx,
+φ0 =
+Z ∞
+xNdx,
+with N representing the spectral shape. Figure. 1
+shows the joint GECAM+Fermi/GBM evolution of the
+above functions, namely FE, N, Ep, φ,
+as well as the photon fluence Φ. These functions are
+obtained from the best fit parameters determined in Sec-
+tion 2, and reported in Table. 1.
+Ryde & Svensson  have shown that the decay
+behavior of the photon flux, N, is a consequence of
+the validity of both the Hardness-Intensity Correlation
+Ep ∝e−ΦN/Φ0 ,
+law during the decay phase:
+N =
+n ,
+phase, and it serves as a reference point from which
+the decay behavior of the photon flux N = N0 is
+measured, and τ is a constant. Subsequently, Ryde &
+Svensson  found that the distribution of n in their
+sample was peaked around n = 1.
+Based on our comprehensive analysis of data obtained
+from the joint analysis of GECAM and Fermi/GBM, we
+find that none of FE, Ep, and N can be accu-
+rately described by a single decaying power law over the
+entire post maximum emission period, extending from
+the initial decay time td1 = 7.2 s to t ∼100 s.
+We then investigate the behavior of the flux and fit it
+using a broken power-law model. The best fit parame-
+ters, as shown in Fig. 2 reveals a break time t = 27±2
+s, with the first index α1 = 1.55 ± 0.10 and the second
+index α2 = 2.98 ± 0.16. Therefore, we denote the break
+time of the flux as td2 = 27 s, representing the initiation
+of the second decay phase of the flux.
+Within the range of td1 = 7.2 s to td2 = 27 s, we ob-
+serve that FE ∝1/t, Ep ∝1/t,
+N ∝1/t, and φp ∝E
+Figs. 3 and 5.
+These lead to HIC and HFC relations
+Ep ∝N
+Ep ∝e−ΦN/ ,
+the peak energy Ep and the associated energy flux,
+FE, believed to be intrinsic to the emission process,
+is consistent with the correlations identified by Liang
+et al. , Ghirlanda et al. , Lu et al. ,
+Frontera et al. , and Dainotti et al. .
+tp = 4.95 s
+td1 = 7.2 s
+td2 = 27 s
+evolution, FE, in erg.cm−2.s −1. The second panel shows the photon fluence evolution, Φ, in photons.cm−2. The third
+panel shows the photon flux evolution, N, in photons.cm−2.s −1. The forth panel shows the spectral peak energy evolution,
+Ep, in keV. The fifth panel shows φp defined in Eq. 1. The peak of the pulse is tp = 4.95 s. The interval from td1 = 7.2
+s to td2 = 27 s indicates the time interval of the decay phase studied.
+Beyond td2 = 27 s, the decay behavior follows FE ∝
+temporal behaviour aligns with the characteristics of
+high latitude emission , which persists after the
+on-axis emission from the final dissipating regions in the
+relativistic outflow ceases; . Such a HLE emission is in general consistent with
+the cessation of synchrotron emission in a large emis-
+sion radius, such as the ICMART model  and the large-
+radius internal shock model  ). The photosphere models  have a much smaller emission
+radius, so that the high-latitude emission timescale is
+expected to be much shorter and exhibit a rapid de-
+cay , which is inconsistent with
+Post-Maximum Flux: broken power-law
+tp = 4.95 s
+td1 = 7.2 s
+td2 = 27 s
+Figure 2. The post maximum flux F best–fitted with a broken power-law model. The best fit parameters indicate a break
+time at 27±2 s, with the first index α1 = 1.55 ± 0.10 and the second index α2 = 2.98 ± 0.16.
+the data. Furthermore, the spectral analysis presented
+in Table 1 shows no evidence of statistically significant
+thermal components, which are essential indicators of
+photospheric emission in such analyses.
+In the subsequent analysis, it is therefore crucial to in-
+vestigate the decay behavior of FE, Ep, and N
+within a general framework of synchrotron radiation at a
+large emission radius. A practical model is the large ra-
+dius internal shock model , because it has less parameters than
+the ICMART model that invokes multiple minijets  and Shao & Gao  for de-
+tailed modeling) and because the two models share sim-
+ilar global properties in terms of FE, Ep, and N
+evolutions. We want to, however, emphasize the caveats
+of the IS model. Since additional rapid variability is ob-
+served on top of the broad pulse profile of GRB 230307A,
+in order to fully interpret the data within the IS model,
+additional small-radius shocks are needed to account for
+the rapid variability. The superposition between small-
+radius ISs and a large-radius IS is actually disfavored
+by the data of GRB 230307A . Nonethe-
+less, the goal of the following investigation is to see how
+good the simplest IS model can reproduce the general
+behavior of this burst.
+The internal shock model, introduced by Rees &
+Meszaros , explains the GRBs originating from
+compact stellar-mass objects. It suggests that a wind
+emitted by such objects has an uneven distribution
+of speed, resulting in faster sections catching up with
+slower ones, generating gamma-rays through radiative
+processes such as synchrotron or inverse Compton radi-
+ation through internal shocks ;
+Internal shocks  were initially thought to be dis-
+crete shell collisions , but this led
+to discrepancies with observed GRB decay rates due to
+the “curvature effect.” In the multiple shells IS scenario,
+the long-term overall trend of the light curve reflects the
+activity history of the central engine, showing neither
+shape-energy dependence nor any power-law behavior
+in the luminosity trend. This random behavior is not
+surprising, as the cluster of shells is randomly generated
+and possesses random mass and velocity.
+Within a relativistic wind characterized by a nonuni-
+form Lorentz factor, internal shocks occur and transform
+a fraction of the kinetic energy into radiation. Our ap-
+proach involves depicting the irregular wind as a series
+of relativistic shells, with the collision of two shells con-
+stituting the fundamental process in this model. When
+multiple shells are present, numerous collisions occur.
+To delineate the temporal structure, we compute the
+time sequence of these two-shell collisions and overlay
+the resultant pulses from each collision.
+A rapidly-moving shell 
+overtakes a slower one , and the two combine to cre-
+ate a single merged shell . This system mimics an
+inelastic collision between two masses mr and ms. By
+applying the principles of energy and momentum con-
+servation, we determine the Lorentz factor of the merged
+shell to be :
+γm ≃
+γrmr + γsms
+γr + ms
+Post-maximum: Ep ∝F 0.48
+log10  = 4.74+0.02
+r = 0.94
+B = 0.48+0.00
+Post-maximum: Ep ∝e−Φ/Φ0
+r = 0.70
+Φ0 = 559.94+2.37
+Post-maximum: Ep ∝N 1.52
+r = 0.72
+B = 1.52+0.03
+p-scaled
+E−0.49
+r = 0.71
+B = −0.49+0.03
+Figure 3. The correlations between the peak energy, Ep, and various parameters such as A: the flux, FE, N, B:
+photon fluence, C: photon number, Φ, and D: φp, are explored in our analysis. The relationship between Ep and
+FE aligns with the findings of previous studies by Liang et al. , Ghirlanda et al. , and Lu et al. . The
+Hardness-Fluence Correlation  is illustrated panel B, while the Hardness-Intensity Correlation  is shown in the
+panel C. The optimal fitting time interval ranges from td1 = 7.2 to td2 = 27 seconds. The correlation coefficients of 0.94, 0.70,
+Ep with FE, N, and φp are performed using a logarithmic model: log = A + B · log, where x represents
+FE, N, and φp.
+Normalized count rate
+IS in 6-8000 keV
+Figure 4. The plot represents the normalized count rate ob-
+tained from the simulation of randomized shell collisions in
+the IS model versus time. 50 shells are ejected, each charac-
+terized by randomly chosen initial thickness, Lorentz factor,
+and mass from log-distributed random distributions.
+Lorentz factors range from 100 to 1000, the mass spans from
+engine follow a linear distribution, with values ranging from
+Subsequently, each collision releases an internal energy
+as described by:
+Eint = mrc2 + msc2.
+η =
+L, is expressed as:
+L =
+h,
+hc/R]
+t > δte/2γ2
+m.
+m/δte, R represents the collision ra-
+dius, and δte denotes the emission timescale at the mo-
+ment when the reverse shock crosses the fast-moving
+shell. This is expressed as δte = lr/c, where
+lr is the width of the rapid shell, βr = 1/2,
+and βrs = 1/2, being γrs the Lorentz factor of
+reverse shock approximated as:
+γrs ≃γm
+leased in a single emission event, specifically relevant
+to GRB 230307A, characterized by immediate emission
+without distinct intervals between pulses. By simulating
+the ejection of multiple randomized shells from the cen-
+tral engine, we are able to closely monitor the properties
+of each individual shell. For instance, we eject 50 shells,
+with their initial thickness, Lorentz factor, and mass
+chosen from random distributions in log space.
+Lorentz factors vary from 100 to 1000, the mass ranges
+from 1028 to 1029, and the initial thickness ranges from
+ejection times are randomly selected from a linear distri-
+bution, with values ranging from 0 to 20 seconds in the
+rest frame of the GRB central engine. Upon collision,
+two shells merge, and the merged shell parameters  are adopted as the new values for the remaining
+shell.
+To ensure the tracking of future collisions, the
+tej,m = R/cβm, where βm = 1/2. The simu-
+lation then restarts with one less shell. This process is
+repeated for each collision, allowing the code to monitor
+all collision/merging events for any arbitrarily designed
+central engine activity .
+To determine Ep, we utilize an empirical relation-
+ship between the isotropic emission energy Eiso and Ep,
+which has been found to be widely applicable to GRBs
+time-resolved analysis of individual bursts . This relationship has also
+been demonstrated to be valid in GRB 230307A, as il-
+lustrated in Fig. 3. We assume the validity of this cor-
+relation, represented by the equation:
+Ep = 100 keV
+The photon flux N in the energy channel 
+is approximately given by Eq. 1:
+N12 ≃
+Z E2,obs/Ep,obs
+E1,obs/Ep,obs
+Ndx , 
+where DL denotes the luminosity distance, LF  repre-
+sents the superposition of all L from each collision as
+shown in Eq. 10.
+For GRB 230307A, the spectral shape is described by
+the CPL model, defined as N = Aαexp,
+where A is the normalization factor in units of ph
+cm−2keV−1s−1,
+is the pivot energy fixed at
+Post-Maximum Flux 
+tp = 4.95 s
+td1 = 7.2 s
+td2 = 27 s
+IS model: Flux 
+HLE: Flux 
+Post-Maximum Ep
+tp = 4.95 s
+td1 = 7.2 s
+td2 = 27 s
+IS Model: Ep
+HLE Ep
+Photon Flux 
+Post-Maximum N 
+tp = 4.95 s
+td1 = 7.2 s
+td2 = 27 s
+IS model: N 
+HLE: N 
+Figure 5. The best fit parameters of FE, Ep, and N during the decay phase of GRB 230307A are depicted in the plot.
+It is evident that fromt td1 = 7.2 to td2 = 27 s, the best fit results align closely with the predictions of the internal shock model.
+Beyond td2 = 27 s, the observed emission corresponds to the High-Latitude Emission  phase.
+tral index, and Ec is the break energy in units of keV
+listed in Table. 1. The simulation results for  are depicted in Fig. 4. The
+light curve does not follow a specific trend, and the
+trend changes for each set of random variables.
+As outlined in the preceding subsection regarding the
+multiple shells IS scenario, where a cluster of shells is
+generated randomly with varying mass and velocity, the
+extended light curve demonstrates neither a correlation
+between shape and energy nor any power-law pattern
+in luminosity trends. To address this, a different model
+proposed by Daigne & Mochkovitch  consid-
+ers continuous relativistic ejections, resulting in shock
+waves propagating within the outflow.
+This modified
+approach effectively considers one single collision at a
+large emission radius, which better matches the observed
+data, showing slower pulse decays . The simplified model in this context by Daigne &
+Mochkovitch  approximates the flow evolu-
+tion, treating the wind as solid shells interacting through
+collisions, while disregarding pressure waves present in
+a full hydrodynamical scenario .
+In our investigation of the decaying phase of the burst,
+we employ a simplified pulse analytic model proposed
+by Daigne & Mochkovitch . Given that our focus
+is solely on the overall decaying behavior and not on
+calculating variability in this particular burst , we have chosen to utilize this analytical
+model in this work due to its advantageous analytical
+properties.
+The analytical solution involves a relativistic wind,
+wherein at time t = t0 a slower shell with mass M0 and
+Lorentz factor Γ0 starts decelerating a faster portion
+of the flow characterized by a constant rest-frame mass
+flux ˙M and Lorentz factor Γ1 > Γ0. Being t the observer
+time, and γ = Γ/Γ1, with Γ and M being the current
+Lorentz factor and mass of the slow shell. Due to the
+accretion of rapidly moving material, the Lorentz factor
+of the slow shell increases. When a mass element dM is
+accreted, the Lorentz factor becomes
+Γ + dΓ =
+Γ1ΓΓ1dM + ΓM
+ΓdM + Γ1M
+dt Γϵc2 =
+at large τ
+comoving frame, t0 = M0/ ˙M, τ = t/t0, and initial γ0 =
+Γ0/Γ1 . For decaying
+part, γ is approximated by
+γ ≃1 −
+Now, we examine the spectral evolution during the
+pulse decay and explore the underlying emission pro-
+cesses. Following Daigne & Mochkovitch 
+we consider that the dissipated energy in the system is
+radiated solely through the synchrotron process. The
+peak energy  is influenced by the Lorentz factor
+electron Lorentz factor behind the shock . Classical
+equipartition assumptions allow to express the magnetic
+field and the characteristic electron Lorentz factor as
+functions of the comoving density  and the dissipated
+energy per unit mass . Specifically, for the standard
+synchrotron radiation within internal shock model the
+peak energy can be written as
+Ep = Esyn ∝Γ B Γ2
+e ∝Γρ1/2ϵ5/2 ∝5
+γ7/2t
+Ep ∝t−7/2. However, empirical observations obtained
+from the best fit of the decay phase of GRB 230307A,
+as shown in section 2, show that the observed spectral
+evolution of pulses deviates from this steep power law
+behavior at late times and decays as Ep ∝t−0.77.
+To account for the observations, a more generalized
+phenomenological expression for the peak energy is in-
+troduced, given by Ep ∝Γρxϵy ∝
+γ4x+y−1t2x
+which at
+later time becomes
+Ep ∝
+t2x+y ,
+standard synchrotron values of 1/2 and 5/2, .
+The values of x and y are crucial in characterizing the
+observed spectral evolution of GRBs. For the case of
+GRB 230307A, when x = y = 1/4, the observed peak
+energy, Ep ∝1/t0.77 is reproduced.
+In the following
+subsection, we will investigate the significance of these
+values for x and y.
+We have so far investigated the behavior of spectral
+evolution during pulse decay and presented a more ver-
+satile expression for the peak energy, considering differ-
+ent exponents to match empirical observations. Now,
+we are going to show that this choice of parameters is
+also consistent with the observed flux, and photon flux
+of GRB 230307A, when considering the internal shock
+model. The synthetic pulse profile depicted in Fig. 5 is
+generated by decelerating a wind with fast shells with
+Lorentz factor Γ1 = 400 and total power
+erg.s−1 decelerated by slow shells with Lorentz factor
+Γ0 = 100 as illustrated in section 3. The adopted values
+are t0 = 0.6 s, x = y = 1/4. The pulse duration aligns
+with the expectation of being approximately 27 s.
+The post-maximum evolution of the flux at 6-8000
+keV bandwidth exhibits a decay behavior of 1/t1.5, as
+depicted in Fig. 5.
+This decay pattern can be com-
+prehended by employing Eq. 15, when combined with
+the Lorentz gamma profile of Eq. 16. The behavior of
+N ∝1/t0.44 within internal shock model is calculated
+using Eq. 1 in conjunction with Eq. 15, which aligns
+with the observation, N ∝1/t0.43, as shown in Fig. 5.
+From our analysis, we have determined that the dis-
+crepancies observed in the spectral evolution of GRB
+shock model proposed in this study may stem from
+oversimplified assumptions regarding the microphysics
+within the emitting shocked regions. Additionally, these
+discrepancies could be attributed to the nature of the
+magnetic field, which may naturally decay with radius
+or be influenced by the presence of an external magnetic
+field Uhm & Zhang ; Zhou et al. .
+internal-collision-induced magnetic reconnection
+and turbulence  model
+The current understanding of relativistic shocks does
+not offer a detailed description. However, incorporat-
+ing fluctuations in the fraction of accelerated electrons
+based on shock intensity allows for achieving more qual-
+itative and quantitative agreement between model pre-
+dictions and observed spectral evolution for many GRBs
+The issues raised above may be more complex than
+initially thought.
+Through the use of time-resolved
+spectral analysis of GECAM data, Yi et al.  have
+demonstrated that the broad pulse of GRB 230307A
+consists of numerous rapidly variable short pulses,
+rather than being caused by short pulses overlaid on top
+of a slow component. This poses a significant challenge
+to the internal shock models, which attribute all vari-
+ability components to collisions among different shells.
+Instead, they propose the ICMART model , wherein the prompt radiation is generated
+by many mini-jets resulting from local magnetic recon-
+nection events in a large emission zone far from the GRB
+central engine. Most notably, GRB 230307A shows the
+presence of a dip at t ∼18 s in all energy bands observed
+by GECAM and Fermi/GBM. During the decay phase,
+significant dip with its location consistent with such a
+decay phase, is allowed in the ICMART model. Because
+the fast pulses originate from local mini-jet events, the
+broad-band emission of the fast component is related to
+the dynamics of the mini-jets and is therefore aligned in
+time.
+The presence of a dip and numerous rapidly variable
+short pulses in the prompt emission of GRB 230307A
+challenges the traditional approach to understanding the
+pulse behavior of these new class of GRBs and calls
+for a revision. It also emphasizes the need to consider
+models other than the internal shock model to explain
+such peculiar behavior. Further observations of similar
+GRBs with high-resolution detectors, such as GECAM,
+are necessary to draw a general conclusion.
+In this paper, we presented the pulse profile of
+GRB 230307A and conducted a detailed analysis of
+its temporal behavior using a combined GECAM–
+Fermi/GBM time-resolved spectral analysis. The inclu-
+sion of GECAM data is particularly advantageous as it
+effectively captured crucial information during the pile-
+up period of the Fermi/GBM , showcasing its unique ability to gather
+data from highly luminous GRBs.
+This capability is
+especially valuable in enhancing our understanding of
+highly luminous GRBs, such as GRB 230307A and GRB
+The analysis performed in this study is essential in val-
+idating the existence of the observed hardness-intensity
+correlation  and hardness-flux correlation .
+These correlations are pivotal observational relations in
+GRBs, as they can aid in distinguishing among different
+theoretical models.
+The proposed multiple shells IS scenario, as outlined
+by Kobayashi et al. , displays a light curve trend
+that mirrors the historical activity of the central engine.
+This trend does not exhibit a dependence on shape-
+energy or adhere to a power-law behavior in luminos-
+ity.
+This stochastic behavior is expected, considering
+the random generation of the shell cluster, which pos-
+sesses varied mass and velocity parameters. Achieving
+precise alignment of all elements in this model is chal-
+lenging due to its inherent randomness, necessitating a
+highly specialized design to ensure accurate representa-
+tion of the system.
+We have observed that the decay phase of GRB
+emission model,
+in particular,
+within the context
+of the large-radius internal shock model , which posits continuous rel-
+ativistic ejections causing shock waves to propagate
+within the outflow.
+However, the parameter values
+x = 1/4 and y = 1/4 are lower than the expected val-
+ues x = 1/2 and y = 5/2 for standard synchrotron
+radiation.
+This deviation suggests in the internal shock frame-
+work a potential scenario where the correlation be-
+tween the magnetic field, outflow Lorentz factor, elec-
+tron Lorentz factor, and the dissipated energy is less pro-
+nounced. As highlighted by Boˇsnjak & Daigne ,
+uncertainties persist in understanding the microphysics
+involved in shocked material, which could be attributed
+to oversimplified assumptions about the microphysics
+within the emitting shocked regions .
+On the other hand, this choice of parameters
+is consistent with a more general model proposed by
+Uhm & Zhang , which involves a Poynting-flux-
+dominated jet dissipating magnetic energy at a distance
+from the engine.
+In this model, the magnetic field
+strength decreases with radius as the emission region
+expands, and rapid bulk acceleration occurs during the
+production of prompt γ-rays. Alternatively, it indicates
+the possible need to incorporate additional elements,
+such as a combination of a decaying shock-generated
+magnetic field and a non-decaying background magnetic
+field, to provide a better fit to the observations compared
+to the standard internal shocks model .
+On the other hand, Yi et al.  demonstrated that
+the broad pulse of GRB 230307A is actually composed of
+numerous rapidly variable short pulses, rather than be-
+ing the result of the superposition of many short pulses
+on top of a slow component. This finding aligns with the
+concept of many mini-jets arising from local magnetic
+reconnection events in a large emission zone far from
+the GRB central engine, as proposed in the ICMART
+model. This challenges the internal shock models, which
+attribute all variability components to collisions among
+different shells. Consequently, it is not surprising that
+the internal shock model for this GRB requires ad hoc
+assumptions in order to provide an acceptable pulse ex-
+planation.
+An area requiring further investigation in the internal
+shock model is the reliability of the initial Lorentz fac-
+tor profile. For example, it is becoming increasingly ac-
+cepted that the kinetic energy of ejecta in GRBs is pow-
+ered by the rotational energy of the central engine. How-
+ever, the utilization of rotational energy-powered ejecta
+results in a reduction of the overall rotational energy of
+the central engine, consequently leading to a smaller ini-
+tial kinetic energy for the remaining ejecta. As a conse-
+quence, this affects the temporal decrease of the Lorentz
+gamma factor of the ejecta , raising concerns
+about the validity of the initial profile employed in the
+internal shock model, which highly relies on the decel-
+eration of rapidly moving materials by slower materials
+within a relativistic wind.

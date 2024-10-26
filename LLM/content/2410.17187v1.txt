@@ -1,0 +1,864 @@
+Draft version October 23, 2024
+Typeset using LATEX twocolumn style in AASTeX631
+Exploring Unobscured QSOs in the Southern Hemisphere with KS4
+Yongjung Kim,1 Minjin Kim,2 Myungshin Im,3, 4 Seo-Won Chang,3, 4 Mankeun Jeong,3, 4 Woowon Byun,1
+Joonho Kim,5 Dohyeong Kim,6 Hyunjin Shim,7 and Hyunmi Song8
+Republic of Korea
+of Korea
+We present a catalog of unobscured QSO candidates in the southern hemisphere from the early in-
+terim data of the KMTNet Synoptic Survey of Southern Sky . The KS4 data covers ∼2500 deg2
+sky area, reaching 5σ detection limits of ∼22.1–22.7 AB mag in the BV RI bands. Combining this
+with available infrared photometric data from the surveys covering the southern sky, we select the
+unobscured QSO candidates based on their colors and spectral energy distributions  fitting
+results. The final catalog contains 72,964 unobscured QSO candidates, of which only 0.4 % are previ-
+ously identified as QSOs based on spectroscopic observations. Our selection method achieves an 87 %
+recovery rate for spectroscopically confirmed bright QSOs at z < 2 within the KS4 survey area. In
+addition, the number count of our candidates is comparable to that of spectroscopically confirmed
+QSOs from the Sloan Digital Sky Survey in the northern sky. These demonstrate that our approach
+is effective in searching for unobscured QSOs in the southern sky. Future spectro-photometric surveys
+covering the southern sky will enable us to discern their true nature and enhance our understanding
+of QSO populations in the southern hemisphere.
+Keywords: Quasars  — Photometry  — Catalogs  — Galaxies 
+Quasi-stellar objects , also known as quasars,
+are the brightest population of active galactic nuclei
+tion of the supermassive black holes  and their
+impact on host galaxies along the cosmic time. Unob-
+scured  QSOs, in particular, provide a unique
+opportunity to directly observe their central structure,
+including the accretion disk surrounded by dense ion-
+ized gas  and dusty torus . Therefore, multiwave-
+Corresponding author: Minjin Kim
+yjkim.ast@gmail.com; mkim.astro@gmail.com
+length studies of those sources provide insights into
+detailed physical properties of AGNs  and structural parameters .
+Furthermore, there is a substantial interest not only
+in investigating the properties of individual objects but
+also in understanding the demography of QSOs. This
+includes statistical analysis of QSO populations, exam-
+ining their distribution in space and time , and analyzing luminos-
+ity functions to trace cosmic evolution , alongside the
+corresponding black hole mass functions and distribu-
+tions of Eddington ratio . Unobscured QSOs ac-
+count for a significant portion of the total QSO popula-
+tion, making them valuable for such studies . Therefore, surveys of unobscured QSOs
+are essential, as they contribute to our understanding
+of both cosmic evolution and the mechanisms underly-
+ing the growth of SMBHs .
+Despite significant advancements in QSO surveys over
+the past two decades , the explo-
+ration of QSOs in the southern hemisphere remains in-
+complete.
+For example, Croom et al.  spectro-
+scopically discovered ∼10K QSOs in a field of a limited
+area  in the southern
+hemisphere. Onken et al.  found 156 spectroscop-
+ically identified QSOs from the All-sky BRIght Com-
+plete Quasar Survey , based on the com-
+bination of All-sky space missions. In addition, Yang &
+Shen  utilized optical photometric data 
+from the Dark Energy Survey  to
+search for the photometric QSO candidates in the south-
+ern hemisphere.
+Some studies have been more dedicated to exploring
+the particular area, the south ecliptic pole field, using
+optical imaging data . This re-
+gion will be extensively explored by several survey mis-
+sions, such as Euclid ,
+Spectro-Photometer for the History of the Universe,
+Epoch of Reionization, and Ices Explorer , eROSITA , and
+poral survey data in the study of AGN physical prop-
+erties, it is vital to pre-select the bright AGN in the
+southern hemisphere.
+Using a network of three KMTNet 1.6-m telescopes
+in Chile, Australia, and South Africa ,
+an optical imaging survey called the KMTNet Synoptic
+Survey of Southern Sky  is underway. This survey
+commenced on November 29, 2019. It aims to image up
+to 7000 square degrees of the sky visible from the south-
+ern hemisphere  in four optical bands
+depths of ∼22.1–22.7 mag. It is noteworthy that the
+survey area has not been fully covered by DES. The pri-
+mary science goal is to identify the optical counterparts
+of gravitational wave triggers and to study kilonovae in
+their early stages .
+We plan to roll out Data Release 1 in late 2024, which
+will be accompanied by a journal paper on the survey
+bilities compared to other southern sky surveys, such as
+SkyMapper Southern Survey , KS4
+is expected to facilitate the discovery of more QSO can-
+didates that were previously missed. The early interim
+data, which covers the sky area of ∼2500 deg2 , are currently available only to internal collaborators
+for research and verification. Leveraging this early data,
+we aim to compile a catalog of unobscured QSO candi-
+dates, serving as groundwork for future survey missions.
+The QSO selection solely based on the optical col-
+ors has some limitations due to contaminators, such as
+early type stars or star-forming galaxies. On the other
+hand, mid-infrared  colors are particularly effec-
+tive in identifying QSO candidates , largely because the MIR light is emit-
+ted from the hot or warm dust surrounding SMBHs, as
+posited by the unified AGN model . However, since MIR wavelengths
+are less affected by dust extinction, relying solely on
+MIR colors can lead to a mixed sample of both unob-
+scured and obscured QSOs. The integration of optical
+data significantly enhances the selection of unobscured
+QSOs . There-
+fore, we utilize a multi-wavelength dataset, including the
+KS4 data, to specifically target the identification of un-
+obscured QSOs in the southern sky.
+In this paper, we present the catalog of unobscured
+QSO candidates in the southern hemisphere, selected
+from the KS4 interim data.
+The KS4 data and pho-
+tometry are described in Section 2. In Section 3, we de-
+scribe how the unobscured QSO candidates are selected,
+and the validation of the candidate selection is given in
+Section 4.
+Through this paper, we adopt the canon-
+ically used cosmological parameters for the standard
+ΛCDM universe: H0 = 70 km s−1 Mpc−1, Ωm = 0.3
+and ΩΛ = 0.7. All the magnitudes are given in the AB
+system unless exceptions are noted.
+The data used in this work consists of object catalogs
+from BV RI stacked images for 638 KS4 tiles .
+Each pre-defined tile covers a total field of 2
+degree × 2 degree, matching the field-of-view of the
+KMTNet camera . Observations were
+made using three identical 1.6-m telescopes between late
+November 2019 and January 2022. We prioritized ob-
+Unobscured QSOs with KS4
+Figure 1. Sky coverage map for the KS4 data, centered on
+the south ecliptic pole. Areas surveyed at least four times in
+the BV RI bands using dithering techniques  are marked in red.
+The DES survey area is shown in
+blue. The background represents a color composite from the
+Digital Sky Survey 2.
+servations in areas of the sky excluding the Large Mag-
+ellanic Cloud, Small Magellanic Cloud, low Galactic lat-
+itude regions , and the regions already cov-
+ered by the DES .
+Because of the alti-
+tude limit of KMTNet, the Decl. < −85◦regions are
+excluded as well. The basic survey strategy is straight-
+forward: each tile is observed with a 120-second expo-
+sure per visit, with a total combined exposure time of at
+least 480 seconds. Each raw image consists of an array
+of four e2v CCDs 
+with a pixel scale of 0.4 arcsec. To fill the CCD gaps in
+the vertical  and horizontal 
+directions, we use a four-point dithering pattern with
+offsets of about 4 and 7 arcmin in RA and Dec, respec-
+tively. This dithering pattern results in heterogeneous
+image depths across the CCD gap and edge regions of
+each tile.
+The data were pre-processed at the KMTNet data cen-
+ter in Daejeon, Korea, including overscan and crosstalk
+corrections, bias subtraction, and flat fielding. A bad
+pixel mask is generated by identifying pixels that are
+affected by cosmic-ray hits on the detector, crosstalks
+from saturated pixels in an associated amplifier , and regions that are unusable due to in-
+herent defects in the CCD. The pre-processed data then
+undergoes zero-point  scaling to a uniform value
+of ZP = 30 mag, eliminating spatially variable ZPs
+across the field. For astrometric calibration, we utilize
+the SCAMP software  to derive an accurate
+World Coordinate System  solution, using Gaia
+EDR3  as the reference
+catalog. This method achieves a root-mean-square er-
+ror of 0.026 arcsec in both RA and Dec relative to the
+reference catalog WCS.
+The KS4 stacking procedure involves using the SWarp
+software  to combine the pre-processed im-
+ages. We employ a tangential projection method and a
+median combine technique to produce the final stacked
+images. Additionally, the FSCALASTRO parameter is set
+to VARIABLE to adjust for spatial variations in the pixel
+scale of KMTNet images, ensuring accurate flux rescal-
+ing throughout the field. The average seeing sizes of the
+combined images are about 2.10, 2.03, 1.94, and 1.93
+arcsec in the BV RI bands, respectively.
+The photometric calibration of the images is per-
+formed using APASS DR9  and
+SkyMapper DR3  catalogs as
+reference data, with the following calibration equations:
+B = BAPASS −0.06 −0.27 × 
+V = VAPASS + 0.02
+R = rAPASS + 0.0383 −0.3718 × 
+I = iSMSS + 0.011 −0.243 × 
+In the above, BAPASS and VAPASS are in Vega mag-
+nitudes, while the others are in the AB system. The
+references for these conversion equations are as follows:
+the B and V conversion equations are from Park et al.
+I is derived by comparing KMTNet images taken in the
+COSMOS field with the SMSS catalog of the same field.
+For point sources brighter than 17 mag, the average
+uncertainties of KS4 photometric calibration are 0.026,
+spectively. Correspondingly, the final 5σ imaging depths
+are B = 22.75, V = 22.60, R = 22.80, and I = 22.09
+mag, which are comparable to those of the preceding
+QSO survey with KMTNet data . The
+saturation levels are 12.95, 13.07, 13.77, and 13.60 mag,
+respectively.
+Source detection was performed on the KS4 I-
+band images with a signal-to-noise ratio criterion of
+MAG AUTO SNR I> 1.
+Subsequently, we extracted the
+flux of sources in each band image using the dual mode
+of SExtractor . We primarily
+use the MAG AUTO estimates from the SExtractor, which
+measure flux within an adaptively scaled aperture. This
+approach is due to variations in the point spread func-
+tion  depending on the source’s position in the
+image.
+To utilize infrared photometric data in the follow-
+ing analysis, we crossmatch the KS4 catalog with ex-
+ternal catalogs from the infrared surveys covering the
+KS4 area: Two Micron All Sky Survey , VISTA Hemisphere Survey , and Wide-field Infrared Survey
+Explorer . For each KS4 ob-
+ject, we identify potential counterparts by searching for
+the nearest neighbor source in external catalogs, rely-
+ing solely on its coordinates. Considering the imaging
+resolution of the surveys, we tested several cases and
+established the matching radii for 2MASS, VHS, and
+WISE as 2.0, 1.0, and 2.0 arcsecs, respectively.
+The 2MASS point source catalog  provides de-
+fault magnitudes for the J, H, and Ks bands , representing the optimal measurements for each
+band.
+Although 2MASS is an all-sky survey, its de-
+tection limits are relatively shallow, with 5σ detection
+limits for a point source at 17.4, 17.2, and 16.9 mag,
+respectively. To enhance our depth of detection, we also
+utilize J, H, and Ks magnitudes from VHS, specifically
+the 2 arcsec diameter aperture magnitudes , which achieve 5σ detection
+limits of 21.5, 21.2, and 20.3 mag, respectively. Note
+that VHS coverage in the H-band is limited to the south
+galactic cap. When a source appears in both 2MASS
+and VHS, we prioritize the VHS magnitudes, resorting
+to 2MASS only when VHS data is unavailable.
+Among the various versions of WISE data, we use the
+W1, W2, W3, and W4 magnitudes from the AllWISE
+catalog . The magnitudes are mea-
+sured with profile-fitting photometry  and their 5σ detection limits are 19.6,
+To convert the Vega magnitudes to AB magnitudes,
+the following papers and conversion factors are refer-
+enced: Blanton et al.  for 2MASS JHKs bands
+VHS JHKs bands , and Cutri et al.
+For the final catalog, we perform the galactic extinc-
+tion correction by utilizing sfdmap Python package1.
+Following the default setting, we use the dust map by
+Schlegel et al.  with a scaling factor of 0.86 from
+Schlafly & Finkbeiner .
+These corrections are
+made under the assumption of RV = 3.1.
+We initially eliminate unreliable sources flagged by
+the KS4 data processing pipeline. These flagged sources
+typically arise from spurious signals, such as crosstalk,
+blended light from bright sources, and instrumental
+hot/bad pixels . As mentioned in Section 2, each
+KS4 field was intentionally dithered at least four times.
+To ensure data homogeneity, we select objects observed
+at least four times in every band, using the NDITH flags
+in the KS4 catalog . Then, the effective
+survey area size decreases, as shown by the red patches
+in Figure 1.
+Our source detection was conducted in the I-band im-
+ages, hence there are numerous sources beyond the 5σ
+imaging depths in the other bands, as shown in Fig-
+ure 2. For reliable source selection, we apply an addi-
+tional signal-to-noise ratio threshold of 5 in the I-band
+of I ≲21 mag.
+Note that the SNRs are simply de-
+termined by taking the reciprocal of magnitude errors.
+The imposition of this additional SNR criterion in the
+I-band  marginally reduces the number
+of sources. The B-band and WISE detections are also
+important in the QSO selection below, so we give ad-
+ditional criteria for them: SNRB > 2, SNRW1 > 2,
+SNRW2 > 2, and SNRW3 > 2. Further imposing these
+SNR criteria results in a significant reduction in the
+source count , while the numbers of
+bright sources  are relatively less affected
+by these criteria. This is due to the remaining bright
+stars after the selection. Indeed, most of the remaining
+bright sources have blue MIR colors ,
+implying that they are not likely to be QSOs.
+We distinguish QSOs from stellar objects and inactive
+galaxies by their MIR colors; QSOs exhibit redder MIR
+colors due to the hot dust emissions reprocessing light
+from accretion disks. We adopt the AGN selection cri-
+teria based on WISE colors of X-ray-detected sources as
+proposed by Mateos et al. :
+Mateos et al.  defined these criteria in the Vega
+magnitude system.
+We applied the Vega-to-AB con-
+version factors as per the AllWISE data , with a minor discrepancy  from those
+used in Mateos et al. .
+Note that most X-ray-
+detected sources in Mateos et al.  are at z < 2,
+Unobscured QSOs with KS4
+SSFLAG & NDITH
+Figure 2. Histograms of the reliable sources selected by SSFLAG and NDITH BVRI criteria across the BV RI bands. The forced
+photometry in the I-band yields flux measurements of numerous sources beyond the 5σ imaging depths, as indicated by the
+vertical dotted lines in each panel. The red histograms represent the marginal reduction in source count after applying an SNR
+criterion in the I-band. The blue histograms show the decrease in numbers when applying additional SNR criteria across the
+B/W1/W2/W3 bands. Note that the sudden increase in number at I ≲16 mag is due to the bright stars that remain after the
+SNR cut. The shaded regions denote the ranges of saturated magnitudes.
+W2 −W3
+W1 −W2
+Selection wedges
+Type-1
+Type-2
+Selected Milliquas QSO 
+Color/SNR-rejected  
+SED-fit-rejected  
+B −W3
+W1 −W2
+Figure 3. Color-color diagrams of the reliable sources that have SSFLAG=Null and NDITH≥4 in the KS4 catalog. The QSO
+selection criteria are indicated by black lines. The blue contours map the distribution of type-1 QSOs in Lyke et al. ,
+while the red contours represent the distribution of type-2 QSOs . The blue contour levels range from 0.5σ
+to 3σ at 0.5σ intervals, starting from the innermost to the outermost, whereas red contour levels range from 0.5σ to 2σ with
+the same increment, also moving outward from the center. The squares indicate the spectroscopically confirmed QSOs from the
+Milliquas v8 catalog  within our survey area. The brown circles represent the QSOs selected by our method, while
+the orange triangles and yellow diamonds are rejected ones due to their photometry and poor fitting results, respectively.
+where their hot dust components are observable within
+the W1-to-W3 bands. The left panel of Figure 3 shows
+the WISE color-color diagram relevant to the selec-
+tion wedge .
+Accompanying this are the
+color distributions of spectroscopically confirmed type-1
+from Lyke et al.  and Reyes et al. , respec-
+tively. As this selection wedge is determined by X-ray
+detection, it effectively captures both type-1 and type-2
+QSOs. Our objective is to refine the selection to un-
+obscured QSOs; thus, we impose an additional criterion
+based on the optical-MIR colors to reflect the bluer opti-
+cal spectral shape of unobscured QSOs, following Byun
+et al. :
+Note that this criterion is converted to the AB magni-
+tude system, while the previously proposed criterion is
+given in the Vega magnitude system .
+The right panel in Figure 3 presents the color distri-
+butions incorporating B-band magnitudes. This fourth
+criterion, shown as the black solid lines, more accurately
+differentiates between type-1 and type-2 QSOs. Indeed,
+criteria, whereas a mere 6.2 % of the type-2 QSOs from
+Reyes et al.  do so. It is noteworthy that the selec-
+tion of type-2 QSOs may be skewed by the small sample
+size  relative to type-1 QSOs . We also note that our selection criteria are highly
+effective for identifying type-1 QSOs up to z ∼2, with
+a recovery rate of 95 %. The recovery rate drops signif-
+icantly to 7 % at z ∼3.3, indicating that these criteria
+are primarily suited for the identification of low-redshift
+type-1 QSOs. This is because high-redshift QSOs ex-
+hibit faint flux at the B band and may not be detected
+in the W3 band. We further discuss the selection effi-
+ciency of spectroscopically confirmed QSOs within the
+KS4 field in Section 4.1.
+Consequently, employing the above selection criteria
+yields 106,443 QSO candidates over the KS4 survey area.
+Because the photometric selection solely with broad-
+band photometry can lead to including a large portion
+of non-QSOs, we carry out the SED fitting on the pre-
+selected sources in order to further perform the rigorous
+classification. The detailed method is described in Son
+et al.  and Byun et al. . The photometric
+data obtained from KS4, 2MASS, VHS, and WISE is
+used for the analysis. We adopt LePhare++2, a C++ ren-
+dition of the original Fortran program LePhare , which allows us to fit
+the SED with various sets of SED templates. We ini-
+tially employ three AGN templates from Lyu & Rieke
+in mid-infrared: normal, hot dust-deficient, and warm
+dust-deficient AGNs. In addition, we consider the emis-
+sion from the polar dust with extinction  on the AGN continuum. Finally, the contribution
+from the host galaxies, which is modeled with 7 types of
+SWIRE galaxies   is added. The flux ratio of the host to
+the total flux at 1.6 µm is set to be 1 −95%. Finally,
+estimation of the COSMOS survey 
+and the stellar templates from Bohlin et al.  and
+Pickles  are adopted. Figure 4 shows an example
+of the SED fitting results.
+To select the best model among the SED templates
+for QSOs, inactive galaxies, and stars in describing the
+observed SEDs of the QSO candidates, we employ the
+Bayesian information criterion . The BIC is de-
+fined as BIC = χ2 + k ln n, where k is the number of
+free parameters and n is the number of the data points
+in the SED. According to this criterion, a source is clas-
+sified as a QSO only if the BIC for the best fit with
+QSO templates is at least 10 points lower than that of
+the best fit with galaxy SED templates ,
+a method proven effective for QSO/galaxy classification
+card heavily obscured AGNs, we impose an additional
+criterion on extinction . We further refine our
+selection by excluding sources whose χ2
+QSO values exceed
+the 97.7 %  confidence threshold.
+This statistical
+cutoff helps identify and remove outliers or less likely
+QSO candidates based on the quality of their fit, ensur-
+ing that only the most probable QSOs are retained in our
+analysis.
+Employing these stringent criteria enhances
+the integrity and reliability of our dataset, focusing on
+sources that best match the expected characteristics of
+QSOs.
+In the KS4 field, the final set of unobscured QSO can-
+didates comprises 72,964 sources, all of which meet the
+selection criteria outlined in Sections 3.1 and 3.2. We
+provide a detailed multi-wavelength catalog of these can-
+didates, as described in Table 1.
+Unobscured QSOs with KS4
+Figure 4.
+Example of SED fitting results.
+The yellow
+squares are the photometric data, while the blue, red, and
+gray lines represent the best-fit galaxy, QSO, and star mod-
+els, respectively. The χ2 values of the models are marked in
+the legend.
+The most direct method to confirm our QSO can-
+didates as real QSOs is to obtain their optical/near-
+infrared spectra to identify the AGN features. However,
+confirming all QSO candidates through individual spec-
+tral observations is a cost-ineffective approach for con-
+ducting QSO surveys in the southern sky. We, therefore,
+anticipate relying on forthcoming spectro-photometric
+surveys, such as 7DS and SPHEREx, for their direct
+confirmation. Instead, we here explore the validity of
+our QSO candidates through indirect methods.
+To validate our selection, we compare our QSO candi-
+dates with spectroscopically confirmed QSOs in the KS4
+survey area. We utilize the Milliquas catalog v8 , which contains approximately 0.9 million type-
+within our survey area. Specifically, within our survey
+area, there are 484 QSOs classified as the core-dominant
+type-1 QSOs in the catalog. Upon cross-matching with
+our QSO candidates, we find only 325 QSOs, resulting
+in a recovery rate of 67 %.
+In Figure 3, we present the color distributions of the
+KS4 or WISE photometry.
+Approximately a quarter
+of QSOs are rejected during the color-selection stage
+neath the selection wedge of Mateos et al.  in the
+left panel, a region where only a very minor fraction of
+type-1 QSOs are expected to be located .
+The remaining samples are rejected during the selection
+based on the SED fitting . It is impor-
+Table 1. Description of the Columns in the KS4 QSO Can-
+didate Catalog.
+KS4 QSO candidate designation
+R.A. 
+Decl. 
+KS4 B-band MAG AUTO magnitude
+e Bmag
+Error on B-band magnitude
+KS4 V -band MAG AUTO magnitude
+e Vmag
+Error on V -band magnitude
+KS4 R-band MAG AUTO magnitude
+e Rmag
+Error on R-band magnitude
+KS4 I-band MAG AUTO magnitude
+e Imag
+Error on I-band magnitude
+J-band magnitude
+e Jmag
+Error in J-band
+f Jmag†
+Flag in J-band
+H-band magnitude
+e Hmag
+Error in H-band
+f Hmag†
+Flag in H-band
+Ks-band magnitude
+e Kmag
+Error in Ks-band
+f Kmag†
+Flag in Ks-band
+WISE W1-band magnitude
+e W1mag
+Error on W1-band magnitude
+WISE W2-band magnitude
+e W2mag
+Error on W2-band magnitude
+WISE W3-band magnitude
+e W3mag
+Error on W3-band magnitude
+WISE W4-band magnitude
+e W4mag
+Error on W4-band magnitude
+Note—All the magnitudes are given in AB magnitudes.
+values are indicated as −99.0. A magnitude with an error of −99.0
+means an upper limit. 
+tant to note that the Milliquas sample is a compilation of
+spectroscopically confirmed QSOs without homogenetic
+selection, which may be related to the missing popula-
+tions by our method.
+In Figure 5, we present the distributions of redshift
+QSOs within the KS4 survey area. Since our selection
+criteria are optimized for identifying low-redshift, unob-
+scured QSOs, the missing fraction of QSOs increases at
+higher redshifts. This fraction also increases at I ≳20
+mag, where the number count of reliable sources after
+applying the SNR criteria drops dramatically .
+As pointed out in Section 3.1, our color-selection crite-
+ria are highly effective for finding low-redshift QSOs. If
+we consider the QSOs with I < 20 mag at z < 2, the
+numbers of selected, color/SNR-rejected, and SED-fit-
+rejected QSOs are 232, 21, and 13, respectively, resulting
+in a recovery rate of 87 % . It is noteworthy
+Selected Milliquas QSO
+Color/SNR-rejected
+SED-fit-rejected
+Figure 5. Redshift  and I-band magnitude  distributions of Milliquas QSOs within the KS4 survey area. The top
+and bottom panels show the stacked histograms and the fractional distributions, respectively. The brown histograms represent
+the QSOs that meet our selection criteria, while the orange and yellow histograms are the rejected ones because of their
+photometry and poor fitting results, respectively.
+that the fraction of color-selected objects is then 92 %
+for SDSS type-1 QSOs as discussed in Section 3.1. This
+similarity highlights the effectiveness of our QSO selec-
+tion methods for spectroscopically confirmed QSOs in
+the southern sky.
+As an indirect approach to validate our QSO candi-
+dates, we compare their number counts per unit area
+to those of spectroscopically identified QSOs from the
+SDSS DR16 , spanning an area of
+Furthermore, we restrict our analysis to
+QSOs with a redshift lower than 2 to accommodate
+the variations in number counts by redshift. The ad-
+justed number counts from SDSS are represented as gray
+squares in Figure 6. Note that the SDSS QSO sample is
+incomplete at i′ > 19.1 mag ,
+indicated by open squares in the figure.
+To match the number counts of SDSS QSOs, we con-
+vert KS4 magnitudes of our QSO candidates to SDSS
+i′-band magnitude using the combination of transforma-
+tion equations for z ≤2.1 QSOs by Jester et al. :
+i′ = V −0.19 −0.9 + 0.18.
+Accurately determining the effective survey area is
+crucial for precise estimation of the number counts.
+Considering the gaps between KMTNet CCD chips care-
+fully, we introduce the Hierarchical Equal Area isoLat-
+Table 2. Effective Survey Area
+HEALPix levels
+Note—The units of b and area are deg and
+deg2, respectively. The last column is for the
+number of QSO candidates.
+itude Pixelation of a sphere , which divides the sphere’s surface into uniform-
+sized areas according to given levels.
+We count the
+HEALPix pixels covering the reliable sources in the KS4
+catalog .
+Figure 7 shows
+examples of the source-matched pixels depending on
+HEALPix levels ranging from 11 to 13, corresponding
+to spatial resolutions of 2.95, 0.74, and 0.18 arcmin2,
+respectively. There are gaps between the CCD chips,
+which are not covered by at least four dithered obser-
+vations.
+As the level goes higher, the polygons trace
+the shape of the gap sharply, while the unoccupied re-
+gions by bright stars appear more as well. However, at
+higher HEALPix levels, the finer resolution results in
+Unobscured QSOs with KS4
+i ′ 
+Ni ′ 
+i ′ 
+Ni ′/Ni ′, SDSS 
+SDSS DR16
+DES DR2
+Figure 6. Differential number counts of KS4 QSO candidates in the i′-band  at |b| > 10◦. The gray squares
+represent spectroscopically identified unobscured QSOs in SDSS , while the open symbols indicate incomplete
+bins. Similarly, the filled and open sky-blue triangles are for the DES DR2 QSO candidates . The inset
+shows the number counts of KS4 QSO candidates with varying galactic latitude limitations, compared to those of SDSS QSOs.
+some pixels being excluded from the calculation due to
+their location in regions with no detectable sources, even
+though these regions are covered more than four times
+of the survey area. Consequently, we adopt the effec-
+tive area under the assumption of HEALPix level 12.
+The sizes of effective survey areas according to galactic
+latitude  limit are listed in Table 2.
+The red circles in Figure 6 represent the differen-
+tial number counts of KS4 QSO candidates located at
+generally align with those observed in the SDSS QSO
+sample, they are marginally lower in the complete bins
+several factors:  a potentially missing population not
+captured by our selection criteria,  the uncertainties
+associated with the estimation of the SDSS survey area
+size , and  the omission
+of precise corrections for selection completeness, which
+approaches unity  at i ≲19 mag. Nevertheless,
+the power-law slopes of 0.85 for KS4 and 0.83 for SDSS
+within the magnitude range of 16 < i′ < 19 suggest that
+our selection method effectively reproduces the observed
+abundance of real QSOs.
+The inset compares the number counts of our candi-
+dates, defined by various b limits, normalized to those
+of the SDSS QSOs. This comparison shows consistent
+trends across different b thresholds, further validating
+the efficacy of our selection criteria. In particular, no no-
+ticeable number excess between |b| > 10◦and |b| > 40◦
+suggests that our method effectively excludes stellar con-
+taminants.
+Yang & Shen  recently published a photometric
+catalog of QSO candidates from the DES Data Release
+log utilizes optical-to-IR photometry via a probabilistic
+approach to identify candidates.
+The number counts
+from this sample, represented by sky-blue triangles in
+Figure 6, are about twice as high as those from our can-
+didates. Note that the sample used here adheres to the
+higher-purity recommendations – in Yang
+shifts lower than 2. Similar to our comparison with the
+SDSS sample, the noted discrepancy could stem from
+the previously mentioned factors. Additionally, differ-
+ences may also arise from the inclusion of host-dominant
+AGNs from the Miliquas catalog in the training sample,
+which our selection criteria may largely overlook. The
+power-law slope between 16 < i′ < 19 is slightly flatter
+at 0.78, potentially reflecting the broader inclusivity of
+their targeting strategy.
+Decl. 
+n = 11
+Decl. 
+n = 12
+R.A. 
+Decl. 
+n = 13
+Figure 7. Changes in sky coverage depending on HEALPix
+Levels of 11 , 12 , and 13 . Each panel
+presents the effective area coverage for a given HEALPix
+level, with areas from the n = 11 level superimposed to
+enable direct comparison. The unoccupied regions are at-
+tributable to the gaps between the KMTNet CCD chips,
+representing incomplete regions not covered by at least four
+dithered observations or the areas affected by bright stars.
+We further emphasize the complementarity in sky cov-
+erage between the KS4 QSO catalog and the DES DR2
+catalog of Yang & Shen . These two catalogs cover
+most of the southern sky , providing an ex-
+tensive resource for QSO studies.
+The Gaia mission is designed to observe bright sources
+PQSO > 0.5
+PGal > 0.5
+PStar > 0.5
+Gaia DR3 others
+Not in Gaia DR3
+i ′ 
+Figure 8.
+Stacked histogram  and fractional distri-
+bution  of our QSO candidates, with classifications
+based on inclusion in the Gaia DR3 dataset. The colors rep-
+resent different classifications based on probability thresh-
+olds: red for PQSO > 0.5, orange for PGal > 0.5, and yellow
+for PStar > 0.5. Gray indicates those within Gaia DR3 that
+do not meet any of the specified probability criteria, while
+light-gray represents candidates not matched to Gaia DR3
+sources.
+probability of being a QSO  determined by the
+discrete source classifier . The Combmod proba-
+bility is determined from the combination of class infor-
+mation from Specmod  and Allosmod
+they provide the probabilities of being a galaxy 
+and a star .
+In Figure 8, we present the fractional distribution of
+our candidates as classified by the probabilities in Gaia
+DR3.
+According to Gaia DR3’s source classification,
+sources are deemed QSOs, galaxies, or stars based on
+the highest posterior probability exceeding 0.5. Notably,
+only 64 % of our candidates are likely classified as QSOs
+with PQSO > 0.5 , while a significant
+portion  of the remaining sources are likely clas-
+sified as stars .
+This classification disparity appears to contradict the
+high completeness reported for QSO and star classifi-
+cations using Combmod . However, it is important to note that
+these probabilities were determined using only Gaia data
+in optical wavelengths.
+Even if an object is a point
+source with PStar > 0.5, the presence of detection in the
+WISE bands suggests a significant possibility that the
+object might not be a star, except for very bright sources
+Unobscured QSOs with KS4
+Both in Quaia and this work 
+Only in this work 
+Only in Quaia, NDITH-rejected 
+Only in Quaia, color/SNR-rejected 
+Only in Quaia, SED-fit-rejected 
+i ′ 
+Figure 9. Stacked histogram  and fractional distribu-
+tion  of QSO candidates at |b| > 10◦selected in
+Quaia and this work.
+The gray histogram represents the
+candidates both in Quaia and this work. The red histogram
+indicates the candidates only in this work. The navy, blue,
+and sky-blue histograms are those rejected due to NDITH,
+color/SNR criteria, and SED-fit results, respectively.
+shown in Figure 4 and by the changes in the number
+distribution after the SNR cut in the WISE bands due
+to the inclusion of bright stars, shown in Figure 2. Fur-
+thermore, cross-matching with the Milliquas catalog in
+Section 4.1 reveals that 20 % of spectroscopically identi-
+fied QSOs are assigned PStar > 0.5. Additionally, the
+effectiveness of our approach in rejecting stellar con-
+tamination, strengthened by the consistent trends in the
+number counts across different b thresholds ,
+suggests that not all sources with PStar > 0.5 in our
+candidates are indeed stars. These raise concerns about
+the reliability of using PQSO alone for accurate QSO se-
+lection.
+Given doubts about the low purity  of the Gaia
+DR3 QSO candidates with PQSO selection , Storey-Fisher et al.  recently generated an
+all-sky QSO catalog named Quaia, based on the combi-
+nation of the Gaia DR3 and unWISE  colors,
+yielding a more reliable set of QSO candidates. There
+are 64,734 Quaia candidates located within the effective
+survey area defined by HEALPix level n = 12, 2542 of
+which are not identified in the KS4 catalog. This omis-
+sion may arise from the marginal inconsistency between
+the imaging data and HEALPix patches. Indeed, about
+the effective survey area estimation. The fraction nat-
+urally decreases if we introduce an effective survey area
+defined by a higher HEALPix level . We also note that the screening with SSFLAG
+has no effect because it excludes known sources.
+In Figure 9, we present the i′-band distribution of
+these Quaia candidates matched to the KS4 catalog and
+our sample, considering the 38,534 candidates selected
+both in Quaia and our work . On the
+other hand, 23,593 Quaia candidates  are not se-
+lected by our selection criteria; they are rejected due
+to  the lack of the number of dithered observations
+we select Quaia candidates using the KS4 HEALPix
+maps, which cannot perfectly trace our survey area, es-
+pecially at the CCD gaps. Unlike our method, Storey-
+Fisher et al.  used only the W1 and W2 band
+magnitudes from the unWISE catalog, which is deeper
+than the AllWISE that we used, potentially explain-
+ing the discrepancies in candidate selection due to SNR
+and colors.
+Indeed, the magnitude differences in W1
+and W2 between unWISE3 and AllWISE for the Quaia
+candidates excluded based on color/SNR exhibit larger
+standard deviation 
+compared to those candidates selected both in Quaia
+and in our analysis .
+This may also be attributed to either the MIR variabil-
+ity between the two surveys  or
+the confusion with nearby sources. On the other hand,
+those rejected due to the poor SED-fitting results occupy
+a large fraction of bright QSO candidates .
+Most of them have χ2
+QSO values higher than 2σ level, in-
+dicating that they are unlikely to be probable QSOs or
+nearby QSOs with the bright and extended host galax-
+ies, in which the systematic uncertainties in the multi-
+wavelength photometry can be significantly larger than
+nucleus dominated objects.
+The number of QSO candidates only in our work  is significantly high, predominantly consist-
+ing of faint sources that are not likely to be observable
+with Gaia. However, even at i′ ≲20 mag, the fraction
+of these candidates remains nonnegligible; about 17 %
+at 15 < i′ < 20.
+As we discussed above, the selec-
+tion efficiency of our method, validated by the recovery
+rate of spectroscopically confirmed QSOs, and the num-
+to find the matched sources in the unWISE catalog .
+ber counts consistent with the other surveys, strength-
+ens the fact that our QSO candidates are promising.
+Therefore, spectro-photometric surveys, such as 7DS
+and SPHEREx, will enable us to estimate the effective-
+ness of our selection method rigorously and to constrain
+the unobscured QSO population in the southern sky.
+In this study, we present a catalog of unobscured
+QSO candidates in the southern sky.
+We mainly use
+the KS4 interim data, which covers ∼2500 deg2 area
+around the south ecliptic pole and achieves 5σ imaging
+depths of ∼22.1–22.7 mag in the BV RI bands. Com-
+bining this KS4 data with infrared photometric data
+from the 2MASS , VHS , and AllWISE
+for the initial selection and apply the SED fitting to re-
+fine our list of plausible QSO candidates. The final cat-
+alog consists of 72,964 candidates for unobscured QSOs
+over an effective survey area of ∼2000 deg2. Despite
+only 0.4 % of these candidates being spectroscopically
+confirmed QSOs so far, the high recovery rate of 87 % for
+QSOs with I < 20 mag at z < 2 proves the robustness of
+our selection method. Moreover, this is also supported
+by the number counts of our candidates, which are con-
+sistent with those of the spectroscopically confirmed
+QSOs from SDSS in the northern hemisphere. Moving
+forward, upcoming spectro-photometric surveys, such as
+SPHEREx and 7DS, are expected to provide valuable in-
+sights into the true nature of these candidates, thereby
+enhancing our understanding of QSO populations in the
+southern sky.
+We thank the anonymous referee for valuable sugges-
+tions that greatly improved the manuscript. This work
+was supported by the National Research Foundation of
+Korea  grant funded by the Korean government
+MI, SWC, JMK acknowledges support from the Na-
+tional Research Foundation of Korea  grants,
+No. 2020R1A2C3011091 and No. 2021M3F7A1084525
+funded by the Ministry of Science and ICT . This
+research was also supported by Basic Science Research
+Program through the NRF funded by the Ministry of
+Education .
+This research has made use of the KMTNet system op-
+erated by the Korea Astronomy and Space Science Insti-
+tute  at three host sites of CTIO in Chile, SAAO
+in South Africa, and SSO in Australia. Data transfer
+from the host site to KASI was supported by the Korea
+Research Environment Open NETwork .
+This publication makes use of data products from the
+Wide-field Infrared Survey Explorer, which is a joint
+project of the University of California, Los Angeles, and
+the Jet Propulsion Laboratory/California Institute of
+Technology, and NEOWISE, which is a project of the Jet
+Propulsion Laboratory/California Institute of Technol-
+ogy. WISE and NEOWISE are funded by the National
+Aeronautics and Space Administration.
+This publication makes use of data products from the
+Two Micron All Sky Survey, which is a joint project
+of the University of Massachusetts and the Infrared
+Processing and Analysis Center/California Institute of
+Technology, funded by the National Aeronautics and
+Space Administration and the National Science Foun-
+dation.
+The VISTA Hemisphere Survey data products served
+at Astro Data Lab are based on observations collected at
+the European Organisation for Astronomical Research
+in the Southern Hemisphere under ESO programme
+The national facility capability for SkyMapper has
+been funded through ARC LIEF grant LE130100104
+from the Australian Research Council, awarded to the
+University of Sydney, the Australian National Univer-
+sity, Swinburne University of Technology, the Univer-
+sity of Queensland, the University of Western Australia,
+the University of Melbourne, Curtin University of Tech-
+nology, Monash University and the Australian Astro-
+nomical Observatory. SkyMapper is owned and oper-
+ated by The Australian National University’s Research
+School of Astronomy and Astrophysics. The survey data
+were processed and provided by the SkyMapper Team
+at ANU. The SkyMapper node of the All-Sky Virtual
+Observatory  is hosted at the National Compu-
+tational Infrastructure . Development and support
+of the SkyMapper node of the ASVO has been funded
+in part by Astronomy Australia Limited  and the
+Australian Government through the Commonwealth’s
+Education Investment Fund  and National Col-
+laborative Research Infrastructure Strategy ,
+particularly the National eResearch Collaboration Tools
+and Resources  and the Australian National
+Data Service Projects .
+This work has made use of data from the Euro-
+pean Space Agency  mission Gaia , processed by the Gaia Data Pro-
+cessing and Analysis Consortium .
+for the DPAC has been provided by national institu-
+tions, in particular the institutions participating in the
+Gaia Multilateral Agreement.
+Facilities: KMTNet, IRSA
+Unobscured QSOs with KS4
+Software:
+astropy , LePhare++ ,

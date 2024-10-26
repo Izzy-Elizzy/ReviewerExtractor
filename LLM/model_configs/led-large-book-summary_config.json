@@ -1,0 +1,7 @@
+{
+  "token_batch_length": 3072,
+  "batch_stride": 50,
+  "max_len_ratio": 8,
+  "parameters": {},
+  "arch": null
+}

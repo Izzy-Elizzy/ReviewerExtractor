@@ -1,0 +1,839 @@
+Draft version October 23, 2024
+Typeset using LATEX twocolumn style in AASTeX62
+Cosmic Ray Mediated Thermal Fronts in the Warm-Hot Circumgalactic Medium
+Hanjue Zhu ,1 Ellen G. Zweibel,2, 3 and Nickolay Y. Gnedin4, 5, 1
+Submitted to ApJ
+We investigate the 1D plane-parallel front connecting the warm  and hot  phases of
+the circumgalactic medium , focusing on the influence of cosmic rays  in shaping these
+transition layers. We find that cosmic rays dictate the thermal balance while other fluxes  adjust to compensate. We compute column density ratios
+for selected transition temperature ions and compare them with observational data. While most of
+our models fail to reproduce the observations, a few are successful, although we make no claims for
+their uniqueness. Some of the discrepancies may indicate challenges in capturing the profiles in cooler,
+photoionized regions, as has been suggested for by previous efforts to model thermal transition layers.
+The circumgalactic medium , a gaseous halo
+enveloping galactic disks, acts as both a reservoir for
+star formation and a repository for galactic outflows and
+feedback processes. Its multiphase structure, character-
+ized by regions of varying temperatures and densities,
+retains the imprints of the galaxy’s formation and evo-
+lutionary history. Investigating the CGM is crucial for
+understanding the baryon cycle in galaxies, as it reg-
+ulates the flow of gas between the galaxy and the in-
+tergalactic medium, thereby influencing star formation
+rates and the effectiveness of feedback processes .
+Recent observational and theoretical studies have sig-
+nificantly advanced our understanding of the CGM. Ob-
+servations using metal absorption lines, such as those
+from O VI, C IV, and Mg II, have unveiled the complex
+multiphase nature of the CGM, highlighting substantial
+variations in temperature, density, and ionization states
+across different regions . Discrepancies between observed line
+ratios and model predictions indicate the necessity for
+models beyond collisional ionization equilibrium 
+Corresponding author: Hanjue Zhu 
+hanjuezhu@uchicago.edu
+and photoionization equilibrium  to accurately in-
+terpret CGM properties. Efforts to address these dis-
+crepancies include considering radiative cooling flows
+that incorporate gas dynamics and self-photoionization,
+turbulent mixing layers where Kelvin-Helmholtz insta-
+bilities create intermediate-temperature regions around
+clouds, conductive interfaces where cool clouds evapo-
+rate and hot gas condenses at the surface due to heat
+conduction, and ionized gas behind radiative shocks po-
+tentially produced by strong galactic winds .
+An important aspect of the CGM is the influence of
+cosmic rays .
+CRs provide additional pressure
+support, affect thermal balance, and may drive galac-
+tic winds, all of which shape the overall structure and
+evolution of the CGM. Their ability to propagate over
+vast distances and recoup their losses by extracting en-
+ergy from ambient shocks and turbulence allows CRs to
+impact regions far from their origin, influencing the ther-
+mal and dynamical properties of the CGM on a larger
+scale . How-
+ever, in the absence of observational evidence for cosmic
+rays in the CGM, we can only speculate upon their in-
+fluence. And because direct detection of cosmic rays in
+diffuse environments such as the CGM is challenging, we
+arXiv:2410.17252v1    22 Oct 2024
+Zhu, Zweibel, Gnedin
+must resort to observational predictions based on mod-
+eling the thermal gas itself.
+The transfer of momentum and energy between cos-
+mic rays and thermal gas is mediated by magnetic field
+structures on a scale of order the cosmic ray gyroradius.
+These small-scale magnetic structures could be part of
+an extrinsic turbulent cascade, but can also be driven by
+the cosmic rays themselves via the so-called streaming
+instability . The latter case is
+known as cosmic ray self confinement, and we will as-
+sume throughout this paper that it holds. An interesting
+consequence of the theory is that it breaks down if the
+projections of the cosmic ray pressure gradient and ther-
+mal plasma density gradient along the background mag-
+netic field oppose each other. In this case - as predicted
+from analytical arguments by Skilling  and shown
+first in a simulation by Wiener et al. , scattering
+disappears, the cosmic rays decouple from the gas, and
+their pressure becomes constant. Such transport bottle-
+necks should be common in the CGM, with its clumpy
+density structure, provided the clumps are magnetically
+connected to the Galactic disk, where most cosmic rays
+presumably originate.
+Bottlenecks were studied in a series of papers of in-
+creasing generality in Wiener et al. ; Bus-
+tard & Zweibel ; Tsung et al. . These works
+showed that the large CR pressure gradient accelerates
+cool clouds upward, imparting significant momentum
+and causing changes in gas density and temperature pro-
+files.
+Additionally, CRs were found to pressurize the
+cold gas, reducing its density and heating the cloud’s
+surface, leading to broader transition layers and altering
+ion abundances. These findings underscore the signifi-
+cant role of CRs in shaping the thermal and dynamical
+properties of the CGM. Due to the disparity in scale
+between the assumed cloud size and the front thickness,
+the transition region has only been modeled previously
+as a 1D structure in a steady state .
+The transition layers between the cool and hot phases,
+characterized by a density contrast typically around a
+factor of 100 as temperatures shift from 104 K to 106 K,
+are particularly affected by CRs. Models of these tran-
+sition layers are crucial not only for explaining observed
+line ratios but as was shown in ,
+may also be indicators of clouds dominated by cosmic
+ray pressure. This dominance would signify that CRs
+are a significant component of the galactic structure, af-
+fecting both the local environment of the CGM and the
+broader galactic ecosystem; it would also be evidence for
+the theory of cosmic ray self confinement.
+In this study, we refine the 1D plane-parallel symmet-
+ric model presented by Wiener et al.  by incor-
+porating thermal conduction and gas flow in the energy
+equation in addition to cosmic ray heating and radiative
+cooling. These additions aim to broaden the range of
+cosmic ray-mediated front models and provide a more
+comprehensive understanding of the CGM’s structure
+and dynamics.
+The plan of this paper is as follows. In §§2.1, we briefly
+review some well-known front models. In §§2.2 we for-
+mulate the problem, with a separate discussion of the
+boundary conditions in §§2.3. Section 3 gives detailed
+discussions of two types of front, static  and evap-
+orative .
+We show the effects of changing the
+background magnetic field and cosmic ray pressure in
+the cloud in §4. In §5 we compute the column densities
+of several transition temperature ions across our range
+of front models and compare their ratios to the ratios
+derived by Wakker et al.  from absorption line
+spectroscopy. Section 6 summarizes and discusses our
+main conclusions. Appendix A is a short discussion of
+condensation fronts. Appendix B shows some results on
+how the column densities of transition temperature ions
+depend on domain over which we integrate.
+Past work on fronts without cosmic rays provides valu-
+able context for understanding the distinct role of CRs
+in gas dynamics. Cowie & McKee  investigated
+evaporative fronts in the interstellar medium, where
+thermal conduction from a surrounding hot medium
+drives the continuous evaporation of cooler gas clouds.
+Their model established a steady-state balance between
+thermal conduction and enthalpy flux as the heating and
+cooling terms, respectively, with mass being lost from
+the cool phase to the hot phase. They also demonstrated
+how the geometry of the system influences the stability
+and evolution of these fronts. Inoue et al.  later
+examined phase transition layers connecting two ther-
+mal equilibrium phases, a cold neutral medium cooled
+by C II and a warm neutral medium cooled by Lyα,
+with heating provided by photoelectrons from dust. Be-
+cause both studies solved for temperature assuming en-
+ergy balance and heat transfer by classical conduction1
+they were treated as two-point boundary value prob-
+lems.
+In Cowie & McKee , the temperature of
+the hot medium was chosen based on observations and
+the cloud temperature was approximated by zero. In-
+does not follow Fick’s Law, but that is immaterial for our purposes.
+Cosmic Ray Mediated Thermal Fronts
+oue et al.  set the boundary temperatures to their
+equilibrium values.
+In Wiener et al. , thermal conduction and en-
+thalpy flux were dropped, leaving collisionless cosmic
+ray heating supplemented by a base heating rate per
+particle to balance radiative cooling. Without heat con-
+duction, the energy equation was reduced to first or-
+der. The models were integrated outward for 100 pc, at
+which point T had typically increased from its chosen
+value of 104 K at the cloud boundary to a few 106 K.
+Over this temperature range it was not possible to find
+a reasonable high-temperature thermal equilibrium, so
+the model was solved as an initial value problem and the
+temperature was still increasing at the 100 pc cutoff. It
+was checked a posteriori that the fronts found from the
+model were too thick for heat transport by thermal con-
+duction to play a significant role. We expand on this
+issue in §3.
+The evolution equations governing a thermal gas de-
+scribe the conservation of mass, momentum, and energy.
+In 1D, they are:
+v −κT
+respectively; vA is the Alfv´en velocity B/√4πρ; Pg and
+Eg denote the thermal pressure and total energy density
+of the gas, with
+Eg =
+γg −1 + 1
+κT stands for the thermal conduction coefficient, and ρL
+is the net cooling function. For simplicity, we assume a
+fully ionized Hydrogen plasma and an ideal gas equation
+of state, and take γg = 5/3 throughout.
+We use a net cooling function ρL ≡n2Λ −nΓ. We
+adopt Γ = 1×10−26 erg/s, consistent with the value used
+in . Because of the sharp cooling drop-
+off near T = 104 K, this choice of Γ allows for thermal
+equilibrium at both T ∼104 K and T ∼106 K. We note
+that this value of Γ is higher than the lower limit set by
+Coulomb scattering of cosmic rays in thermal plasma
+we use
+Λ = 1.1×10−21×10Θ)erg cm3 s−1, 
+Θ = 0.4x −3 +
+ex+0.08 + e−1.5 .
+in Imada & Zweibel  and modified in Wiener et al.
+licity cooling rates from Wiersma et al. , where
+they used the Cloudy photoionization code to calculate
+cooling functions for gas with varying metallicities, tem-
+peratures and densities under a UV/X-ray background
+at z = 0.
+In the fluid approximation, cosmic rays are governed
+by the energy equation :
+resents the CR energy flux:
+Fc = γcPc −κc
+The influence of cosmic rays is manifested through
+the cosmic ray pressure  gradient term in the mo-
+mentum equation and the heating term in the energy
+equation.
+As shown in Wiener et al. ; Zweibel
+the transfer of cosmic ray energy to Alfv´en waves due
+to the streaming instability together with the transfer of
+wave energy to the thermal background, as must occur
+in a steady state. The pressure gradient force represents
+momentum transfer between the cosmic rays and the
+magnetic field fluctuations, and occurs whether cosmic
+rays are self confined or confined by extrinsic turbulence.
+We seek steady state solutions of Equations  - 
+under the further simplifying assumptions that cosmic
+ray diffusion is negligible and v/vA ≪1. That is, we
+set all time derivatives to zero, drop κc, and wherever
+v + vA appears, we replace it by vA. This leads to the
+following three conserved quantities:
+ρv = constant,
+ρv2 + Pg + Pc = constant,
+Pc/ργc/2 = constant.
+Zhu, Zweibel, Gnedin
+Fiducial Value
+np,0
+Pg,0
+Pc,0
+Pg,0
+Table 1. Parameters values adopted in this paper.
+From equations 8 we obtain the following relationship
+between number density  and temperature :
+ρv2 +nkBT +Pc,02/3 = ρ0v2
+where the “0” subscripts denote initial values. This al-
+lows us to treat T as a function of n. We then recast
+eqn.  as a second order ordinary differential equation
+tial value problem to determine the spatial profile of the
+variables. The boundary values are established within
+the warm ionized medium, as detailed in Section 2.3.
+In the warm ionized medium on the left boundary
+number density  of 0.1 cm−3. The initial temper-
+ature  is established at 104 K, leading to an initial
+gas pressure  of 1.38 × 10−13 erg/cm3.
+These boundary conditions are chosen to represent typi-
+cal conditions in the warm ionized medium of the CGM.
+In this environment, the thermal conduction coefficient
+is given by κT = 5.6 × 10−7T 5/2 erg/s/K/cm .
+In our fiducial case, we adopt a constant magnetic
+field strength B = 3 µG and assume the field is per-
+pendicular to the plane of the front. This choice aligns
+with observations of the ∼µG magnetic field strength
+in the CGM .
+For the evaporative solutions, we set the gas velocity
+at the boundary  to 400 m/s, neglecting the effects of
+any relative motion between the cloud and the ambient
+medium. The positive value of the mass flux corresponds
+to the warm medium evaporating into the hot medium.
+We also explore the scenario with a static front, where
+v = 0. We show in Appendix A that a condensation
+front cannot form under these conditions. In our setup,
+we have vA ≫v, which satisfies the condition for the
+validity of Equation 3. In our fiducial case, we assume
+Pc,0 = 2Pg,0 ), but the
+initial ratio of CR pressure to gas pressure is a parameter
+we vary; we introduce the parameter α ≡Pc,0/Pg,0 + 1.
+We list all relevant parameters in Table 1.
+We proceed by solving the energy equation , reformulated as a second-order initial value
+problem for n, imposing two boundary conditions: n0 =
+plore the effect of the gradient  on our outcomes.
+defer discussions of how dn
+dx is selected in a natural envi-
+ronment to future works, except for a few remarks in §6.
+In Wiener et al.  the front models are generated
+by integrating a first order ODE, and dn
+through the polytropic relationship between Pc and n,
+along with the requirement that cosmic ray heating bal-
+ances radiative cooling.
+In this section, we first examine the simpler static
+front case  to isolate and better under-
+stand the interaction between thermal conduction, cos-
+mic ray heating, and radiative cooling. We numerically
+solve the energy equation 
+density, temperature, and pressure profiles as a func-
+tion of distance in Figure 1.
+Following Wiener et al.
+Cosmic Ray Mediated Thermal Fronts
+Number Density
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Pressure/kB
+Figure 1. Number density , temperature , and
+pressure  profiles for a static front system, where
+the velocity v = 0 and only thermal conduction, cosmic ray
+heating, and radiative cooling interact. The profiles are dif-
+ferentiated by the initial gradients of number density, dn
+across a range from 10−14 to 10−17 cm−4.
+We emphasize
+that except for the initial gradients, all profiles originate from
+the same initial conditions. The top panel shows the num-
+ber density profiles, where steeper initial gradients lead to
+a more rapid decline in number density from the origin. In
+contrast, the less steep initial gradients see a substantial and
+sharp decrease around ∼1 pc, indicating a delayed transi-
+tion. The middle panel shows the corresponding temperature
+profiles. The different profiles underscore the significant im-
+pact of the initial gradient on the structure of the front. The
+bottom panel illustrates the pressure profiles; while the ini-
+tial cosmic ray pressure is twice that of the gas pressure, it
+gradually decreases as the density drops.
+tinguished by their initial gradients of number density,
+the models are initialized with cosmic ray pressure dom-
+inant , and all become gas pressure domi-
+nated at large distances, typically by about an order of
+magnitude. This is due to the polytropic relationship
+between Pc and ρ, whereas the decrease in ρ is compen-
+sated by an increase in T. As shown in Figure 1, steeper
+initial gradients , which
+imply stronger influences from thermal conduction and
+cosmic ray heating, resulting in a noticeable and imme-
+diate decrease in number density from the origin.
+contrast, profiles with less steep initial gradients , only show a significant decrease in
+number density at ∼1 pc, indicating a delayed transi-
+tion. Regardless of the initial gradient, the number den-
+sity always decreases to of order 10−3 cm−3 at x = 100
+pc, with the steepest gradient reaching ∼1×10−3 cm−3
+and the least steep gradient dropping to ∼3 × 10−3
+cm−3. The same behavior is observed in the temper-
+ature profiles in the middle panel of Figure 1. Lower
+cm−4 one; we display one profile here for clarity. The
+bottom panel presents the pressure profiles for all four
+In Figure 2, we show the contributions of each flux
+component as a function of distance.
+In the steepest
+initial gradient case, cosmic ray heating is consistently
+offset by conductive cooling. When dn
+cosmic ray heating decreases to be smaller than radia-
+tive cooling, radiative cooling is then countered by CR
+heating and conductive heating. This balance contin-
+ues all the way to the boundary at x = 100 pc. It is
+not surprising that all these models require conductive
+cooling near the cloud, since the gradient required to
+balance cosmic ray heating with radiative cooling is of
+order 10−21 cm−4, much smaller than any of the models
+presented here.
+Comparing our static front results with previous work
+highlights the influence of cosmic rays on the energy
+balance.
+In Cowie & McKee , without cosmic
+rays, conductive heating balances radiative cooling at
+the front. In contrast, when cosmic rays are included,
+as in our model and Wiener et al. , cosmic ray
+heating becomes the dominant process balancing radia-
+tive cooling. Nonetheless, thermal conduction remains
+significant, as strong cosmic ray heating requires con-
+ductive cooling to dissipate the excess energy. Our re-
+sult highlights the crucial role of thermal conduction in
+maintaining thermal equilibrium within the system.
+Zhu, Zweibel, Gnedin
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Flux Gradient 
+Figure 2.
+Contributions of each flux component as a function of distance in the static case, in solid and dashed lines in
+erg cm−3s−1. This figure delineates the varying dynamics between different flux components under different initial number
+density gradients. For smaller initial number density gradients, cosmic ray heating first is balanced by conductive cooling,
+until it decreases to the level of radiative cooling, which is when conduction becomes less dominant heating term. For larger
+initial gradients, the transition from conductive cooling to heating occurs over a more extended distance . The
+interplay between these components is critical to understanding the thermal dynamics of the system.
+In this section, we incorporate an evaporative flow into
+the energy equation:
+γg −1Pgv −κT
+the resulting number density, temperature, and pres-
+sure profiles in Figure 3.
+For comparison, the static
+front cases are shown with dashed lines. Notably, the
+profiles of the evaporation fronts begin to deviate from
+those of the static case beyond 0.1 pc, with these devi-
+ations amplifying with increasing distance. Specifically,
+the number density in the evaporation front scenario
+drops more significantly compared to the static case,
+which corresponds to a greater increase in temperature.
+The pressure profiles show that as we move away from
+the origin, the cosmic ray  and gas pressure profiles
+evolve similarly to the static front case. However, after
+the point where Pc = Pg, the difference between Pc and
+Pg becomes greater compared to the static front sce-
+nario, indicating a sharper transition between the roles
+of CR pressure and gas pressure. The presence of flow
+introduces dynamical pressure, which is absent in the
+static case.
+In the evaporation scenario, the pressure
+profile shows a continuous decrease in the sum of CR and
+gas pressures, accompanied by an increase in dynamical
+pressure. However, the dynamical pressure remains rel-
+atively small, accounting for only about 3% of the total
+pressure at x = 100 pc, emphasizing the dominant role
+of CR and gas pressures in shaping the dynamics of the
+layer.
+We also present the contributions of each flux com-
+ponent as a function of distance in Figure 4. For less
+steep initial gradients , we
+identify three distinct regions.
+Near the origin, cos-
+mic ray  heating is the dominant process and is
+balanced by conductive cooling. Further from the ori-
+gin, there is a transition region where CR heating de-
+creases to levels comparable to radiative cooling, caus-
+ing conduction to shift from cooling to heating. This
+transition indicates a regime where CR heating is bal-
+anced by radiative cooling. Beyond this point, as ra-
+diative cooling reaches its maximum and subsequently
+declines, conductive heating and enthalpy flux cooling
+become the dominant processes, similar to the Cowie &
+McKee evaporation fronts. For steeper initial gradients
+nificantly. Strong CR heating prevents radiative cooling
+from fully balancing the thermal energy input, leading to
+the absence of a region where radiative cooling balances
+CR heating and thereby precluding the formation of re-
+gions with flat number density and temperature profiles.
+Cosmic Ray Mediated Thermal Fronts
+These results underscore the complex interplay between
+CR heating, radiative cooling, and conduction in regu-
+lating the thermal dynamics of the system.
+In this section, we examine the effects of chang-
+ing physical parameters, specifically the magnetic field
+strength and the ratio between cosmic ray pressure
+and gas pressure at the x = 0 boundary, denoted as
+α ≡Pc,0/Pg,0 + 1.
+The magnetic field strength ap-
+pears only as a multiplier in the cosmic ray heating term.
+Meanwhile, the ratio α sets the initial cosmic ray pres-
+sure and also determines the system’s total pressure,
+with a higher α indicating increased initial CR pressure
+and total pressure.
+We investigate how variations in
+these parameters impact the dynamics and structure of
+the layer.
+In this subsection, we discuss the results for α = 10.
+With this higher value, at the x = 100 pc boundary,
+the number density does not drop as low, reaching only
+temperature profile is smaller, however.
+Additionally,
+the role of dynamical pressure across the layer becomes
+much less significant.
+At the x = 100 pc boundary,
+dynamical pressure constitutes only 0.8% of the total
+pressure, in contrast to the α = 3 case, where dynami-
+cal pressure at the same boundary is comparable to CR
+pressure.
+Examining the component plot  reveals the
+impact of α. For dn
+ing at the origin extends the distance needed for conduc-
+tion to change from cooling to heating. This difference
+is illustrated in the top two panels of Figure 6. We also
+observe that for dn
+sity gradient, and hence the temperature gradient, are
+steeper than their α = 3 counterparts . Additionally, after the peak in radiative
+cooling, the α = 10 scenarios require a longer distance
+for radiative cooling and CR heating to fall to levels
+similar to enthalpy flux and conduction. This extended
+distance is reflected in the more gradual changes in the
+number density and temperature profiles in this region.
+The component plots demonstrate how the strength of
+CR heating at the origin impacts the system’s thermal
+structure and the spatial extent of physical processes.
+These observations are similar to the α = 3 case, where
+the presence of CR heating leads to the adjustment of
+other terms in the energy equations to counteract CR
+heating.
+Number Density
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Pressure/kB
+Figure 3. Number density, temperature, and pressure pro-
+files in the fiducial, evaporative front case. The dashed, semi-
+transparent lines show the flux magnitude for the static sce-
+nario.
+The top panel shows the number density profiles,
+where steeper initial gradients lead to a more rapid decline
+in number density from the origin. In contrast, the less steep
+initial gradients see a substantial and sharp decrease around
+shows the corresponding temperature profiles.
+The differ-
+ent profiles underscore the significant impact of the initial
+gradient on the structure of the front.
+The bottom panel
+illustrates the pressure profiles; while the initial cosmic ray
+pressure is twice that of the gas pressure, it gradually de-
+creases as the density drops.
+Zhu, Zweibel, Gnedin
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Flux Gradient 
+Figure 4. Contributions of each flux component as a function of distance in the fiducial case. The thin, semi-transparent
+lines show the flux magnitude for the static scenario. For initial gradients less steep than 10−16 cm−4, three distinct phases are
+identified: close to the origin, cosmic ray heating dominates and is counterbalanced by conductive cooling; at an intermediate
+distance, a transition to conductive heating occurs as cosmic ray heating balances radiative cooling; and beyond, where conduc-
+tive heating dominates against declining radiative cooling. For steeper initial gradients , CR heating is so
+strong that radiative cooling cannot balance it, precluding the formation of regions with flat number density and temperature
+profiles.
+We now investigate the impact of a heightened mag-
+netic field strength, B, set to 30 µG. Note that when
+only B is adjusted, the total pressure of the system re-
+mains the same; only the cosmic ray heating term in-
+creases by a factor of 10. With this stronger magnetic
+field, achieving number density and temperature profiles
+as steep as in previous cases requires steeper initial num-
+ber density gradients. This change is clearly shown in
+Figure 7. A key difference between the B = 30µG result
+and the α = 10 result is that, with constant total pres-
+sure, the temperature does not reach ∼106 K, as it does
+in the fiducial case and in the α = 10 case. Similarly,
+the enhanced magnetic field reduces the relative impor-
+tance of dynamical pressure compared to the trend in
+the fiducial case .
+Turning to Figure 8, we see that a tenfold increase
+in the magnetic field strength causes CR heating to de-
+crease more rapidly, aligning more quickly with radia-
+tive cooling levels. For all initial density gradients, by
+x = 100 pc, the relatively smaller decrease in number
+density compared to the fiducial case means that en-
+thalpy flux cooling and conductive heating are no longer
+the dominant processes. Instead, CR heating and radia-
+tive cooling become dominant at the x = 100 pc bound-
+ary. This sustained dominance of CR heating and ra-
+diative cooling at larger scales is a direct outcome of the
+stronger magnetic field’s influence on the system.
+It may seem paradoxical that increasing B, and with
+it vA, increases the heating rate but decreases T far
+from the cloud. We can understand this by observing
+that as B increases, so does the range over which cosmic
+ray heating is balanced by conductive cooling. This in
+turn requires that T cannot increase too quickly. For
+example, it can readily be shown that if T has a power
+law dependence on position, T ∝xp, conductive cooling
+requires p < 2/7. This accounts for the relatively slow
+increase in T in the high magnetic field models.
+We use the ionization fractions Xi from Gnat &
+Sternberg  and the relative abundances AX from
+Asplund et al.  to compute the column densities of
+specific ions. The column density for each ion is defined
+by NX = AX
+Xin dx, where n is the number den-
+sity, and the integral is across the front, up to a distance
+of 100 pc. We discuss this choice of integration bound-
+ary in Appendix B. We then compare our calculated
+line ratios with measurements from high-velocity clouds
+et al. . Discrepancies between our theoretical line
+Cosmic Ray Mediated Thermal Fronts
+Number Density
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Pressure/kB
+Figure 5. Profiles for number density , temperature , and pressure  for the evaporation
+scenario with a high cosmic ray pressure to gas pressure ratio at the x = 0 boundary . In the top panels, the solid lines
+represent α = 10, while the dashed semi-transparent lines depict the profiles for α = 3. The top panels illustrate the impact of
+α on the number density and temperature profiles, showing that the number density reaches only ∼10−2 cm−3 at x = 100 pc
+for dn
+highest and lowest initial density gradients in blue and red, respectively, indicating that the transition from cosmic ray pressure
+dominated to gas pressure dominated persists at higher α, while dynamical pressure constitutes only 0.8% of the total pressure
+at the x = 100 pc boundary, in contrast to the α = 3 case where it is comparable to CR pressure.
+ratios and the observational data could highlight poten-
+tial shortcomings in the current models.
+We compute the column densities for CIV, OVI, and
+SiIV, and derive the diagnostic line ratios SiIV/CIV,
+CIV/OVI, and NV/OVI. These ratios serve as key in-
+dicators for understanding the ionization processes and
+thermal structure within the interstellar medium. The
+SiIV/CIV ratio probes cooler, photoionized gas with
+temperatures in the range of 104 −105 K, primarily
+indicating regions where UV radiation dominates the
+ionization processes . In contrast, the CIV/OVI ratio spans the
+transition between photoionized and hotter, collisionally
+ionized gas, typically found at temperatures between
+fying multiphase structures within the ISM, often trac-
+ing shock-heated gas in more dynamic regions . Finally, the NV/OVI ratio
+is sensitive to collisionally ionized gas in the warm-hot
+ionized medium , making it a useful diagnostic
+for gas in intermediate ionization states and the pres-
+ence of shock-heated or disturbed gas .
+We show in the left panel of Figure 9 our model-
+dependent SiIV/CIV ratio versus CIV/OVI ratio in
+logarithmic scale, while in the right panel we present
+Zhu, Zweibel, Gnedin
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Flux Gradient 
+Figure 6. Flux component contributions in the evaporation scenario with α = 10, plotted over distance. Thin, semi-transparent
+lines indicate the α = 3 fiducial case for comparison. The top two panels illustrate that for dn
+heating at the origin extends the distance needed for conduction to change from cooling to heating. The bottom two panels
+show that for
+α = 3 counterparts. The component plots demonstrate the impact of CR heating on the front structure and the spatial extent
+of physical processes.
+NV/OVI ratio versus CIV/OVI ratio, overplotted with
+observational data from Wakker et al. . The black
+circular data points with error bars represent the obser-
+vational measurements, and our model predictions are
+superimposed as colored geometric shapes.
+Addition-
+ally, we include a CR heating balancing radiative cool-
+ing model, as discussed in Wiener et al. , shown
+in orange.
+Our results reveal that most of the models lie well
+outside the observational range in the SiIV/CIV versus
+CIV/OVI parameter space. The highest magnetic field
+sistent with the observations; however, these models si-
+multaneously predict CIV/OVI ratios that are too high
+compared to the observational data. In contrast, mod-
+els with lower magnetic field values produce SiIV/CIV
+ratios that are significantly lower than those observed in
+the HVCs.
+Similarly, in the right panel, the high B value models
+systematically overestimate the NV/OVI ratio, placing
+them outside the range of observational constraints. For
+the other models, those with the largest dn
+mate the CIV/OVI ratio, suggesting that the structure
+and dynamics of the gas in these models may be in-
+sufficient to fully capture the physical processes driving
+the ionization conditions. However, the range of mod-
+els that overlap the data plotted in  space is quite large, suggesting that this is not a par-
+ticularly sensitive diagnostic of conditions in the front,
+including the initial value of the density gradient.
+A prima facie interpretation of these results suggests
+that if a model lies within the observational range in
+the NV/OVI versus CIV/OVI parameter space but fails
+to reproduce the correct SiIV/CIV ratio, it implies that
+the model is better at predicting the ionization profile for
+gas in the 105−106 K temperature range than for cooler
+gas at 104 −105 K. This also indicates that the model
+more accurately captures conditions dominated by col-
+lisional ionization rather than photoionization. These
+discrepancies highlight potential limitations in the cur-
+rent model framework, particularly regarding the role
+of magnetic fields and cosmic ray heating in shaping
+the ionization state of the ISM and CGM. In fact, the
+line ratios are not well fit by previous models which do
+not include cosmic rays ). Our α = 1 models, as shown in Figure 9, align
+with this finding.
+It should not be overlooked, however, that some of our
+models do successfully reproduce both pairs of line ra-
+tios. As might be expected from the forgoing discussion,
+these are the models with intermediate field strength;
+B = 20µG for α = 3. As we already noted, the fits are
+relatively insensitive to the initial density gradient dn
+which sets the initial cosmic ray heating rate and which
+Cosmic Ray Mediated Thermal Fronts
+Number Density
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+B = 3 G
+Pressure/kB
+B = 30 G
+B = 3 G
+Figure 7. Number density , temperature , and pressure  profiles for the evaporation scenario with
+a magnetic field strength of 30 µG and a cosmic ray to gas pressure ratio  of 3. In the top panels, the solid lines represent the
+current scenario, while the thin lines show the profiles with a magnetic field strength of 3 µG. The profiles indicate that with
+a stronger magnetic field, dynamical pressure is reduced. Additionally, achieving similarly steep profiles as seen with a weaker
+magnetic field requires steeper initial number density gradients.
+we regard as the least well-determined parameter in our
+models.
+In this paper, we explored the evolution of the tran-
+sition layer between warm  and hot  gas
+phases in the circumgalactic medium by integrating the
+energy equation  as an initial value prob-
+lem. We showed that cosmic ray heating, thermal con-
+duction, radiative cooling, enthalpy flux, and dynamical
+pressure collectively shape the temperature and density
+profiles of the transition layer. At large distances from
+the cloud, we found that conduction is the main heat
+source, and that it can be balanced by an outward en-
+thalpy flux, as in the models of Cowie & McKee .
+We also found that the temperature and density pro-
+files across the front are quite sensitive to the value we
+adopt for the initial density gradient. When the gradient
+is sufficiently small, radiative cooling suffices to balance
+cosmic ray heating as assumed in the front models of
+Wiener et al. .
+For sufficiently large gradients,
+cosmic ray heating is balanced by conductive cooling.
+In view of this sensitivity, we have to ask what controls
+this ratio in a natural environment. While addressing
+this question is beyond the scope of this paper, we spec-
+ulate that the answer lies either in the front formation
+process or in the stability of the front to small pertur-
+bations. These possibilities will be examined in future
+work.
+Our findings emphasize the dominant role that cosmic
+rays can play in regulating the structure of the transition
+Zhu, Zweibel, Gnedin
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+Flux Gradient 
+Figure 8. Flux component contributions in the evaporation scenario with α = 3 and a magnetic field strength of 30 µG.
+Solid lines represent the heightened magnetic field scenario, while thin, semi-transparent lines depict the flux contributions for
+a magnetic field strength of 3 µG. The plot shows a more rapid decline in CR heating, aligning more quickly with radiative
+cooling levels. Additionally, beyond the cooling function peak, CR heating and radiative cooling remain the dominant processes
+due to the smaller decline in number density.
+B=3 G, =3
+B=3 G, =10
+B=20 G, =3
+B=30 G, =3
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+dx |0 = 10
+CR heating + radiative cooling
+Figure 9. Left panel: SiIV/CIV versus CIV/OVI ratios in logarithmic scale, compared with observational data from Wakker
+et al.  . Right panel: NV/OVI versus CIV/OVI ratios, similarly overlaid with observational
+data. Colored shapes denote our model predictions, with variations in magnetic field strengths and cosmic ray parameters. The
+orange shapes represent models where CR heating balances radiative cooling, following Wiener et al. . Both panels reveal
+discrepancies between the models and observations, particularly in the SiIV/CIV versus CIV/OVI space, where no models fit
+within the observed range. High magnetic field models match SiIV/CIV but overestimate CIV/OVI, while lower field models
+miss SiIV/CIV but align with CIV/OVI and NV/OVI. This suggests that in general, the models are more accurate at higher
+temperatures but struggle with cooler, photoionized conditions. Note that models with intermediate field strength, B = 20µG,
+do overlap the date on both plots, although we make no claim to their uniqueness.
+layer between the warm and hot gas phases of the CGM.
+The addition of CR heating in these models dictates the
+thermal balance, with the other flux terms adjusting
+accordingly to balance CR heating.
+These effects are
+sensitive to the magnetic field strength and the ratio of
+CR to gas pressure  at the warm gas boundary.
+Our analysis of ion column density ratios shows that
+while our model predictions align with some observa-
+Cosmic Ray Mediated Thermal Fronts
+tional data, and some represent successful fits, discrep-
+ancies persist.
+Only the highest magnetic field mod-
+els reproduce the observed SiIV/CIV ratios, but they
+overestimate the CIV/OVI ratios.
+Conversely, other
+models underestimate the SiIV/CIV ratios, although
+some fall within the observed range for CIV/OVI and
+NV/OVI. The agreement with CIV/OVI and NV/OVI,
+but not with SiIV/CIV, suggests that these models bet-
+ter represent ionization conditions at higher tempera-
+tures , where collisional ionization dom-
+inates, but struggle to capture the profiles in cooler,
+photoionized regions. These discrepancies indicate that
+while CR heating significantly influences the ionization
+structure of the CGM, additional processes such as tur-
+bulent mixing, shocks, or self-ionization may be neces-
+sary to fully explain the observed line ratios in lower
+temperature regimes.
+The need to include such ef-
+fects would be particularly compelling if magnetic field
+strengths as high as 20µG  could be ruled
+out.
+In addition to the influence of cosmic rays, our study
+highlights the crucial role of thermal conduction in
+maintaining energy balance within the transition layers.
+Thermal conduction dissipates excess heat from cosmic
+ray interactions, preventing runaway heating and stabi-
+lizing the temperature profiles.
+Overall, our findings reinforce the notion that the
+CGM is a complex and dynamic environment where a
+variety of physical processes, e.g. cosmic ray heating,
+radiative cooling, thermal conduction, and gas flows, in-
+teract to shape its structure and ionization state. Future
+work will focus on investigating the stability of these
+transition layers, particularly in the presence of cos-
+mic ray pressure, magnetic fields, and thermal conduc-
+tion. Studying the onset and development of instabili-
+ties within these fronts will be crucial for understanding
+their behavior.
+We are happy to acknowledge useful discussions with
+Roark Habegger, Tsuyoshi Inoue, Andrey Kravtsov,
+Peng Oh, Brant Tan, Robert Benjamin, and Aaron
+Tran.
+This work was supported in part by the NSF
+grant AST 2010189 and in part by grant NSF PHY-
+Grant No. 2919.02 to the Kavli Institute for Theoretical
+Physics . HZ thanks the Department of Astron-
+omy at the University of Wisconsin-Madison for their
+hospitality. This manuscript has also been co-authored
+by Fermi Research Alliance, LLC under Contract No.
+DE-AC02-07CH11359 with the United States Depart-
+ment of Energy.
+A. CONDENSATION FRONT
+From the momentum conservation equation  in the steady-state case , we have:
+pressure.
+Differentiating the equation, we have:
+dρ = 2
+dρ > 0. Therefore, a monotonically decreasing density ρ corresponds to a
+monotonically decreasing pressure P.
+This relationship implies that the flow cannot proceed from the hot medium to the cold medium. Specifically, in a
+scenario where the density is monotonically decreasing as the gas transitions from the cold to the hot medium, the
+corresponding pressure must also decrease. Consequently, gas flow is driven in the direction of decreasing pressure,
+which means it cannot move from the hot medium to the cold medium.
+B. SENSITIVITY OF LINE RATIOS TO INTEGRATION CUTOFFS
+The line ratios we presented are sensitive to the cutoff point chosen for the integration over the transition layer.
+In Figure 10, we plot the line ratios , log, and log) as functions of temperature
+where the integration is cut off, with the shaded regions representing the range of observational data. The vertical
+lines indicate the temperature at x = 100 pc for the two models: the red vertical line corresponds to the temperature
+for the model with dn
+Zhu, Zweibel, Gnedin
+As seen in Figure 10, the choice of temperature cutoff has a significant, nontrivial effect on the calculated line ratios.
+Wiener et al.  used a cutoff at 2 × 106 K, which aligns more closely with the converged values in the higher-
+temperature regime, compared to cutting off at 100 pc for the red model. However, while extending the integration
+to higher temperatures may yield more stable line ratios, the physical thickness of the transition layers becomes an
+important consideration. The models suggest that line ratios converge at higher temperatures, but the temperature at
+x = 100 pc remains well below this threshold for both models. This highlights a key issue: while we can theoretically
+integrate to very high temperatures, the question remains whether the transition layers are actually that thick in reality.
+Currently, we lack observational probes that can resolve the full extent of these layers. This uncertainty underscores
+the need for careful definition of the integration boundaries and comparison across models and observations.
+dx |0 = 10
+dx |0 = 10
+Figure 10.
+Line ratios log, log, and log as a function of the temperature at which the
+integration is cut off. The shaded regions represent the range of observational data for each line ratio. The vertical red and
+blue lines correspond to the temperatures at x = 100 pc for the models with dn

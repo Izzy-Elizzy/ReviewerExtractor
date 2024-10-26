@@ -21,7 +21,7 @@ models = [
     # Add more models here...
 ]
 
-base_dir = f"/nobackup/{username}/models"
+base_dir = f"./models"
 
 def download_models(models: list, base_dir: str) -> None:
     """
@@ -36,11 +36,6 @@ def download_models(models: list, base_dir: str) -> None:
         # Download model
         snapshot_download(repo_id=model_name, local_dir=model_dir, cache_dir=model_dir)
         logging.info(f"Downloaded {model_name} to {model_dir}")
-        
-        # Save configuration
-        config_path = save_model_config(model_dir,model_name)
-        if config_path:
-            logging.info(f"Saved configuration for {model_name}")
 
 download_models(models,base_dir)
 

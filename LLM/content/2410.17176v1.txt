@@ -1,0 +1,376 @@
+Opacity of Ejecta in Calculations of Supernova
+Light Curves
+M.Sh. Potashov1,2,4*, S.I. Blinnikov1,2,3,4,**, and E.I. Sorokina2,5
+Abstract—The plasma opacity in stars depends mainly on the
+local state of matter , but in supernova ejecta
+it also depends on the expansion velocity gradient, because the
+Doppler effect shifts the spectral lines differently in different
+ejecta layers. This effect is known in the literature as the
+expansion opacity. The existing approaches to the inclusion of
+this effect, in some cases, predict different results in identical
+conditions. In this paper we compare the approaches of Blinnikov
+to calculating the opacity in supernova ejecta and give examples
+of the influence of different approximations on the model light
+curves of supernovae.
+Keywords supernovae · expansion opacity · light curves ·
+radiative transfer
+Radiative transfer is of paramount importance in a high-
+temperature plasma. It is especially important in astrophysics,
+because most of the data on the Universe are obtained from
+radiation. The optical plasma properties determine the interac-
+tion of matter with radiation and are an important part of any
+problem with radiative transfer. The interaction of matter with
+radiation is characterized by the opacity . The opacity itself gives an idea of the atomic
+and ionic structure of materials. In some cases, bound–bound
+transitions in ions create a thick “forest” of spectral lines that
+contribute significantly to the opacity. It is not easy to calculate
+this contribution, and additional physical effects  can make this calculation more
+difficult. In moving matter all line frequencies are shifted due
+to the Doppler effect. The light emitted in the rest frame
+interacts with a moving plasma with the absorptivity calculated
+at the shifted frequency ∆ν. If the matter moves nonuniformly
+necessary to sum the contributions of different lines at different
+points on the path of the light in the plasma.
+By the “velocity gradient” we mean the spatial derivative of
+the velocity component along the general expansion direction
+dr ≡∂vr
+at the stage of free expansion with kinematics v = r/t,
+i.e., the velocity gradient is equal to the reciprocal of the
+time after explosion. The plasma opacity can depend on the
+velocity gradient, because the Doppler effect shifts the spectral
+lines differently in different layers. For the cases where there
+are many bound–bound transitions, i.e., a large number of
+lines contribute to the opacity, the latter is enhanced when
+the plasma expands with a nonuniform velocity field. The
+expansion opacity approximation, whose interpretation still
+remains debatable, was introduced to perform calculations
+in such situations. The problem of a proper approximation
+to describing the absorption and scattering of radiation in a
+plasma moving with a velocity gradient was considered in
+a number of papers. Several approaches to calculating the
+expansion opacity are described in the well-known book by
+Castor , in particular, those from Friend and Castor
+et al. , and Wehrse et al. . A puzzling fact is that
+in some situations the photon mean free paths calculated by
+different methods differ by orders of magnitude. In this paper
+we will check the differences for the expansion opacity from
+Friend and Castor  and Eastman and Pinto , on
+the one hand, and Blinnikov , on the other hand. Below
+we will denote the models computed using the approach of
+Friend and Castor  and Eastman and Pinto  by the
+index E, because it is based in part on heuristic considerations.
+The second, Blinnikov’s approach will be denoted by the index
+arXiv:2410.17176v1    22 Oct 2024
+Opacity of Ejecta in Calculations of Supernova Light Curves
+H, corresponding to the Hilbert expansion used in Blinnikov
+We will also consider the influence of different opacity
+parameters on the predicted light curves of supernovae ,
+other things being equal.
+THE LIMITING CASES OF STRONG AND WEAK LINES
+In this section we will show that the expressions for the
+expansion opacity derived by Blinnikov  are reduced
+to the Friend–Castor  formulas in two
+limiting cases: when all lines are strong and when all lines are
+weak. We will adopt the following notation: χ is the opacity
+opacity parameter, where t is the time from SN explosion
+from Blinnikov  as
+χ−1
+exp = χ−1
+Nν−1
+i=Nν
+χ−1
+j=Nν
+sj−1
+νj−1
+that can affect the observer due to the expansion redshift, and
+χi is the mean opacity in the continuum 
+between adjacent lines νi and νi+1. The continuum can be
+formed through free–bound and free–free transitions, electron
+scattering, and a superimposed quasi-continuum formed by a
+rest frame. The values of the parameter si between the lines
+can differ due to the differences of χi in the continuum. In the
+last sum over j νj−1 is assumed to be equal to ν at j = Nν.
+It is convenient to rewrite Eq.  partly via the wavelength
+λ = c/ν by introducing δλi ≡λi −λi+1:
+χ−1
+exp ≈
+i=Nν−1
+χ−1
+j=Nν
+si−1
+and we will assume that the entire range important for the
+effect is ∆ν << ν. This inequality is not so strong as the pre-
+vious one, because either ∆ν = ν/s or ∆ν ∼ν. The
+stronger of these inequalities must hold: at small s it is clear
+that the Doppler effect ceases to work at ∆ν > ν.
+We will then get
+χ−1
+exp ≈
+i=Nν−1
+χ−1
+j=Nν
+si−1
+was no need to assume that δλi << λ, although this condition
+is almost always fulfilled in practice. If si is great, i.e.,
+the lines are few, and the parameter si is great, then all of the
+exponentials in  are small and the expansion effect vanishes:
+χexp = χNν−1. The case where the parameter si is not too
+great, say, si < 103 and δνi/ν ∼10−6 is less trivial. Then,
+si is small and the first exponential can be expanded:
+we have
+χ−1
+exp ≈ct
+i=Nν−1
+ν exp
+j=Nν
+si−1
+χ−1
+exp ≈ct
+i=Nν−1
+λ exp
+j=Nν
+si−1
+the expansion opacity proposed by Friend and Castor 
+and Eastman and Pinto  . In this approximation the
+contribution of the lines to the opacity in a given frequency
+interval  is assumed to be given in the case of
+homologous expansion by the expression
+χE =
+and τj is the Sobolev optical depth in line j :
+τj = hc
+our χexpν – we obtain the “monochromatic” χν at frequency
+ν, while Friend–Castor and E obtain the mean in an interval
+to average our χexpν over the interval ∆ν. Let us define the
+mean over the interval ∆ν as the mean free path:
+χν exp
+tic considerations. The E opacity or rather the mean extinction
+coefficient in an interval  is the mean number of
+interactions between a photon and lines as they are Doppler
+shifted by ∆ν divided by the distance traveled ∼ct∆ν/ν.
+One would think, on the first impression, that Eq.  cannot
+be derived from our Eq. , because the exponentials of −τj
+enter into both expressions, but for the mean free path in our
+case and for the reciprocal of the mean free path in E. In fact,
+the estimates of the mean opacities from  agree with .
+From  in the case of strong lines, i.e., lines with a Sobolev
+optical depth τj > 1, we find that the sum does not go up to
+Opacity of Ejecta in Calculations of Supernova Light Curves
+Nmax, but is truncated at the first k, such that τk > 1 and
+Pk−1
+i=Nν τi < 1. Then, we have the following estimate:
+χ−1
+exp ≈ctνk −ν
+Nstrongν ,
+We see that this coincides with E, because mostly Nstrong
+strong lines with a Sobolev optical depth greater than unity
+contribute to the sum in .
+If there are no strong lines in the interval, then the result of
+averaging  also coincides with E in the case of weak lines.
+Let all lines in the interval ∆ν have a small optical depth,
+τi < 1, but there are many lines, so that P
+i τi >> 1 over the
+interval ∆ν. In this case, the summation does not go up to
+Nmax either, but is truncated at the line with the first number
+k, such that Pk
+i τi > 1  terms enter into the
+sum, because the summation begins with line Nν). We now
+obtain the following estimate:
+χ−1
+exp ≈ctνk −ν
+depth of weak lines in the interval ∆ν; then, Nweak⟨τ⟩is the
+total optical depth of weak lines in this interval. We obtain
+the same expression for weak lines from  by substituting
+τj for 1 −exp . Thus, both methods for weak lines yield
+the same result that is reduced simply to the summation of
+the extinction coefficients in lines , just as in the case of a medium at rest.
+Thus, the simple heuristic E approximation  correctly
+conveys the limiting cases of the rigorously derived approxi-
+mate expression , and it may well be used in practice. When
+deriving their approximation, the authors of E did not have the
+rigorous derivation done in this section, but they tested their
+recipe by a comparison with a rigorous numerical calculation
+with a large number of lines and obtained satisfactory agree-
+ment. The same formula was derived even earlier by Friend
+and Castor  based on the Poisson distribution of line
+strengths in a frequency interval. The parameter s vanished in
+all of the last approximate formulas – recall that this occurred
+only because we assumed the condition si << 1. This
+case is particularly important for practice, because the role of
+lines is particularly great if it is fulfilled. Since the parameter
+s drops out in this case, the cases of both strong and weak
+lines considered by us can be described by our formulas and
+by Eq.  even at a continuum mean free path exceeding the
+SN ejecta sizes. In this case, the diffusion approximation can
+be completely maintained by the forest of spectral lines. Such
+a situation actually comes already near the maximum light of
+SNe I .
+In the case of weak lines, our results also coincide with
+those from Wagoner et al. . However, for strong lines,
+when the dependences of the result on letter parameters
+coincide, we obtain disagreement with this paper by a factor
+of 2, because Wagoner et al.  adopted the definition of
+χexp for the transfer equation and not for the flux, as in our
+case.
+COMPARISON OF THE OPACITIES FOR DIFFERENT
+METHODS OF AVERAGING OVER A FREQUENCY INTERVAL
+In the previous section we showed that the mean opacity
+derived from Eq.  agrees with its values inferred from 
+only in the limiting cases of strong and weak lines. In the real
+case, a mixture of strong and weak lines, we have to resort to
+numerical calculations.
+We will compare the expansion opacities derived for
+the E and H cases from Eq.  and , respectively.
+wavelength range from log 1 Å to log 50 000 Å into
+is calculated from Eq.  at s < 30. For large values
+of this parameter we apply Eq. derived in Blinnikov
+χ−1
+exp = χ−1
+j=Nν
+i=Nν
+j=Nν+1
+τj−1
+νj−1
+stability of this formula at larger s. This is physically justified
+by the fact that larger s correspond to a smaller expansion
+opacity effect, because the nonthermal broadening of spectral
+lines due to the motion of the entire envelope is ν/s. In this
+case, the region from which the continuum radiation comes to
+a given point is relatively small and a forest of lines is formed
+against the background of a constant continuum in numerical
+wavelength bins.
+Figures 1 and 2 present the computations of the mean
+opacities in accordance with the E  and H  approaches.
+In Fig. 1 the region for the W7 SN Ia model  was chosen for a mixture of silicon and iron 10 days
+after explosion. The H and E opacities in the visible and
+infrared ranges are seen to differ noticeably, which can lead
+Opacity of Ejecta in Calculations of Supernova Light Curves
+t = 15.0 
+ρ = 10−14 
+T = 5×103 
+Figure 1: Comparison of the ejecta opacities averaged by different methods over the computational cells of the wavelength grid.
+The blue curve  corresponds to the E approximation; the orange curve  corresponds to the Blinnikov approximation.
+The computations were performed for matter composed of 90% silicon and 10% iron by mass. The velocity gradient corresponds
+to a free expansion for 15 days since explosion. The density and the temperature for which the computations were performed
+are indicated in the figure. All parameters roughly correspond to the SN Ia ejecta layers responsible for the generation of
+radiation before maximum light.
+to a redistribution of fluxes between different spectral ranges
+and to a change in the broadband light curves.
+In turn, for the parameters typical of an SN IIP in Fig. 2
+we compared the behaviors of the two approaches for two
+times  in regions close to the
+thermalization ones. It can be seen that within the first days
+after explosion the H and E opacities differ more dramatically
+than at later stages. Hence we can draw the preliminary
+conclusion that the fluxes will be particularly different before
+the light curve reaches the plateau. This will be illustrated in
+the next section with specific models.
+INFLUENCE OF THE OPACITY AVERAGING METHOD ON
+SN LIGHT CURVES
+The SN light curves were computed with the STELLA code
+code was used to compute and average the opacities on a fre-
+quency grid in the E approximation. An additional procedure
+was developed for the computations in the H approximation.
+So far the formula from Blinnikov  has been used only
+in the CRAB code  to compute the opacity
+averaged over the entire spectrum. In our case, an averaging in
+narrower frequency intervals  was required, because
+STELLA computes the radiative transfer on a grid of 100–1000
+frequency intervals.
+Using the above two opacity approximations, we computed
+the light curves for two types of supernovae, SNe Ia and
+SNe IIP. The SN Ia ejecta are composed mostly of metals
+and their opacity is determined mainly by the spectral lines,
+while the SN IIP ejecta are mostly hydrogen ones, but the
+admixtures also play an important role. Therefore, it should
+be understood how important the role of the ejecta expansion
+opacity averaging method for each type of SN is in modeling
+its radiation.
+As an SN Ia model we chose the classical W7 model
+constructed artificially. This is a star of mass 15 M⊙and radius
+the injection of thermal energy 4 × 1050 erg at the center
+followed by the formation of 0.15 M⊙radioactive nickel as a
+result of its explosion. The presupernova is surrounded by an
+envelope of mass 0.03 M⊙with a density ρ ∝r−2 up to a
+distance of 3600 R⊙. Such an envelope helps to explain the
+first maximum observed in many SNe IIP in the light curve
+before it reaches the plateau.
+The UBVRI light curves for both models computed in
+different opacity approximations are shown in Figs. 3 and 5.
+The difference between the SN Ia light curves in the visible
+bands is not very large. As could be assumed from a direct
+comparison of the opacities at typical 
+chemical composition, temperature, and density , in
+the visible range changing the approach to the opacity affects
+most strongly the I band. The main differences lie in the
+redistribution of radiation between the far-ultraviolet and far-
+Opacity of Ejecta in Calculations of Supernova Light Curves
+t = 15.0 
+ρ = 10−15 
+T = 4×103 
+II P
+t = 50.0 
+ρ = 10−14 
+T = 4×103 
+II P
+Figure 2: Same as Fig. 1, but for SN IIP ejecta. The computations were performed for the solar chemical composition. The
+upper graph is plotted for more rarefied matter with a steeper velocity gradient; the lower one is plotted for denser matter with
+a shallower velocity gradient, roughly corresponding to the layers generating the SN IIP radiation during the first maximum
+infrared ranges . Attenuation of the hard ultraviolet
+flux can affect, for example, the degree of excitation of
+atomic levels and can change the pattern of spectral lines in a
+complete calculation including, in particular, fluorescence.
+In the case of SNe IIP, the main differences in the ap-
+proaches to the opacity manifested themselves to a greater
+extent at the initial phases of the light curve . Therefore, we show here only this phase, within
+The question of what contribution the spectral lines make
+to the energy exchange between radiation and matter and
+how much these lines contribute to the equalization of their
+temperatures and the establishment of equilibrium remains
+open.
+As can be seen from the results of our computations in
+Opacity of Ejecta in Calculations of Supernova Light Curves
+Figure 3: The broadband light curves for the W7  model computed in the H  and E 
+approximations for the opacity. For comparison, the crosses and triangles indicate the light curves of several observed SNe Ia.
+Figs. 6–8, the height and shape of the peak changes greatly
+for different expansion opacity approximations and depend on
+the so-called qf parameter that must efficiently describe the
+fluorescence .
+All of the codes to compute the light curves that use
+coherent scattering in lines neglect this important effect. It
+was shown already in Blinnikov et al.  that the simple
+prescription of qf = 1, when all lines are purely absorbing
+ones, provides good agreement of the model light curves with
+SN observations and the EDDINGTON code. Thus, for the E
+opacity a good reproduction for the light curves is obtained at
+qf close to 1, when all lines are absorbing ones , while for the H case the parameter qf can
+approach zero, when the lines are almost purely scattering
+ones . The choice of an
+optimal parameter qf in the H case deserves a separate study.
+DISCUSSION OF RESULTS AND CONCLUSIONS
+Our results show that different descriptions of the expansion
+opacity have a significant influence on the observed light
+curves of both SNe I and II. Comparison of STELLA with
+other codes, including the Monte Carlo one , when the heuristic E approach is
+used, does not yet prove that the E approach is more appro-
+priate to the problem. After all, the CRAB code also shows its
+applicability to different objects and the H approximation is
+used there to calculate the opacity of an expanding medium.
+However, it should be kept in mind that there is also a different
+aspect of the problem: fluorescence and thermalization. Low
+values of the line absorption parameter should be taken when
+Opacity of Ejecta in Calculations of Supernova Light Curves
+Figure 4: The bolometric light curves  for the SN Ia model computed in different approximations for the opacity:
+E with absorbing lines  and H with absorbing lines . The color lines indicate the quasi-bolometric UBVRI light
+curve , the far ultraviolet blueward of the U band , and the far-infrared radiation redward of the I band
+Figure 5: The broadband light curves for the SN IIP model computed in the E  and H  approximations for the
+opacity.
+using the H approach. In computations on powerful computers,
+in principle, no approximations like the expansion opacity
+could have been made, but so far such computations can
+be performed only in those situations where the flows are
+monotonic, there are no shock waves, and so on.
+We are grateful to V.P. Utrobin who shared the experience
+of his work with an H–type approximation in the CRAB code
+and to the anonymous referee for important remarks.
+This study was supported by the Russian Foundation for
+Basic Research .
