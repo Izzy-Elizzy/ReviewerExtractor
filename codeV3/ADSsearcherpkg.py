@@ -200,11 +200,18 @@ def n_grams(df, directorypath):
                        'Top 10 Trigrams', 'Data Type']]
     return top10Df
 
+
 def get_user_input(dataframe):
+    """
+    Gets user input for searching a dataframe, compatible with Jupyter notebooks
+    and all system types using raw_input() instead of input().
     
-    # Create a prompt session
-    session = PromptSession(auto_suggest=AutoSuggestFromHistory())
-    
+    Args:
+        dataframe: pandas DataFrame containing the data to search
+        
+    Returns:
+        dict: Dictionary containing search parameters and column names
+    """
     # Columns we are concerned with for search
     name_column = "Name"
     institution_column = "Institution"
@@ -223,31 +230,49 @@ def get_user_input(dataframe):
         possible_searches.append("Institution Search - Type: Institution")    
     if 'Name' in dataframe.columns and 'Institution' in dataframe.columns and 'Fellowship Year' in dataframe.columns:
         possible_searches.append("Fellow Search - Type: Fellow")
-        
 
     print("\nBased on your data, you can perform the following searches:")
     for search in possible_searches:
         print(f"- {search}")
 
-    # Get user input
-    search_type = input("Which search would you like to perform? ").lower()
+    # Get user input using raw_input()
+    try:
+        # Python 2
+        search_type = raw_input("Which search would you like to perform? ").lower()
+    except NameError:
+        # Python 3
+        search_type = input("Which search would you like to perform? ").lower()
 
     # Prompt the user to confirm or correct column names
     if search_type == 'name':
-        name_column = session.prompt(f"Name column (detected: Name): ", default = "Name")
+        try:
+            name_column = raw_input(f"Name column (detected: Name): ") or "Name"
+        except NameError:
+            name_column = input(f"Name column (detected: Name): ") or "Name"
+            
     if search_type == 'institution':
-        institution_column = session.prompt(f"Institution column (detected: Institution): ", default = "Institution")
+        try:
+            institution_column = raw_input(f"Institution column (detected: Institution): ") or "Institution"
+        except NameError:
+            institution_column = input(f"Institution column (detected: Institution): ") or "Institution"
+            
     if search_type == "fellow":
-        name_column = session.prompt(f"Name column (detected: Name): ", default = "Name" )
-        institution_column = session.prompt(f"Institution column (detected: Institution): ", default = "Institution")
-        year_column = session.prompt(f"Year column (detected: Year): ", default = "Fellowship Year")
+        try:
+            name_column = raw_input(f"Name column (detected: Name): ") or "Name"
+            institution_column = raw_input(f"Institution column (detected: Institution): ") or "Institution"
+            year_column = raw_input(f"Year column (detected: Fellowship Year): ") or "Fellowship Year"
+        except NameError:
+            name_column = input(f"Name column (detected: Name): ") or "Name"
+            institution_column = input(f"Institution column (detected: Institution): ") or "Institution"
+            year_column = input(f"Year column (detected: Fellowship Year): ") or "Fellowship Year"
+
     # Return the user's input
     return {
         'name_column': name_column,
         'institution_column': institution_column,
         'year_column': year_column,
         'search_type': search_type,
-        'default_year_range': None  # No need for a default year range if 'Year' is in the CSV
+        'default_year_range': None
     }
 
 
@@ -334,6 +359,58 @@ def run_file_search(filename, token, stop_dir, **kwargs):
     return final_df
  
 # ________________________________________________________Deprecated functions for testing purposes____________________________________________________________
+
+#Depracted Function (Doesn't work with Jupyter Cells, Only Terminals)
+def get_user_input_depracted(dataframe):
+    
+    # Create a prompt session
+    session = PromptSession(auto_suggest=AutoSuggestFromHistory())
+    
+    # Columns we are concerned with for search
+    name_column = "Name"
+    institution_column = "Institution"
+    year_column = "Year"
+
+    # Detect and display available columns
+    print("I detected the following columns in your CSV:")
+    for column in dataframe.columns:
+        print(f"- {column}")
+
+    # Suggest search types based on available columns
+    possible_searches = []
+    if 'Name' in dataframe.columns:
+        possible_searches.append("Name Search - Type: Name")
+    if 'Institution' in dataframe.columns:
+        possible_searches.append("Institution Search - Type: Institution")    
+    if 'Name' in dataframe.columns and 'Institution' in dataframe.columns and 'Fellowship Year' in dataframe.columns:
+        possible_searches.append("Fellow Search - Type: Fellow")
+        
+
+    print("\nBased on your data, you can perform the following searches:")
+    for search in possible_searches:
+        print(f"- {search}")
+
+    # Get user input
+    search_type = input("Which search would you like to perform? ").lower()
+
+    # Prompt the user to confirm or correct column names
+    if search_type == 'name':
+        name_column = session.prompt(f"Name column (detected: Name): ", default = "Name")
+    if search_type == 'institution':
+        institution_column = session.prompt(f"Institution column (detected: Institution): ", default = "Institution")
+    if search_type == "fellow":
+        name_column = session.prompt(f"Name column (detected: Name): ", default = "Name" )
+        institution_column = session.prompt(f"Institution column (detected: Institution): ", default = "Institution")
+        year_column = session.prompt(f"Year column (detected: Year): ", default = "Fellowship Year")
+    # Return the user's input
+    return {
+        'name_column': name_column,
+        'institution_column': institution_column,
+        'year_column': year_column,
+        'search_type': search_type,
+        'default_year_range': None  # No need for a default year range if 'Year' is in the CSV
+    }
+
 
 #Deprecated Fucntions (Combined Functionality Above)
 def run_file_fellows_deprecated(filename, token, stop_dir ):

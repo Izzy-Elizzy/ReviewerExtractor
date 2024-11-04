@@ -17,7 +17,8 @@ from generate_config import save_model_config, load_model_config
 
 username = "ielhaime"
 models = [
-    "meta-llama/Llama-3.1-8B",  
+    "pszemraj/led-large-book-summary",
+    "meta-llama/Llama-3.1-8B" 
     # Add more models here...
 ]
 
