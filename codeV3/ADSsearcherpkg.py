@@ -203,160 +203,288 @@ def n_grams(df, directorypath):
 
 def get_user_input(dataframe):
     """
-    Gets user input for searching a dataframe, compatible with Jupyter notebooks
-    and all system types using raw_input() instead of input().
+    Gets user input for searching a dataframe, compatible with Jupyter notebooks.
     
     Args:
         dataframe: pandas DataFrame containing the data to search
         
     Returns:
-        dict: Dictionary containing search parameters and column names
+        dict: Dictionary containing search parameters and search type
     """
-    # Columns we are concerned with for search
-    name_column = "Name"
-    institution_column = "Institution"
-    year_column = "Year"
-
-    # Detect and display available columns
-    print("I detected the following columns in your CSV:")
-    for column in dataframe.columns:
-        print(f"- {column}")
-
-    # Suggest search types based on available columns
-    possible_searches = []
+    # Detect available columns and build search options
+    available_searches = []
     if 'Name' in dataframe.columns:
-        possible_searches.append("Name Search - Type: Name")
+        available_searches.append(("name", "Name Search - search by author name"))
     if 'Institution' in dataframe.columns:
-        possible_searches.append("Institution Search - Type: Institution")    
-    if 'Name' in dataframe.columns and 'Institution' in dataframe.columns and 'Fellowship Year' in dataframe.columns:
-        possible_searches.append("Fellow Search - Type: Fellow")
+        available_searches.append(("institution", "Institution Search - search by institution"))
+    if all(col in dataframe.columns for col in ['Name', 'Institution', 'Fellowship Year']):
+        available_searches.append(("fellow", "Fellow Search - search by name, institution, and year"))
 
-    print("\nBased on your data, you can perform the following searches:")
-    for search in possible_searches:
-        print(f"- {search}")
+    # Display available options
+    print("\nAvailable columns:", ", ".join(dataframe.columns))
+    print("\nAvailable search types:")
+    for search_id, description in available_searches:
+        print(f"- {description}")
 
-    # Get user input using raw_input()
-    try:
-        # Python 2
-        search_type = raw_input("Which search would you like to perform? ").lower()
-    except NameError:
-        # Python 3
-        search_type = input("Which search would you like to perform? ").lower()
+    # Get search type
+    while True:
+        try:
+            search_type = input("\nWhich search would you like to perform? (name/institution/fellow): ").lower()
+            if any(search_type == s[0] for s in available_searches):
+                break
+            print("Invalid search type. Please choose from the available options.")
+        except NameError:
+            print("Error getting input. Please try again.")
 
-    # Prompt the user to confirm or correct column names
+    # Get relevant column names based on search type
+    search_params = {'search_type': search_type}
+    
     if search_type == 'name':
-        try:
-            name_column = raw_input(f"Name column (detected: Name): ") or "Name"
-        except NameError:
-            name_column = input(f"Name column (detected: Name): ") or "Name"
-            
-    if search_type == 'institution':
-        try:
-            institution_column = raw_input(f"Institution column (detected: Institution): ") or "Institution"
-        except NameError:
-            institution_column = input(f"Institution column (detected: Institution): ") or "Institution"
-            
-    if search_type == "fellow":
-        try:
-            name_column = raw_input(f"Name column (detected: Name): ") or "Name"
-            institution_column = raw_input(f"Institution column (detected: Institution): ") or "Institution"
-            year_column = raw_input(f"Year column (detected: Fellowship Year): ") or "Fellowship Year"
-        except NameError:
-            name_column = input(f"Name column (detected: Name): ") or "Name"
-            institution_column = input(f"Institution column (detected: Institution): ") or "Institution"
-            year_column = input(f"Year column (detected: Fellowship Year): ") or "Fellowship Year"
+        search_params['name_column'] = input("Name column [Name]: ") or "Name"
+        search_params['year_range'] = '[2003 TO 2030]'  # Default year range
+        
+    elif search_type == 'institution':
+        search_params['institution_column'] = input("Institution column [Institution]: ") or "Institution"
+        search_params['year_range'] = '[2003 TO 2030]'  # Default year range
+        
+    elif search_type == 'fellow':
+        search_params['name_column'] = input("Name column [Name]: ") or "Name"
+        search_params['institution_column'] = input("Institution column [Institution]: ") or "Institution"
+        search_params['year_column'] = input("Year column [Fellowship Year]: ") or "Fellowship Year"
 
-    # Return the user's input
-    return {
-        'name_column': name_column,
-        'institution_column': institution_column,
-        'year_column': year_column,
-        'search_type': search_type,
-        'default_year_range': None
-    }
+    return search_params
 
-
-def run_file_search(filename, token, stop_dir, **kwargs):
+def run_file_search(filename, token, stop_dir):
     """
-    Combined function for fellows, institutions, and names searches.
+    Runs search based on user's choice of search type.
 
     Args:
-        filename (str): Path to the input CSV file.
-        token (str): Your ADS API token.
-        stop_dir (str): Path to the stopwords file.
-        **kwargs: Optional keyword arguments for columns:
-            - name_column (str): Column name for author names. Defaults to 'Name'.
-            - institution_column (str): Column name for institutions. Defaults to 'Institution'.
-            - year_column (str): Column name for years. Defaults to 'Fellowship Year'.
+        filename (str): Path to the input CSV file
+        token (str): ADS API token
+        stop_dir (str): Path to stopwords file
 
     Returns:
-        pandas.DataFrame: Dataframe containing search results.
+        pandas.DataFrame: Search results
     """
-
     dataframe = pd.read_csv(filename)
     final_df = pd.DataFrame()
     count = 0
 
-    user_input = get_user_input(dataframe)
+    # Get user's search preferences
+    search_params = get_user_input(dataframe)
+    search_type = search_params['search_type']
 
-    name_column = user_input['name_column']
-    institution_column = user_input['institution_column']
-    year_column = user_input['year_column']
+    for i in range(len(dataframe)):
+        if search_type == 'name':
+            # Name-only search
+            name = dataframe[search_params['name_column']][i]
+            data1 = ads_search(
+                name=name,
+                institution=None,
+                year=search_params['year_range'],
+                token=token,
+                stop_dir=stop_dir
+            )
+            search_identifier = f"name: {name}"
 
-    # name_column = kwargs.get('name_column', 'Name')
-    # institution_column = kwargs.get('institution_column', 'Institution')
-    # year_column = kwargs.get('year_column', 'Fellowship Year')
+        elif search_type == 'institution':
+            # Institution-only search
+            institution = dataframe[search_params['institution_column']][i]
+            data1 = ads_search(
+                name=None,
+                institution=institution,
+                year=search_params['year_range'],
+                token=token,
+                stop_dir=stop_dir
+            )
+            data1['Input Institution'] = institution
+            search_identifier = f"institution: {institution}"
 
-    # Check if 'Fellowship Year' column exists (for fellows search)
-    if year_column in dataframe.columns:
-        # Handle the fellows search scenario
-        for i in range(dataframe.shape[0]):
-            name = dataframe[name_column][i]
-            inst = dataframe[institution_column][i]
-            year = dataframe[year_column][i]
+        elif search_type == 'fellow':
+            # Fellow search (name + institution + year)
+            name = dataframe[search_params['name_column']][i]
+            institution = dataframe[search_params['institution_column']][i]
+            year = str(int(dataframe[search_params['year_column']][i]))
+            
+            data1 = ads_search(
+                name=name,
+                institution=institution,
+                year=year,
+                token=token,
+                stop_dir=stop_dir
+            )
+            data1['Input Institution'] = institution
+            search_identifier = f"fellow: {name} at {institution} in {year}"
 
-            # Convert year to string if necessary
-            if isinstance(year, (int, float)):
-                year = str(int(year))
-
-            data1 = ads_search(name=name, institution=inst, year=year, token=token, stop_dir=stop_dir)
-            data1['Input Institution'] = inst
-
-            if not data1.empty:
-                data2 = data_type(data1)
-                data3 = merge(data2)
-                data4 = n_grams(data3, stop_dir)
-                final_df = pd.concat([final_df, data4], ignore_index=True)
-                count += 1
-                print(str(count) + ' iterations done')
-            else:
-                print(f"No results found for {name} at {inst} in {year}.")
-    else:
-        # Handle the names or institutions search scenario
-        for i in range(dataframe.shape[0]):
-            if name_column in dataframe.columns:
-                name = dataframe[name_column][i]
-                inst = None  # Institution is not specified
-                year = '[2003 TO 2030]'  # Default year range
-            elif institution_column in dataframe.columns:
-                name = None  # Name is not specified
-                inst = dataframe[institution_column][i]
-                year = '[2003 TO 2030]'  # Default year range
-
-            data1 = ads_search(name=name, institution=inst, year=year, token=token, stop_dir=stop_dir)
-            data1['Input Institution'] = inst
-
-            if not data1.empty:
-                data2 = data_type(data1)
-                data3 = merge(data2)
-                data4 = n_grams(data3, stop_dir)
-                final_df = pd.concat([final_df, data4], ignore_index=True)
-                count += 1
-                print(str(count) + ' iterations done')
-            else:
-                print(f"No results found for {name} at {inst} in {year}.")
+        # Process results if found
+        if not data1.empty:
+            data2 = data_type(data1)
+            data3 = merge(data2)
+            data4 = n_grams(data3, stop_dir)
+            final_df = pd.concat([final_df, data4], ignore_index=True)
+            count += 1
+            print(f"Completed {count} searches - Processed {search_identifier}")
+        else:
+            print(f"No results found for {search_identifier}")
 
     return final_df
+
+# def get_user_input(dataframe):
+#     """
+#     Gets user input for searching a dataframe, compatible with Jupyter notebooks
+#     and all system types using raw_input() instead of input().
+    
+#     Args:
+#         dataframe: pandas DataFrame containing the data to search
+        
+#     Returns:
+#         dict: Dictionary containing search parameters and column names
+#     """
+#     # Columns we are concerned with for search
+#     name_column = "Name"
+#     institution_column = "Institution"
+#     year_column = "Year"
+
+#     # Detect and display available columns
+#     print("I detected the following columns in your CSV:")
+#     for column in dataframe.columns:
+#         print(f"- {column}")
+
+#     # Suggest search types based on available columns
+#     possible_searches = []
+#     if 'Name' in dataframe.columns:
+#         possible_searches.append("Name Search - Type: Name")
+#     if 'Institution' in dataframe.columns:
+#         possible_searches.append("Institution Search - Type: Institution")    
+#     if 'Name' in dataframe.columns and 'Institution' in dataframe.columns and 'Fellowship Year' in dataframe.columns:
+#         possible_searches.append("Fellow Search - Type: Fellow")
+
+#     print("\nBased on your data, you can perform the following searches:")
+#     for search in possible_searches:
+#         print(f"- {search}")
+
+#     # Get user input using raw_input()
+#     try:
+#         # Python 2
+#         search_type = raw_input("Which search would you like to perform? ").lower()
+#     except NameError:
+#         # Python 3
+#         search_type = input("Which search would you like to perform? ").lower()
+
+#     # Prompt the user to confirm or correct column names
+#     if search_type == 'name':
+#         try:
+#             name_column = raw_input(f"Name column (detected: Name): ") or "Name"
+#         except NameError:
+#             name_column = input(f"Name column (detected: Name): ") or "Name"
+            
+#     if search_type == 'institution':
+#         try:
+#             institution_column = raw_input(f"Institution column (detected: Institution): ") or "Institution"
+#         except NameError:
+#             institution_column = input(f"Institution column (detected: Institution): ") or "Institution"
+            
+#     if search_type == "fellow":
+#         try:
+#             name_column = raw_input(f"Name column (detected: Name): ") or "Name"
+#             institution_column = raw_input(f"Institution column (detected: Institution): ") or "Institution"
+#             year_column = raw_input(f"Year column (detected: Fellowship Year): ") or "Fellowship Year"
+#         except NameError:
+#             name_column = input(f"Name column (detected: Name): ") or "Name"
+#             institution_column = input(f"Institution column (detected: Institution): ") or "Institution"
+#             year_column = input(f"Year column (detected: Fellowship Year): ") or "Fellowship Year"
+
+#     # Return the user's input
+#     return {
+#         'name_column': name_column,
+#         'institution_column': institution_column,
+#         'year_column': year_column,
+#         'search_type': search_type,
+#         'default_year_range': None
+#     }
+
+
+# def run_file_search(filename, token, stop_dir, **kwargs):
+#     """
+#     Combined function for fellows, institutions, and names searches.
+
+#     Args:
+#         filename (str): Path to the input CSV file.
+#         token (str): Your ADS API token.
+#         stop_dir (str): Path to the stopwords file.
+#         **kwargs: Optional keyword arguments for columns:
+#             - name_column (str): Column name for author names. Defaults to 'Name'.
+#             - institution_column (str): Column name for institutions. Defaults to 'Institution'.
+#             - year_column (str): Column name for years. Defaults to 'Fellowship Year'.
+
+#     Returns:
+#         pandas.DataFrame: Dataframe containing search results.
+#     """
+
+#     dataframe = pd.read_csv(filename)
+#     final_df = pd.DataFrame()
+#     count = 0
+
+#     user_input = get_user_input(dataframe)
+
+#     name_column = user_input['name_column']
+#     institution_column = user_input['institution_column']
+#     year_column = user_input['year_column']
+
+#     # name_column = kwargs.get('name_column', 'Name')
+#     # institution_column = kwargs.get('institution_column', 'Institution')
+#     # year_column = kwargs.get('year_column', 'Fellowship Year')
+
+#     # Check if 'Fellowship Year' column exists (for fellows search)
+#     if year_column in dataframe.columns:
+#         # Handle the fellows search scenario
+#         for i in range(dataframe.shape[0]):
+#             name = dataframe[name_column][i]
+#             inst = dataframe[institution_column][i]
+#             year = dataframe[year_column][i]
+
+#             # Convert year to string if necessary
+#             if isinstance(year, (int, float)):
+#                 year = str(int(year))
+
+#             data1 = ads_search(name=name, institution=inst, year=year, token=token, stop_dir=stop_dir)
+#             data1['Input Institution'] = inst
+
+#             if not data1.empty:
+#                 data2 = data_type(data1)
+#                 data3 = merge(data2)
+#                 data4 = n_grams(data3, stop_dir)
+#                 final_df = pd.concat([final_df, data4], ignore_index=True)
+#                 count += 1
+#                 print(str(count) + ' iterations done')
+#             else:
+#                 print(f"No results found for {name} at {inst} in {year}.")
+#     else:
+#         # Handle the names or institutions search scenario
+#         for i in range(dataframe.shape[0]):
+#             if name_column in dataframe.columns:
+#                 name = dataframe[name_column][i]
+#                 inst = None  # Institution is not specified
+#                 year = '[2003 TO 2030]'  # Default year range
+#             elif institution_column in dataframe.columns:
+#                 name = None  # Name is not specified
+#                 inst = dataframe[institution_column][i]
+#                 year = '[2003 TO 2030]'  # Default year range
+
+#             data1 = ads_search(name=name, institution=inst, year=year, token=token, stop_dir=stop_dir)
+#             data1['Input Institution'] = inst
+
+#             if not data1.empty:
+#                 data2 = data_type(data1)
+#                 data3 = merge(data2)
+#                 data4 = n_grams(data3, stop_dir)
+#                 final_df = pd.concat([final_df, data4], ignore_index=True)
+#                 count += 1
+#                 print(str(count) + ' iterations done')
+#             else:
+#                 print(f"No results found for {name} at {inst} in {year}.")
+
+#     return final_df
  
 # ________________________________________________________Deprecated functions for testing purposes____________________________________________________________
 
