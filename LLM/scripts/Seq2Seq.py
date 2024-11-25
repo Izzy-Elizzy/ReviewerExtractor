@@ -137,23 +137,23 @@ def generate_summaries(model_path, config_path, papers):
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-if __name__ == "__main__":
-    # Example usage
-    model_path = "./models/led-large-book-summary"
-    config_path = "./models/led-large-book-summary/config.json"
+# if __name__ == "__main__":
+#     # Example usage
+#     model_path = "./models/led-large-book-summary"
+#     config_path = "./models/led-large-book-summary/config.json"
     
-    papers = [
-        "First paper text goes here...",
-        "Second paper text goes here...",
-    ]
+#     papers = [
+#         "First paper text goes here...",
+#         "Second paper text goes here...",
+#     ]
 
-    summaries = generate_summaries(model_path, config_path, papers)
+#     summaries = generate_summaries(model_path, config_path, papers)
 
-    if summaries:
-        for i, summary in enumerate(summaries):
-            if summary:
-                print(f"Summary {i + 1}:\n{summary}\n")
-            else:
-                print(f"Failed to generate summary {i + 1}")
-    else:
-        print("Failed to generate summaries.")
+#     if summaries:
+#         for i, summary in enumerate(summaries):
+#             if summary:
+#                 print(f"Summary {i + 1}:\n{summary}\n")
+#             else:
+#                 print(f"Failed to generate summary {i + 1}")
+#     else:
+#         print("Failed to generate summaries.")

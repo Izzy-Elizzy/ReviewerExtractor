@@ -71,7 +71,7 @@ def setup_model(model_path, config_path=None):
             device=device  # Explicitly set device for pipeline
         )
         
-        llm = HuggingFacePipeline(pipeline=pipe, model_kwargs={'temperature': 0.3})
+        llm = HuggingFacePipeline(pipeline=pipe, model_kwargs={'temperature': 0.5})
 
         template = """
         Write a summary of the following text delimited by triple backticks.
@@ -126,22 +126,22 @@ def generate_summaries(model_path, config_path, papers):
 
 
 
-if __name__ == "__main__":
-    model_path = "./LLM/models/Llama-3.1-8B"  # Or path to your desired model
-    config_path = "./LLM/models/Llama-3.1-8B" # Or None, or your config path
+# if __name__ == "__main__":
+#     model_path = "./LLM/models/Llama-3.1-8B"  # Or path to your desired model
+#     config_path = "./LLM/models/Llama-3.1-8B" # Or None, or your config path
     
 
 
-    papers = [
-        "The first paper text goes here...",
-        "The second paper text goes here...",
-        # ... more papers
-    ]
+#     papers = [
+#         "The first paper text goes here...",
+#         "The second paper text goes here...",
+#         # ... more papers
+#     ]
 
-    summaries = generate_summaries(model_path, config_path, papers)
+#     summaries = generate_summaries(model_path, config_path, papers)
 
-    if summaries:
-        for i, summary in enumerate(summaries):
-            print(f"Summary {i + 1}:\n{summary}\n")
-    else:
-        print("Failed to generate summaries.")
+#     if summaries:
+#         for i, summary in enumerate(summaries):
+#             print(f"Summary {i + 1}:\n{summary}\n")
+#     else:
+#         print("Failed to generate summaries.")
