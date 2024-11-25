@@ -11,9 +11,41 @@ import torch
 import re
 import json
 
+"""
+Module: scientific_metrics_evaluator.py
+
+This module provides a class `ScientificMetricsEvaluator` for evaluating the quality of text summaries 
+using a combination of ROUGE and BERTScore metrics, along with a novelty score based on n-gram analysis.  It's designed 
+to assess the abstractiveness and quality of generated summaries compared to reference texts.
+"""
+
 class ScientificMetricsEvaluator:
+    """
+    Class: ScientificMetricsEvaluator
+
+    This class implements methods for evaluating scientific text summaries using ROUGE, BERTScore, and n-gram novelty.
+
+    Attributes:
+        rouge_scorer (rouge_scorer.RougeScorer):  An instance of the ROUGE scorer for calculating ROUGE-1, ROUGE-2, 
+                                                  ROUGE-L, and ROUGE-Lsum scores.  Stemming is enabled (`use_stemmer=True`) 
+                                                  to improve matching across different word forms.
+        bert_scorer (bert_score.BERTScorer): An instance of the BERTScorer for calculating precision, recall, and F1 scores 
+                                               based on contextual embeddings.  It uses the `adsabs/astroBERT` model,
+                                               which is specifically trained for scientific text.
+        tokenizer (transformers.AutoTokenizer): A tokenizer for the `adsabs/astroBERT` model.  This is used to chunk 
+                                                 long texts into smaller, manageable sequences for BERTScore calculation.
+        max_length (int): The maximum length (in tokens) of a text sequence processed by the BERT scorer.  Longer texts 
+                           are chunked into overlapping sequences.
+        overlap (int): The amount of overlap (in tokens) between consecutive chunks of text. This helps to maintain context
+                        across chunk boundaries.
+    """
     def __init__(self):
-        """Initialize scientific metrics"""
+        """
+        Method: __init__
+
+        Initializes the `ScientificMetricsEvaluator` by creating instances of the ROUGE scorer and BERTScorer, 
+        and loading the tokenizer for the `adsabs/astroBERT` model.
+        """
         self.rouge_scorer = rouge_scorer.RougeScorer(
             ['rouge1', 'rouge2', 'rougeL', 'rougeLsum'],
             use_stemmer=True
@@ -35,16 +67,49 @@ class ScientificMetricsEvaluator:
         self.overlap = 50
 
     def _preprocess_text_rouge(self, text: str) -> str:
-        """Preprocessing for ROUGE - keeps whitespace"""
+        """
+        Method: _preprocess_text_rouge
+
+        Preprocesses the input text for ROUGE scoring.  Removes characters that are not alphanumeric, whitespace, 
+        or common punctuation marks (.,!?-).  Preserves whitespace to maintain sentence structure for ROUGE.
+
+        Args:
+            text (str): The input text.
+
+        Returns:
+            str: The preprocessed text.
+        """
         text = re.sub(r'[^\w\s,.!?-]', '', text)
         return ' '.join(text.split()).strip()
 
     def _preprocess_text_bert(self, text: str) -> str:
-        """Minimal preprocessing for BERT"""
+        """
+        Method: _preprocess_text_bert
+
+        Preprocesses the input text for BERTScore scoring.  Removes characters that are not alphanumeric or 
+        common punctuation marks (.,!?-). This is a more minimal preprocessing step than for ROUGE.
+
+        Args:
+            text (str): The input text.
+
+        Returns:
+            str: The preprocessed text.
+        """
         return re.sub(r'[^\w,.!?-]', '', text)
 
     def _chunk_text(self, text: str) -> List[str]:
-        """Chunk text into overlapping sequences"""
+        """
+        Method: _chunk_text
+
+        Chunks a long text into overlapping sequences of a maximum length suitable for the BERT scorer. This is 
+        necessary because the BERTScorer has a limit on the length of input sequences.
+
+        Args:
+            text (str): The input text.
+
+        Returns:
+            List[str]: A list of text chunks.
+        """
         tokens = self.tokenizer.encode(text, add_special_tokens=False)
         chunks = []
         
@@ -57,7 +122,18 @@ class ScientificMetricsEvaluator:
         return chunks
 
     def calculate_rouge(self, reference: str, candidate: str) -> Dict[str, float]:
-        """Calculate ROUGE scores"""
+        """
+        Method: calculate_rouge
+
+        Calculates ROUGE scores (rouge1, rouge2, rougeL, rougeLsum) between a reference text and a candidate text.
+
+        Args:
+            reference (str): The reference text.
+            candidate (str): The candidate text (e.g., a generated summary).
+
+        Returns:
+            Dict[str, float]: A dictionary containing the ROUGE scores.
+        """
         reference = self._preprocess_text_rouge(reference)
         candidate = self._preprocess_text_rouge(candidate)
         
@@ -71,7 +147,19 @@ class ScientificMetricsEvaluator:
         }
 
     def calculate_bertscore(self, reference: str, candidate: str) -> Dict[str, float]:
-        """Calculate BERTScore using chunked texts"""
+        """
+        Method: calculate_bertscore
+
+        Calculates BERTScore (precision, recall, F1) between a reference text and a candidate text.  Handles long texts
+        by chunking them into smaller, overlapping sequences before scoring.
+
+        Args:
+            reference (str): The reference text.
+            candidate (str): The candidate text.
+
+        Returns:
+            Dict[str, float]: A dictionary containing the BERTScore scores.
+        """
         reference = self._preprocess_text_bert(reference)
         candidate = self._preprocess_text_bert(candidate)
         
@@ -98,7 +186,20 @@ class ScientificMetricsEvaluator:
         }
 
     def calculate_ngram_novelty(self, reference: str, candidate: str) -> float:
-        """Calculate the proportion of novel n-grams"""
+        """
+        Method: calculate_ngram_novelty
+
+        Calculates a novelty score based on the proportion of n-grams (unigrams, bigrams, trigrams) in the 
+        candidate text that are not present in the reference text.  This measures how much new information 
+        the candidate text provides compared to the reference.
+
+        Args:
+            reference (str): The reference text.
+            candidate (str): The candidate text.
+
+        Returns:
+            float: The novelty score (average across unigrams, bigrams, and trigrams).
+        """
         reference = self._preprocess_text_rouge(reference)
         candidate = self._preprocess_text_rouge(candidate)
         
@@ -117,7 +218,19 @@ class ScientificMetricsEvaluator:
         return np.mean(novelty_scores) if novelty_scores else 0.0
 
     def evaluate_summary(self, reference: str, candidate: str) -> Dict[str, float]:
-        """Calculate all metrics"""
+        """
+        Method: evaluate_summary
+
+        Calculates all the metrics (ROUGE, BERTScore, novelty) and combines them into a single "abstractive_score".
+
+        Args:
+            reference (str): The reference text.
+            candidate (str): The candidate text.
+
+        Returns:
+            Dict[str, float]: A dictionary containing all the calculated scores, including the combined 
+                              'abstractive_score'.
+        """
         rouge_scores = self.calculate_rouge(reference, candidate)
         bert_scores = self.calculate_bertscore(reference, candidate)
         novelty_score = self.calculate_ngram_novelty(reference, candidate)
@@ -145,8 +258,20 @@ class ScientificMetricsEvaluator:
         
         return final_scores
 
-def benchmark(paper, summary):
-        evaluator = ScientificMetricsEvaluator()
-        scores = evaluator.evaluate_summary(paper, summary)
+def benchmark(paper: str, summary: str) -> float:
+    """
+    Function: benchmark
 
-        return scores['abstractive_score']
+    Calculates and returns the 'abstractive_score' for a given paper and its summary.  This score combines 
+    BERTScore F1 and n-gram novelty scores.
+
+    Args:
+        paper (str): The text of the original scientific paper.
+        summary (str): The generated summary of the paper.
+
+    Returns:
+        float: The 'abstractive_score', a combined metric reflecting the quality of the summary.
+    """
+    evaluator = ScientificMetricsEvaluator()
+    scores = evaluator.evaluate_summary(paper, summary)
+    return scores['abstractive_score']
